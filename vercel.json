@@ -1,17 +1,23 @@
 {
   "redirects": [
-    {
-      "source": "/attendance-calculator",
-      "destination": "/attendance-calculator.html"
-    },
-    {
-      "source": "/cgpa-calculator",
-      "destination": "/cgpa-calculator.html"
-    },
-    {
-      "source": "/word-counter",
-      "destination": "/word-counter.html"
-    }
+    { "source": "/attendance-calculator", "destination": "/attendance-calculator.html" },
+    { "source": "/cgpa-calculator", "destination": "/cgpa-calculator.html" },
+    { "source": "/percentage-calculator", "destination": "/percentage-calculator.html" },
+    { "source": "/word-counter", "destination": "/word-counter.html" },
+    { "source": "/json-formatter", "destination": "/json-formatter.html" },
+    { "source": "/password-generator", "destination": "/password-generator.html" },
+    { "source": "/base64-encoder", "destination": "/base64-encoder.html" },
+    { "source": "/base64-decoder", "destination": "/base64-decoder.html" },
+    { "source": "/url-encoder", "destination": "/url-encoder.html" },
+    { "source": "/url-decoder", "destination": "/url-decoder.html" },
+    { "source": "/case-converter", "destination": "/case-converter.html" },
+    { "source": "/text-reverser", "destination": "/text-reverser.html" },
+    { "source": "/lorem-ipsum-generator", "destination": "/lorem-ipsum-generator.html" },
+    { "source": "/uuid-generator", "destination": "/uuid-generator.html" },
+    { "source": "/html-formatter", "destination": "/html-formatter.html" },
+    { "source": "/css-minifier", "destination": "/css-minifier.html" },
+    { "source": "/js-minifier", "destination": "/js-minifier.html" },
+    { "source": "/color-picker", "destination": "/color-picker.html" }
   ]
 }
 {
