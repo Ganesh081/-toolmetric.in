@@ -17,3 +17,11 @@
 {
   "cleanUrls": true
 }
+{
+  "redirects": [
+    {
+      "source": "/:path",
+      "destination": "/:path.html"
+    }
+  ]
+}
