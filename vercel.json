@@ -1,0 +1,16 @@
+{
+  "redirects": [
+    {
+      "source": "/attendance-calculator",
+      "destination": "/attendance-calculator.html"
+    },
+    {
+      "source": "/cgpa-calculator",
+      "destination": "/cgpa-calculator.html"
+    },
+    {
+      "source": "/word-counter",
+      "destination": "/word-counter.html"
+    }
+  ]
+}
