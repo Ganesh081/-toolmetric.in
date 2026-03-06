@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UUID Generator - Generate Unique UUIDs Online | ToolMetric</title>
+    <meta name="description" content="Free online UUID generator. Generate unique UUIDs, GUIDs, and identifiers in various formats. Perfect for database keys, API tokens, and unique identification.">
+    <meta name="keywords" content="UUID generator, GUID generator, unique identifier, UUID v4, random UUID, online UUID generator, generate UUID">
+    <meta name="author" content="ToolMetric">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="UUID Generator - ToolMetric">
+    <meta property="og:description" content="Generate unique UUIDs and GUIDs instantly">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolmetric.com/uuid-generator.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🛠️ ToolMetric</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container tool-container">
+        <div class="tool-header">
+            <h1>UUID Generator</h1>
+            <p class="tool-description">
+                Generate unique UUIDs instantly with our comprehensive UUID generator tool. 
+                This essential utility creates cryptographically secure UUIDs (Universally Unique Identifiers) 
+                and GUIDs (Globally Unique Identifiers) for various applications including database keys, 
+                API tokens, session identifiers, and unique tracking codes. Our generator supports multiple 
+                UUID versions and formats, ensuring compatibility with different systems and programming languages. 
+                Whether you need UUIDs for software development, database design, or system integration, 
+                our tool provides reliable, collision-free identifiers with proper formatting and validation. 
+                Generate single UUIDs or bulk quantities with customizable options for different use cases.
+            </p>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 728x90</p>
+        </div>
+
+        <div class="tool-content">
+            <div class="uuid-controls">
+                <h3>UUID Generation Settings</h3>
+                
+                <div class="settings-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <div class="setting-group">
+                        <div class="form-group">
+                            <label for="uuidVersion">UUID Version:</label>
+                            <select id="uuidVersion" class="form-control">
+                                <option value="v4">Version 4 (Random)</option>
+                                <option value="v1">Version 1 (Time-based)</option>
+                                <option value="nil">NIL UUID (All zeros)</option>
+                                <option value="max">Max UUID (All F's)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="uuidCount">Number of UUIDs:</label>
+                            <input type="number" id="uuidCount" class="form-control" value="1" min="1" max="100">
+                        </div>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <div class="form-group">
+                            <label for="outputFormat">Output Format:</label>
+                            <select id="outputFormat" class="form-control">
+                                <option value="standard">Standard (8-4-4-4-12)</option>
+                                <option value="uppercase">Uppercase</option>
+                                <option value="lowercase">Lowercase</option>
+                                <option value="braces">With Braces {UUID}</option>
+                                <option value="hyphens">No Hyphens</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="separator">Separator:</label>
+                            <select id="separator" class="form-control">
+                                <option value="-">Hyphen (-)</option>
+                                <option value="">None</option>
+                                <option value="_">Underscore (_)</option>
+                                <option value=" ">Space</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <h4>Additional Options</h4>
+                        <div class="checkbox-group" style="display: grid; gap: 0.75rem;">
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" id="includeTimestamp" style="margin-right: 0.75rem;">
+                                <span>Include Generation Timestamp</span>
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" id="validateUUIDs" checked style="margin-right: 0.75rem;">
+                                <span>Validate Generated UUIDs</span>
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" id="bulkMode" style="margin-right: 0.75rem;">
+                                <span>Bulk Mode (Line separated)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="generate-section" style="text-align: center; margin: 2rem 0;">
+                    <button onclick="generateUUIDs()" class="btn" style="font-size: 1.1rem; padding: 1rem 2rem;">Generate UUIDs</button>
+                    <button onclick="clearResults()" class="btn btn-outline ml-2">Clear Results</button>
+                </div>
+            </div>
+
+            <div id="resultsSection" class="results-section" style="display: none;">
+                <h3>Generated UUIDs</h3>
+                <div class="results-display" style="background: #f9fafb; border: 2px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                    <div id="uuidsList" style="display: grid; gap: 0.75rem;"></div>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button onclick="copyAllUUIDs()" class="btn btn-secondary">Copy All</button>
+                        <button onclick="downloadUUIDs()" class="btn btn-outline">Download as Text</button>
+                        <button onclick="regenerateUUIDs()" class="btn btn-outline">Regenerate</button>
+                    </div>
+                </div>
+                
+                <div id="statistics" class="statistics" style="background: #f0f9ff; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                    <h4>Generation Statistics</h4>
+                    <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <div>
+                            <strong>Total Generated:</strong> <span id="totalGenerated">0</span>
+                        </div>
+                        <div>
+                            <strong>UUID Version:</strong> <span id="currentVersion">v4</span>
+                        </div>
+                        <div>
+                            <strong>Format:</strong> <span id="currentFormat">Standard</span>
+                        </div>
+                        <div>
+                            <strong>Generation Time:</strong> <span id="generationTime">0ms</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="uuid-info">
+                <h3>UUID Information</h3>
+                <div class="info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+                    <div class="info-card" style="background: #f0f9ff; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0ea5e9;">
+                        <h4>🔢 Version 4 (Random)</h4>
+                        <p>Most commonly used version. Generated using random or pseudo-random numbers. No guarantee of uniqueness across space and time, but collision probability is extremely low.</p>
+                    </div>
+                    <div class="info-card" style="background: #f0fdf4; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #22c55e;">
+                        <h4>⏰ Version 1 (Time-based)</h4>
+                        <p>Generated using timestamp and MAC address. Guarantees uniqueness across space and time but may reveal MAC address information.</p>
+                    </div>
+                    <div class="info-card" style="background: #fefce8; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #eab308;">
+                        <h4>🔤 Format Structure</h4>
+                        <p>Standard UUID format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (8-4-4-4-12 hexadecimal characters, total 32 chars with 4 hyphens).</p>
+                    </div>
+                    <div class="info-card" style="background: #fdf4ff; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #d946ef;">
+                        <h4>🌐 Global Uniqueness</h4>
+                        <p>UUIDs are 128-bit numbers, providing approximately 3.4 × 10^38 possible values. The probability of collision is virtually zero for practical purposes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 300x250</p>
+        </div>
+
+        <div class="tool-content">
+            <h3>How to Use UUID Generator</h3>
+            <ol>
+                <li>Choose the UUID version (v4 for random, v1 for time-based)</li>
+                <li>Set the number of UUIDs you want to generate</li>
+                <li>Select your preferred output format and separator</li>
+                <li>Choose additional options like timestamp and validation</li>
+                <li>Click "Generate UUIDs" to create unique identifiers</li>
+                <li>Copy, download, or regenerate UUIDs as needed</li>
+            </ol>
+
+            <h4 class="mt-3">Features</h4>
+            <ul>
+                <li><strong>Multiple Versions:</strong> Support for UUID v1, v4, NIL, and Max</li>
+                <li><strong>Flexible Formats:</strong> Various output formats and separators</li>
+                <li><strong>Bulk Generation:</strong> Generate up to 100 UUIDs at once</li>
+                <li><strong>Validation:</strong> Automatic UUID validation and formatting</li>
+                <li><strong>Statistics:</strong> Generation time and count tracking</li>
+                <li><strong>Export Options:</strong> Copy and download functionality</li>
+            </ul>
+
+            <h4 class="mt-3">Common Use Cases</h4>
+            <ul>
+                <li><strong>Database Keys:</strong> Primary keys for database records</li>
+                <li><strong>API Tokens:</strong> Authentication and session tokens</li>
+                <li><strong>File Names:</strong> Unique file identifiers</li>
+                <li><strong>Transaction IDs:</strong> Unique transaction identifiers</li>
+                <li><strong>Component IDs:</strong> Unique component identifiers in systems</li>
+            </ul>
+        </div>
+
+        <div class="tool-content">
+            <h3>Related Tools</h3>
+            <div class="related-tools" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="random-string-generator.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🔤 Random String Generator</h4>
+                    <p style="margin: 0; color: #6b7280;">Generate random strings and codes</p>
+                </a>
+                <a href="random-number-generator.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🔢 Random Number Generator</h4>
+                    <p style="margin: 0; color: #6b7280;">Generate random numbers with custom ranges</p>
+                </a>
+                <a href="password-generator.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🔐 Password Generator</h4>
+                    <p style="margin: 0; color: #6b7280;">Create strong, secure passwords</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>What's the difference between UUID and GUID?</h4>
+                <p>GUID (Globally Unique Identifier) is Microsoft's implementation of UUID. They are essentially the same thing - 128-bit unique identifiers.</p>
+            </div>
+            <div class="faq-item">
+                <h4>How unique are UUIDs?</h4>
+                <p>UUIDs have 3.4 × 10^38 possible values. The probability of collision is so low that it's practically impossible for real-world applications.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Which UUID version should I use?</h4>
+                <p>Version 4 (random) is recommended for most applications as it doesn't reveal sensitive information like MAC addresses or timestamps.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can UUIDs be reversed or traced?</h4>
+                <p>Version 4 UUIDs are completely random and cannot be traced back to their source. Version 1 UUIDs contain timestamps and MAC addresses.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🛠️ ToolMetric</h4>
+                    <p>Your trusted source for free online tools. We provide simple, fast, and secure tools for everyday use.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Generator Tools</h4>
+                    <ul>
+                        <li><a href="uuid-generator.html">UUID Generator</a></li>
+                        <li><a href="random-string-generator.html">Random String Generator</a></li>
+                        <li><a href="random-number-generator.html">Random Number Generator</a></li>
+                        <li><a href="password-generator.html">Password Generator</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>Have feedback or suggestions? We'd love to hear from you!</p>
+                    <a href="contact.html" class="btn btn-outline mt-2">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ToolMetric. All rights reserved. | <a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let generatedUUIDs = [];
+
+        function generateUUIDs() {
+            const version = document.getElementById('uuidVersion').value;
+            const count = parseInt(document.getElementById('uuidCount').value);
+            const format = document.getElementById('outputFormat').value;
+            const separator = document.getElementById('separator').value;
+            const includeTimestamp = document.getElementById('includeTimestamp').checked;
+            const validateUUIDs = document.getElementById('validateUUIDs').checked;
+            const bulkMode = document.getElementById('bulkMode').checked;
+
+            // Validation
+            if (count < 1 || count > 100) {
+                showMessage('Number of UUIDs must be between 1 and 100', 'error');
+                return;
+            }
+
+            const startTime = performance.now();
+            generatedUUIDs = [];
+
+            for (let i = 0; i < count; i++) {
+                let uuid = generateUUID(version);
+                uuid = formatUUID(uuid, format, separator);
+                
+                if (validateUUIDs && !isValidUUID(uuid)) {
+                    showMessage('Invalid UUID generated', 'error');
+                    return;
+                }
+                
+                if (includeTimestamp) {
+                    uuid = `${uuid} [${new Date().toISOString()}]`;
+                }
+                
+                generatedUUIDs.push(uuid);
+            }
+
+            const endTime = performance.now();
+            const generationTime = (endTime - startTime).toFixed(2);
+
+            displayResults();
+            updateStatistics(version, format, generationTime);
+            showMessage(`Generated ${count} UUID(s) in ${generationTime}ms`, 'success');
+        }
+
+        function generateUUID(version) {
+            switch(version) {
+                case 'v4':
+                    return generateUUIDv4();
+                case 'v1':
+                    return generateUUIDv1();
+                case 'nil':
+                    return '00000000-0000-0000-0000-000000000000';
+                case 'max':
+                    return 'ffffffff-ffff-ffff-ffff-ffffffffffff';
+                default:
+                    return generateUUIDv4();
+            }
+        }
+
+        function generateUUIDv4() {
+            // Generate 16 bytes (128 bits) of random data
+            const bytes = new Uint8Array(16);
+            crypto.getRandomValues(bytes);
+            
+            // Set version (4) and variant bits
+            bytes[6] = (bytes[6] & 0x0f) | 0x40; // Version 4
+            bytes[8] = (bytes[8] & 0x3f) | 0x80; // Variant 10xx
+            
+            // Convert to hex string
+            const hex = Array.from(bytes)
+                .map(byte => byte.toString(16).padStart(2, '0'))
+                .join('');
+            
+            // Format as UUID
+            return [
+                hex.substr(0, 8),
+                hex.substr(8, 4),
+                hex.substr(12, 4),
+                hex.substr(16, 4),
+                hex.substr(20, 12)
+            ].join('-');
+        }
+
+        function generateUUIDv1() {
+            // Simplified v1 UUID (using timestamp + random)
+            const timestamp = Date.now();
+            const random = new Uint8Array(10);
+            crypto.getRandomValues(random);
+            
+            const timeHex = timestamp.toString(16).padStart(12, '0');
+            const randomHex = Array.from(random)
+                .map(byte => byte.toString(16).padStart(2, '0'))
+                .join('');
+            
+            const combined = timeHex + randomHex;
+            return [
+                combined.substr(0, 8),
+                combined.substr(8, 4),
+                '1' + combined.substr(12, 3), // Version 1
+                combined.substr(15, 4),
+                combined.substr(19, 12)
+            ].join('-');
+        }
+
+        function formatUUID(uuid, format, separator) {
+            // Remove existing separators
+            let cleanUUID = uuid.replace(/[-{}]/g, '');
+            
+            // Apply new separator
+            let formattedUUID;
+            if (separator === '-') {
+                formattedUUID = [
+                    cleanUUID.substr(0, 8),
+                    cleanUUID.substr(8, 4),
+                    cleanUUID.substr(12, 4),
+                    cleanUUID.substr(16, 4),
+                    cleanUUID.substr(20, 12)
+                ].join(separator);
+            } else {
+                formattedUUID = cleanUUID;
+                if (separator) {
+                    formattedUUID = [
+                        cleanUUID.substr(0, 8),
+                        cleanUUID.substr(8, 4),
+                        cleanUUID.substr(12, 4),
+                        cleanUUID.substr(16, 4),
+                        cleanUUID.substr(20, 12)
+                    ].join(separator);
+                }
+            }
+            
+            // Apply format
+            switch(format) {
+                case 'uppercase':
+                    return formattedUUID.toUpperCase();
+                case 'lowercase':
+                    return formattedUUID.toLowerCase();
+                case 'braces':
+                    return '{' + formattedUUID + '}';
+                case 'hyphens':
+                    return cleanUUID;
+                default:
+                    return formattedUUID;
+            }
+        }
+
+        function isValidUUID(uuid) {
+            const uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+            return uuidRegex.test(uuid.replace(/[{}]/g, ''));
+        }
+
+        function displayResults() {
+            const uuidsList = document.getElementById('uuidsList');
+            const bulkMode = document.getElementById('bulkMode').checked;
+            
+            if (bulkMode) {
+                uuidsList.innerHTML = `
+                    <div style="background: white; padding: 1rem; border-radius: 6px; border: 1px solid #e5e7eb;">
+                        <pre style="margin: 0; font-family: monospace; white-space: pre-wrap; word-break: break-all;">${generatedUUIDs.join('\n')}</pre>
+                    </div>
+                `;
+            } else {
+                uuidsList.innerHTML = generatedUUIDs.map((uuid, index) => 
+                    `<div style="display: flex; align-items: center; gap: 1rem; background: white; padding: 1rem; border-radius: 6px; border: 1px solid #e5e7eb;">
+                        <span style="font-weight: bold; color: #6b7280; min-width: 60px;">${index + 1}.</span>
+                        <code style="flex: 1; font-family: monospace; background: #f9fafb; padding: 0.5rem; border-radius: 4px; word-break: break-all;">${uuid}</code>
+                        <button onclick="copyUUID('${uuid.replace(/'/g, "\\'")}')" class="btn btn-outline" style="padding: 0.5rem 1rem;">Copy</button>
+                    </div>`
+                ).join('');
+            }
+            
+            document.getElementById('resultsSection').style.display = 'block';
+        }
+
+        function updateStatistics(version, format, generationTime) {
+            document.getElementById('totalGenerated').textContent = generatedUUIDs.length;
+            document.getElementById('currentVersion').textContent = version.toUpperCase();
+            document.getElementById('currentFormat').textContent = format.charAt(0).toUpperCase() + format.slice(1);
+            document.getElementById('generationTime').textContent = generationTime + 'ms';
+        }
+
+        function copyUUID(uuid) {
+            copyToClipboard(uuid);
+        }
+
+        function copyAllUUIDs() {
+            if (generatedUUIDs.length === 0) {
+                showMessage('No UUIDs to copy', 'error');
+                return;
+            }
+            copyToClipboard(generatedUUIDs.join('\n'));
+        }
+
+        function downloadUUIDs() {
+            if (generatedUUIDs.length === 0) {
+                showMessage('No UUIDs to download', 'error');
+                return;
+            }
+            
+            const content = `Generated UUIDs\n` +
+                          `===============\n` +
+                          `Version: ${document.getElementById('uuidVersion').value}\n` +
+                          `Format: ${document.getElementById('outputFormat').value}\n` +
+                          `Count: ${generatedUUIDs.length}\n` +
+                          `Generated: ${new Date().toLocaleString()}\n\n` +
+                          `UUIDs:\n${generatedUUIDs.join('\n')}`;
+            
+            downloadFile(content, 'uuids_' + new Date().getTime() + '.txt');
+        }
+
+        function regenerateUUIDs() {
+            if (generatedUUIDs.length === 0) {
+                showMessage('Generate UUIDs first', 'error');
+                return;
+            }
+            generateUUIDs();
+        }
+
+        function clearResults() {
+            generatedUUIDs = [];
+            document.getElementById('resultsSection').style.display = 'none';
+            showMessage('Results cleared', 'info');
+        }
+    </script>
+</body>
+</html>

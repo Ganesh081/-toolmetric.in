@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Word Counter Online | Character Count & Reading Time | ToolMetric</title>
+    <meta name="description" content="Count words, characters, sentences & paragraphs instantly. Free online word counter with reading time estimation. Perfect for writers & students.">
+    <meta name="keywords" content="word counter, character counter, reading time, text analysis, writing tool, word count, character count, sentence count">
+    <meta name="author" content="ToolMetric">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Free Word Counter Online | Character Count & Reading Time | ToolMetric">
+    <meta property="og:description" content="Count words, characters, sentences & paragraphs instantly. Free online word counter with reading time estimation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolmetric.com/word-counter">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Word Counter",
+        "description": "Free online word counter that counts words, characters, sentences, and paragraphs with reading time estimation",
+        "url": "https://toolmetric.com/word-counter",
+        "applicationCategory": "ProductivityApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "ToolMetric"
+        }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🛠️ ToolMetric</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container tool-container">
+        <div class="tool-header">
+            <h1>Word Counter with Reading Time</h1>
+            <p class="tool-description">
+                Analyze your text comprehensively with our advanced word counter and reading time calculator. 
+                This powerful tool provides detailed text statistics including word count, character count (with and without spaces), 
+                sentence count, paragraph count, and estimated reading time. Perfect for writers, students, bloggers, 
+                and content creators who need to meet specific word limits or understand their text better. 
+                Our tool also calculates speaking time for presentations and provides readability metrics to help improve your content. 
+                Simply paste or type your text to get instant, accurate analysis with real-time updates as you write.
+            </p>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 728x90</p>
+        </div>
+
+        <div class="tool-content">
+            <div class="form-group">
+                <label for="textInput">Enter or Paste Your Text:</label>
+                <textarea id="textInput" class="form-control" rows="10" placeholder="Start typing or paste your text here to get instant word count, character count, and reading time analysis..."></textarea>
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <button onclick="clearText()" class="btn btn-outline">Clear Text</button>
+                    <button onclick="copyText()" class="btn btn-outline">Copy Text</button>
+                    <button onclick="downloadText()" class="btn btn-outline">Download Text</button>
+                    <button onclick="loadSample()" class="btn btn-secondary">Load Sample Text</button>
+                </div>
+            </div>
+
+            <div id="statistics" class="statistics-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
+                <div class="stat-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; text-align: center; border-left: 4px solid #2563eb;">
+                    <div style="font-size: 2rem; font-weight: bold; color: #2563eb;" id="wordCount">0</div>
+                    <div style="color: #6b7280; margin-top: 0.5rem;">Words</div>
+                </div>
+                <div class="stat-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; text-align: center; border-left: 4px solid #10b981;">
+                    <div style="font-size: 2rem; font-weight: bold; color: #10b981;" id="charCount">0</div>
+                    <div style="color: #6b7280; margin-top: 0.5rem;">Characters (no spaces)</div>
+                </div>
+                <div class="stat-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; text-align: center; border-left: 4px solid #f59e0b;">
+                    <div style="font-size: 2rem; font-weight: bold; color: #f59e0b;" id="charCountWithSpaces">0</div>
+                    <div style="color: #6b7280; margin-top: 0.5rem;">Characters (with spaces)</div>
+                </div>
+                <div class="stat-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; text-align: center; border-left: 4px solid #ef4444;">
+                    <div style="font-size: 2rem; font-weight: bold; color: #ef4444;" id="sentenceCount">0</div>
+                    <div style="color: #6b7280; margin-top: 0.5rem;">Sentences</div>
+                </div>
+                <div class="stat-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; text-align: center; border-left: 4px solid #8b5cf6;">
+                    <div style="font-size: 2rem; font-weight: bold; color: #8b5cf6;" id="paragraphCount">0</div>
+                    <div style="color: #6b7280; margin-top: 0.5rem;">Paragraphs</div>
+                </div>
+                <div class="stat-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; text-align: center; border-left: 4px solid #06b6d4;">
+                    <div style="font-size: 2rem; font-weight: bold; color: #06b6d4;" id="readingTime">0</div>
+                    <div style="color: #6b7280; margin-top: 0.5rem;">Reading Time (min)</div>
+                </div>
+            </div>
+
+            <div id="detailedStats" class="result-box" style="display: none;">
+                <h3>Detailed Analysis</h3>
+                <div id="detailedStatsContent"></div>
+            </div>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 300x250</p>
+        </div>
+
+        <div class="tool-content">
+            <h3>Reading & Speaking Time Estimates</h3>
+            <div id="timeEstimates" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <div class="time-card" style="background: #f0f9ff; padding: 1rem; border-radius: 8px; border-left: 4px solid #0ea5e9;">
+                    <h4 style="color: #0284c7; margin-bottom: 0.5rem;">📖 Slow Reader (100 WPM)</h4>
+                    <p style="font-size: 1.5rem; font-weight: bold; color: #0ea5e9;" id="slowReading">0 minutes</p>
+                </div>
+                <div class="time-card" style="background: #f0fdf4; padding: 1rem; border-radius: 8px; border-left: 4px solid #22c55e;">
+                    <h4 style="color: #16a34a; margin-bottom: 0.5rem;">📚 Average Reader (200 WPM)</h4>
+                    <p style="font-size: 1.5rem; font-weight: bold; color: #22c55e;" id="avgReading">0 minutes</p>
+                </div>
+                <div class="time-card" style="background: #fefce8; padding: 1rem; border-radius: 8px; border-left: 4px solid #eab308;">
+                    <h4 style="color: #ca8a04; margin-bottom: 0.5rem;">⚡ Fast Reader (300 WPM)</h4>
+                    <p style="font-size: 1.5rem; font-weight: bold; color: #eab308;" id="fastReading">0 minutes</p>
+                </div>
+                <div class="time-card" style="background: #fdf4ff; padding: 1rem; border-radius: 8px; border-left: 4px solid #d946ef;">
+                    <h4 style="color: #c026d3; margin-bottom: 0.5rem;">🎤 Speaking (150 WPM)</h4>
+                    <p style="font-size: 1.5rem; font-weight: bold; color: #d946ef;" id="speakingTime">0 minutes</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>Text Analysis</h3>
+            <div id="textAnalysis" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <div class="analysis-card" style="background: #f9fafb; padding: 1rem; border-radius: 8px;">
+                    <h4>Average Word Length</h4>
+                    <p style="font-size: 1.2rem; font-weight: bold; color: #374151;" id="avgWordLength">0 characters</p>
+                </div>
+                <div class="analysis-card" style="background: #f9fafb; padding: 1rem; border-radius: 8px;">
+                    <h4>Average Sentence Length</h4>
+                    <p style="font-size: 1.2rem; font-weight: bold; color: #374151;" id="avgSentenceLength">0 words</p>
+                </div>
+                <div class="analysis-card" style="background: #f9fafb; padding: 1rem; border-radius: 8px;">
+                    <h4>Longest Word</h4>
+                    <p style="font-size: 1.2rem; font-weight: bold; color: #374151;" id="longestWord">-</p>
+                </div>
+                <div class="analysis-card" style="background: #f9fafb; padding: 1rem; border-radius: 8px;">
+                    <h4>Readability Level</h4>
+                    <p style="font-size: 1.2rem; font-weight: bold; color: #374151;" id="readability">-</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>Word Frequency Analysis</h3>
+            <div id="wordFrequency" class="result-box" style="display: none;">
+                <h4>Top 10 Most Frequent Words</h4>
+                <div id="frequencyList"></div>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>How to Use Word Counter</h3>
+            <ol>
+                <li>Type or paste your text in the text area above</li>
+                <li>View real-time statistics as you type</li>
+                <li>Check reading time estimates for different reading speeds</li>
+                <li>Analyze text metrics and word frequency</li>
+                <li>Use the tools to copy, clear, or download your text</li>
+            </ol>
+
+            <h4 class="mt-3">Features</h4>
+            <ul>
+                <li><strong>Real-time Analysis:</strong> Statistics update instantly as you type</li>
+                <li><strong>Multiple Metrics:</strong> Words, characters, sentences, paragraphs, and more</li>
+                <li><strong>Reading Time:</strong> Estimates for different reading speeds</li>
+                <li><strong>Speaking Time:</strong> Perfect for presentation planning</li>
+                <li><strong>Text Analysis:</strong> Average word/sentence length and readability</li>
+                <li><strong>Word Frequency:</strong> See your most used words</li>
+                <li><strong>Export Options:</strong> Copy or download your text</li>
+            </ul>
+        </div>
+
+        <div class="tool-content">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>How is reading time calculated?</h4>
+                <p>Reading time is calculated based on average reading speeds: Slow (100 WPM), Average (200 WPM), and Fast (300 WPM). We divide your total word count by these speeds to estimate reading time.</p>
+            </div>
+            <div class="faq-item">
+                <h4>What's the difference between character counts?</h4>
+                <p>"Characters (no spaces)" counts only letters, numbers, and punctuation. "Characters (with spaces)" includes all characters plus spaces between words.</p>
+            </div>
+            <div class="faq-item">
+                <h4>How are paragraphs counted?</h4>
+                <p>Paragraphs are counted by identifying line breaks (double newlines) in your text. Single line breaks are considered part of the same paragraph.</p>
+            </div>
+            <div class="faq-item">
+                <h4>What is readability level?</h4>
+                <p>Readability is estimated based on average sentence length and word complexity. Simple sentences and shorter words result in easier readability.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🛠️ ToolMetric</h4>
+                    <p>Your trusted source for free online tools. We provide simple, fast, and secure tools for everyday use.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Text Tools</h4>
+                    <ul>
+                        <li><a href="word-counter.html">Word Counter</a></li>
+                        <li><a href="case-converter.html">Case Converter</a></li>
+                        <li><a href="remove-spaces.html">Remove Spaces</a></li>
+                        <li><a href="text-reverser.html">Text Reverser</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>Have feedback or suggestions? We'd love to hear from you!</p>
+                    <a href="contact.html" class="btn btn-outline mt-2">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ToolMetric. All rights reserved. | <a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let textInput = document.getElementById('textInput');
+        
+        // Real-time analysis
+        textInput.addEventListener('input', debounce(analyzeText, 300));
+        
+        function analyzeText() {
+            const text = textInput.value;
+            
+            if (text.trim() === '') {
+                resetStatistics();
+                return;
+            }
+            
+            // Basic counts
+            const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+            const wordCount = words.length;
+            const charCount = text.replace(/\s/g, '').length;
+            const charCountWithSpaces = text.length;
+            const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+            const sentenceCount = sentences.length;
+            const paragraphs = text.split(/\n\n+/).filter(p => p.trim().length > 0);
+            const paragraphCount = paragraphs.length;
+            
+            // Update basic statistics
+            document.getElementById('wordCount').textContent = formatNumber(wordCount);
+            document.getElementById('charCount').textContent = formatNumber(charCount);
+            document.getElementById('charCountWithSpaces').textContent = formatNumber(charCountWithSpaces);
+            document.getElementById('sentenceCount').textContent = formatNumber(sentenceCount);
+            document.getElementById('paragraphCount').textContent = formatNumber(paragraphCount);
+            
+            // Reading time calculations
+            const avgReadingTime = Math.ceil(wordCount / 200); // Average reading speed
+            document.getElementById('readingTime').textContent = avgReadingTime;
+            
+            // Detailed time estimates
+            document.getElementById('slowReading').textContent = Math.ceil(wordCount / 100) + ' minutes';
+            document.getElementById('avgReading').textContent = Math.ceil(wordCount / 200) + ' minutes';
+            document.getElementById('fastReading').textContent = Math.ceil(wordCount / 300) + ' minutes';
+            document.getElementById('speakingTime').textContent = Math.ceil(wordCount / 150) + ' minutes';
+            
+            // Text analysis
+            updateTextAnalysis(words, sentences);
+            
+            // Word frequency
+            updateWordFrequency(words);
+            
+            // Show detailed stats
+            document.getElementById('detailedStats').style.display = 'block';
+            document.getElementById('wordFrequency').style.display = 'block';
+        }
+        
+        function updateTextAnalysis(words, sentences) {
+            // Average word length
+            const totalWordLength = words.reduce((sum, word) => sum + word.length, 0);
+            const avgWordLength = words.length > 0 ? (totalWordLength / words.length).toFixed(1) : 0;
+            document.getElementById('avgWordLength').textContent = avgWordLength + ' characters';
+            
+            // Average sentence length
+            const avgSentenceLength = sentences.length > 0 ? Math.round(words.length / sentences.length) : 0;
+            document.getElementById('avgSentenceLength').textContent = avgSentenceLength + ' words';
+            
+            // Longest word
+            const longestWord = words.reduce((longest, word) => word.length > longest.length ? word : longest, '');
+            document.getElementById('longestWord').textContent = longestWord || '-';
+            
+            // Readability (simplified)
+            let readability = 'Easy';
+            if (avgSentenceLength > 20) readability = 'Difficult';
+            else if (avgSentenceLength > 15) readability = 'Moderate';
+            else if (avgSentenceLength > 10) readability = 'Fairly Easy';
+            
+            document.getElementById('readability').textContent = readability;
+            
+            // Update detailed stats
+            const detailedContent = document.getElementById('detailedStatsContent');
+            detailedContent.innerHTML = `
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div><strong>Total Words:</strong> ${formatNumber(words.length)}</div>
+                    <div><strong>Unique Words:</strong> ${formatNumber(new Set(words.map(w => w.toLowerCase())).size)}</div>
+                    <div><strong>Characters:</strong> ${formatNumber(textInput.value.length)}</div>
+                    <div><strong>Characters (no spaces):</strong> ${formatNumber(textInput.value.replace(/\s/g, '').length)}</div>
+                    <div><strong>Sentences:</strong> ${formatNumber(sentences.length)}</div>
+                    <div><strong>Paragraphs:</strong> ${formatNumber(textInput.value.split(/\n\n+/).filter(p => p.trim().length > 0).length)}</div>
+                    <div><strong>Lines:</strong> ${formatNumber(textInput.value.split('\n').length)}</div>
+                    <div><strong>Avg Words per Sentence:</strong> ${avgSentenceLength}</div>
+                </div>
+            `;
+        }
+        
+        function updateWordFrequency(words) {
+            // Count word frequency
+            const wordFreq = {};
+            words.forEach(word => {
+                const cleanWord = word.toLowerCase().replace(/[^a-z0-9]/g, '');
+                if (cleanWord.length > 2) { // Ignore very short words
+                    wordFreq[cleanWord] = (wordFreq[cleanWord] || 0) + 1;
+                }
+            });
+            
+            // Sort by frequency
+            const sortedWords = Object.entries(wordFreq)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 10);
+            
+            // Display frequency list
+            const frequencyList = document.getElementById('frequencyList');
+            if (sortedWords.length > 0) {
+                frequencyList.innerHTML = sortedWords.map(([word, count]) => `
+                    <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb;">
+                        <span>${word}</span>
+                        <span style="font-weight: bold; color: #2563eb;">${count}</span>
+                    </div>
+                `).join('');
+            } else {
+                frequencyList.innerHTML = '<p>No significant words found</p>';
+            }
+        }
+        
+        function resetStatistics() {
+            document.getElementById('wordCount').textContent = '0';
+            document.getElementById('charCount').textContent = '0';
+            document.getElementById('charCountWithSpaces').textContent = '0';
+            document.getElementById('sentenceCount').textContent = '0';
+            document.getElementById('paragraphCount').textContent = '0';
+            document.getElementById('readingTime').textContent = '0';
+            document.getElementById('slowReading').textContent = '0 minutes';
+            document.getElementById('avgReading').textContent = '0 minutes';
+            document.getElementById('fastReading').textContent = '0 minutes';
+            document.getElementById('speakingTime').textContent = '0 minutes';
+            document.getElementById('avgWordLength').textContent = '0 characters';
+            document.getElementById('avgSentenceLength').textContent = '0 words';
+            document.getElementById('longestWord').textContent = '-';
+            document.getElementById('readability').textContent = '-';
+            document.getElementById('detailedStats').style.display = 'none';
+            document.getElementById('wordFrequency').style.display = 'none';
+        }
+        
+        function clearText() {
+            textInput.value = '';
+            resetStatistics();
+            showMessage('Text cleared', 'info');
+        }
+        
+        function copyText() {
+            if (textInput.value.trim() === '') {
+                showMessage('No text to copy', 'error');
+                return;
+            }
+            copyToClipboard(textInput.value);
+        }
+        
+        function downloadText() {
+            if (textInput.value.trim() === '') {
+                showMessage('No text to download', 'error');
+                return;
+            }
+            const filename = 'text_' + new Date().getTime() + '.txt';
+            downloadFile(textInput.value, filename);
+        }
+        
+        function loadSample() {
+            const sampleText = `The quick brown fox jumps over the lazy dog. This pangram sentence contains every letter of the alphabet at least once. It's commonly used for testing typewriters and computer keyboards, and for other applications involving all of the letters in the English alphabet.
+
+Word counting is an essential task for writers, students, and professionals alike. Whether you're writing an essay, blog post, or professional document, knowing your word count helps you meet requirements and track your progress.
+
+This sample text demonstrates how the word counter tool analyzes various aspects of your writing. It calculates words, characters, sentences, and paragraphs while also providing reading time estimates. The tool helps you understand your text better and improve your writing efficiency.`;
+            
+            textInput.value = sampleText;
+            analyzeText();
+            showMessage('Sample text loaded', 'success');
+        }
+        
+        // Initialize
+        resetStatistics();
+    </script>
+</body>
+</html>

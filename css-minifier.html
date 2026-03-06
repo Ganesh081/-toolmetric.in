@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Minifier - Minify and Optimize CSS Code Online | ToolMetric</title>
+    <meta name="description" content="Free online CSS minifier and optimizer. Compress CSS code, remove whitespace, and optimize styles for faster loading. Perfect for web developers and performance optimization.">
+    <meta name="keywords" content="CSS minifier, CSS optimizer, CSS compressor, minify CSS, online CSS minifier, CSS optimization tool">
+    <meta name="author" content="ToolMetric">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="CSS Minifier - ToolMetric">
+    <meta property="og:description" content="Minify and optimize CSS code instantly">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolmetric.com/css-minifier.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🛠️ ToolMetric</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container tool-container">
+        <div class="tool-header">
+            <h1>CSS Minifier</h1>
+            <p class="tool-description">
+                Minify and optimize CSS code instantly with our comprehensive CSS minifier tool. 
+                This essential utility for web developers compresses CSS files by removing unnecessary 
+                whitespace, comments, and redundant code while maintaining functionality. 
+                Perfect for improving website performance, reducing file sizes, and optimizing loading times. 
+                Our tool handles complex CSS with media queries, animations, and modern features while 
+                ensuring your styles remain intact and functional. Whether you're working with large 
+                stylesheets, component CSS, or framework styles, our minifier creates production-ready 
+                code that loads faster and performs better. Simply paste your CSS and watch it transform 
+                into optimized, minified output instantly.
+            </p>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 728x90</p>
+        </div>
+
+        <div class="tool-content">
+            <div class="css-controls">
+                <div class="control-buttons" style="display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                    <button onclick="minifyCSS()" class="btn">Minify CSS</button>
+                    <button onclick="beautifyCSS()" class="btn btn-secondary">Beautify CSS</button>
+                    <button onclick="validateCSS()" class="btn btn-outline">Validate CSS</button>
+                    <button onclick="clearCSS()" class="btn btn-outline">Clear</button>
+                    <button onclick="loadSample()" class="btn btn-secondary">Load Sample</button>
+                </div>
+                
+                <div class="minify-options" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+                    <div class="form-group">
+                        <label for="removeComments">
+                            <input type="checkbox" id="removeComments" checked style="margin-right: 0.5rem;">
+                            Remove Comments
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="removeWhitespace">
+                            <input type="checkbox" id="removeWhitespace" checked style="margin-right: 0.5rem;">
+                            Remove Whitespace
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="optimizeColors">
+                            <input type="checkbox" id="optimizeColors" checked style="margin-right: 0.5rem;">
+                            Optimize Colors
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="mergeSelectors">
+                            <input type="checkbox" id="mergeSelectors" style="margin-right: 0.5rem;">
+                            Merge Selectors
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="css-editor" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="input-section">
+                    <h3>Input CSS</h3>
+                    <textarea id="cssInput" class="form-control" rows="20" placeholder="Paste your CSS code here..."></textarea>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button onclick="copyInput()" class="btn btn-outline">Copy Input</button>
+                        <button onclick="uploadFile()" class="btn btn-outline">Upload File</button>
+                        <input type="file" id="fileInput" accept=".css" style="display: none;" onchange="handleFileUpload(event)">
+                    </div>
+                </div>
+                
+                <div class="output-section">
+                    <h3>Minified Output</h3>
+                    <div id="cssOutput" style="background: #f9fafb; border: 2px solid #e5e7eb; border-radius: 8px; padding: 1rem; min-height: 400px; font-family: monospace; white-space: pre-wrap; overflow: auto;"></div>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button onclick="copyOutput()" class="btn btn-secondary">Copy Output</button>
+                        <button onclick="downloadCSS()" class="btn btn-outline">Download CSS</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="validationResult" class="validation-result" style="display: none; margin-top: 1rem;">
+                <!-- Validation results will be shown here -->
+            </div>
+
+            <div id="cssStats" class="css-stats" style="display: none; margin-top: 1rem;">
+                <h3>CSS Statistics</h3>
+                <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #2563eb;" id="selectorCount">0</div>
+                        <div style="color: #6b7280;">Selectors</div>
+                    </div>
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #10b981;" id="propertyCount">0</div>
+                        <div style="color: #6b7280;">Properties</div>
+                    </div>
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #f59e0b;" id="originalSize">0</div>
+                        <div style="color: #6b7280;">Original Size</div>
+                    </div>
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #ef4444;" id="minifiedSize">0</div>
+                        <div style="color: #6b7280;">Minified Size</div>
+                    </div>
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #8b5cf6;" id="compressionRatio">0%</div>
+                        <div style="color: #6b7280;">Compression</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 300x250</p>
+        </div>
+
+        <div class="tool-content">
+            <h3>How to Use CSS Minifier</h3>
+            <ol>
+                <li>Paste your CSS code in the input textarea or upload a CSS file</li>
+                <li>Choose minification options (comments, whitespace, colors, etc.)</li>
+                <li>Click "Minify CSS" to compress and optimize your code</li>
+                <li>Use "Beautify CSS" to format minified code back to readable format</li>
+                <li>Click "Validate CSS" to check for syntax errors</li>
+                <li>Copy the minified output or download as a file</li>
+            </ol>
+
+            <h4 class="mt-3">Features</h4>
+            <ul>
+                <li><strong>Minification:</strong> Remove whitespace and comments for smaller files</li>
+                <li><strong>Color Optimization:</strong> Convert colors to shortest format</li>
+                <li><strong>Selector Merging:</strong> Combine duplicate selectors</li>
+                <li><strong>Validation:</strong> Check CSS syntax and structure</li>
+                <li><strong>Statistics:</strong> Analyze CSS size and compression ratio</li>
+                <li><strong>Beautification:</strong> Format minified CSS back to readable form</li>
+            </ul>
+
+            <h4 class="mt-3">Common Use Cases</h4>
+            <ul>
+                <li><strong>Production Builds:</strong> Optimize CSS for live websites</li>
+                <li><strong>Performance:</strong> Reduce file sizes for faster loading</li>
+                <li><strong>CDN Optimization:</strong> Minimize CSS for content delivery</li>
+                <li><strong>Bundle Optimization:</strong> Compress CSS in build processes</li>
+                <li><strong>Mobile Apps:</strong> Reduce CSS for mobile applications</li>
+            </ul>
+        </div>
+
+        <div class="tool-content">
+            <h3>Related Tools</h3>
+            <div class="related-tools" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="javascript-minifier.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">⚡ JavaScript Minifier</h4>
+                    <p style="margin: 0; color: #6b7280;">Minify JavaScript code</p>
+                </a>
+                <a href="html-formatter.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🌐 HTML Formatter</h4>
+                    <p style="margin: 0; color: #6b7280;">Format and beautify HTML code</p>
+                </a>
+                <a href="json-formatter.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">📋 JSON Formatter</h4>
+                    <p style="margin: 0; color: #6b7280;">Format and validate JSON data</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>What is CSS minification?</h4>
+                <p>CSS minification removes unnecessary characters like whitespace, comments, and formatting to reduce file size without changing functionality.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Will minification break my CSS?</h4>
+                <p>No, our minifier only removes whitespace and comments. It preserves all CSS rules, selectors, and properties exactly as they work.</p>
+            </div>
+            <div class="faq-item">
+                <h4>How much can CSS be compressed?</h4>
+                <p>Typically 20-60% compression is achievable, depending on the amount of whitespace, comments, and optimization opportunities in your CSS.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can I reverse the minification?</h4>
+                <p>While you can't perfectly reverse minification, our beautifier can format minified CSS back to a readable structure with proper indentation.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🛠️ ToolMetric</h4>
+                    <p>Your trusted source for free online tools. We provide simple, fast, and secure tools for everyday use.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Developer Tools</h4>
+                    <ul>
+                        <li><a href="css-minifier.html">CSS Minifier</a></li>
+                        <li><a href="javascript-minifier.html">JavaScript Minifier</a></li>
+                        <li><a href="html-formatter.html">HTML Formatter</a></li>
+                        <li><a href="json-formatter.html">JSON Formatter</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>Have feedback or suggestions? We'd love to hear from you!</p>
+                    <a href="contact.html" class="btn btn-outline mt-2">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ToolMetric. All rights reserved. | <a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let minifiedCSS = '';
+        let originalCSS = '';
+
+        function minifyCSS() {
+            const input = document.getElementById('cssInput').value.trim();
+            
+            if (!input) {
+                showMessage('Please enter CSS code to minify', 'error');
+                return;
+            }
+            
+            originalCSS = input;
+            
+            try {
+                const removeComments = document.getElementById('removeComments').checked;
+                const removeWhitespace = document.getElementById('removeWhitespace').checked;
+                const optimizeColors = document.getElementById('optimizeColors').checked;
+                const mergeSelectors = document.getElementById('mergeSelectors').checked;
+                
+                minifiedCSS = processCSS(input, removeComments, removeWhitespace, optimizeColors, mergeSelectors);
+                document.getElementById('cssOutput').textContent = minifiedCSS;
+                document.getElementById('cssOutput').style.color = '#1f2937';
+                
+                calculateStatistics(input, minifiedCSS);
+                showValidation(true, 'CSS minified successfully!');
+                showMessage('CSS minified successfully', 'success');
+            } catch (error) {
+                showValidation(false, 'CSS minification error: ' + error.message);
+                document.getElementById('cssOutput').textContent = input;
+                document.getElementById('cssOutput').style.color = '#ef4444';
+                showMessage('CSS minification failed', 'error');
+            }
+        }
+
+        function beautifyCSS() {
+            const input = document.getElementById('cssInput').value.trim();
+            
+            if (!input) {
+                showMessage('Please enter CSS code to beautify', 'error');
+                return;
+            }
+            
+            try {
+                const beautified = formatCSS(input);
+                document.getElementById('cssOutput').textContent = beautified;
+                document.getElementById('cssOutput').style.color = '#1f2937';
+                
+                showValidation(true, 'CSS beautified successfully!');
+                showMessage('CSS beautified successfully', 'success');
+            } catch (error) {
+                showValidation(false, 'CSS beautification error: ' + error.message);
+                document.getElementById('cssOutput').textContent = input;
+                document.getElementById('cssOutput').style.color = '#ef4444';
+                showMessage('CSS beautification failed', 'error');
+            }
+        }
+
+        function processCSS(css, removeComments, removeWhitespace, optimizeColors, mergeSelectors) {
+            let result = css;
+            
+            // Remove comments
+            if (removeComments) {
+                result = result.replace(/\/\*[\s\S]*?\*\//g, '');
+            }
+            
+            // Optimize colors
+            if (optimizeColors) {
+                // Convert long hex to short hex
+                result = result.replace(/#([0-9a-fA-F])\1([0-9a-fA-F])\2([0-9a-fA-F])\3/g, '#$1$2$3');
+                
+                // Convert rgb() to hex where possible
+                result = result.replace(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/g, (match, r, g, b) => {
+                    const toHex = (n) => parseInt(n).toString(16).padStart(2, '0');
+                    return '#' + toHex(r) + toHex(g) + toHex(b);
+                });
+            }
+            
+            // Remove whitespace
+            if (removeWhitespace) {
+                result = result.replace(/\s+/g, ' ')
+                           .replace(/\s*([{}:;,])\s*/g, '$1')
+                           .replace(/;\s*}/g, '}')
+                           .trim();
+            }
+            
+            // Basic selector merging (simplified)
+            if (mergeSelectors) {
+                const rules = {};
+                const ruleRegex = /([^{]+)\{([^}]*)\}/g;
+                let match;
+                
+                while ((match = ruleRegex.exec(result)) !== null) {
+                    const selector = match[1].trim();
+                    const properties = match[2].trim();
+                    
+                    if (rules[selector]) {
+                        rules[selector] += ';' + properties;
+                    } else {
+                        rules[selector] = properties;
+                    }
+                }
+                
+                result = Object.entries(rules)
+                    .map(([selector, properties]) => `${selector}{${properties}}`)
+                    .join('');
+            }
+            
+            return result;
+        }
+
+        function formatCSS(css) {
+            // Simple CSS formatter
+            let result = css;
+            let indent = 0;
+            const indentSize = '    ';
+            
+            result = result.replace(/\s*([{}])\s*/g, '\n$1\n');
+            result = result.replace(/;/g, ';\n');
+            result = result.replace(/\n\s*\n/g, '\n');
+            
+            const lines = result.split('\n');
+            const formattedLines = [];
+            
+            for (const line of lines) {
+                const trimmed = line.trim();
+                if (!trimmed) continue;
+                
+                if (trimmed === '}') {
+                    indent--;
+                }
+                
+                formattedLines.push(indentSize.repeat(Math.max(0, indent)) + trimmed);
+                
+                if (trimmed === '{') {
+                    indent++;
+                }
+            }
+            
+            return formattedLines.join('\n');
+        }
+
+        function validateCSS() {
+            const input = document.getElementById('cssInput').value.trim();
+            
+            if (!input) {
+                showMessage('Please enter CSS code to validate', 'error');
+                return;
+            }
+            
+            // Basic CSS validation
+            const issues = [];
+            
+            // Check for unmatched braces
+            const openBraces = (input.match(/{/g) || []).length;
+            const closeBraces = (input.match(/}/g) || []).length;
+            
+            if (openBraces !== closeBraces) {
+                issues.push('Mismatched opening and closing braces');
+            }
+            
+            // Check for common syntax errors
+            if (input.includes(';;')) {
+                issues.push('Double semicolons detected');
+            }
+            
+            if (/:([^;]*);/g.test(input)) {
+                // Basic property validation
+                const properties = input.match(/([^{}]+){([^{}]*)}/g) || [];
+                for (const prop of properties) {
+                    const content = prop.match(/{([^}]*)}/);
+                    if (content && content[1].trim() === '') {
+                        issues.push('Empty CSS rule detected');
+                    }
+                }
+            }
+            
+            calculateStatistics(input, input);
+            
+            if (issues.length === 0) {
+                showValidation(true, 'CSS appears to be valid!');
+                showMessage('CSS validation successful', 'success');
+            } else {
+                showValidation(false, 'CSS issues found: ' + issues.join(', '));
+                showMessage('CSS validation found issues', 'error');
+            }
+        }
+
+        function calculateStatistics(original, minified) {
+            const selectorCount = (original.match(/[^{]+{/g) || []).length;
+            const propertyCount = (original.match(/[^:]+:/g) || []).length;
+            const originalSize = new Blob([original]).size;
+            const minifiedSize = new Blob([minified]).size;
+            const compressionRatio = originalSize > 0 ? Math.round((1 - minifiedSize / originalSize) * 100) : 0;
+            
+            document.getElementById('selectorCount').textContent = selectorCount;
+            document.getElementById('propertyCount').textContent = propertyCount;
+            document.getElementById('originalSize').textContent = formatBytes(originalSize);
+            document.getElementById('minifiedSize').textContent = formatBytes(minifiedSize);
+            document.getElementById('compressionRatio').textContent = compressionRatio + '%';
+            document.getElementById('cssStats').style.display = 'block';
+        }
+
+        function showValidation(isValid, message) {
+            const resultDiv = document.getElementById('validationResult');
+            resultDiv.style.display = 'block';
+            
+            if (isValid) {
+                resultDiv.innerHTML = `
+                    <div class="message success">
+                        <h4>✅ ${message}</h4>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="message error">
+                        <h4>❌ ${message}</h4>
+                    </div>
+                `;
+            }
+        }
+
+        function clearCSS() {
+            document.getElementById('cssInput').value = '';
+            document.getElementById('cssOutput').textContent = '';
+            document.getElementById('validationResult').style.display = 'none';
+            document.getElementById('cssStats').style.display = 'none';
+            minifiedCSS = '';
+            originalCSS = '';
+            showMessage('CSS cleared', 'info');
+        }
+
+        function loadSample() {
+            const sampleCSS = `/* Sample CSS for demonstration */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+}`;
+            
+            document.getElementById('cssInput').value = sampleCSS;
+            showMessage('Sample CSS loaded', 'success');
+        }
+
+        function copyInput() {
+            const input = document.getElementById('cssInput').value;
+            if (!input) {
+                showMessage('No input to copy', 'error');
+                return;
+            }
+            copyToClipboard(input);
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('cssOutput').textContent;
+            if (!output) {
+                showMessage('No output to copy', 'error');
+                return;
+            }
+            copyToClipboard(output);
+        }
+
+        function downloadCSS() {
+            const output = document.getElementById('cssOutput').textContent;
+            if (!output) {
+                showMessage('No output to download', 'error');
+                return;
+            }
+            
+            const blob = new Blob([output], { type: 'text/css' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'minified_' + new Date().getTime() + '.css';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showMessage('CSS downloaded successfully', 'success');
+        }
+
+        function uploadFile() {
+            document.getElementById('fileInput').click();
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            if (!file.type.includes('css') && !file.name.endsWith('.css')) {
+                showMessage('Please upload a CSS file', 'error');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('cssInput').value = e.target.result;
+                showMessage('File uploaded successfully', 'success');
+            };
+            reader.onerror = function() {
+                showMessage('Error reading file', 'error');
+            };
+            reader.readAsText(file);
+        }
+    </script>
+</body>
+</html>

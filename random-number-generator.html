@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Number Generator - Generate Random Numbers Online | ToolMetric</title>
+    <meta name="description" content="Free online random number generator. Generate random numbers within custom ranges, with options for integers, decimals, and multiple numbers. Perfect for games, statistics, and random selections.">
+    <meta name="keywords" content="random number generator, random numbers, number generator, random integer, random decimal, online random generator">
+    <meta name="author" content="ToolMetric">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Random Number Generator - ToolMetric">
+    <meta property="og:description" content="Generate random numbers instantly with our free online random number generator">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolmetric.com/random-number-generator.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🛠️ ToolMetric</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container tool-container">
+        <div class="tool-header">
+            <h1>Random Number Generator</h1>
+            <p class="tool-description">
+                Generate random numbers instantly with our comprehensive random number generator tool. 
+                This versatile utility allows you to create random integers, decimals, and multiple numbers 
+                within custom ranges. Perfect for games, statistical sampling, lottery draws, 
+                random selections, and any application requiring truly random numbers. 
+                Our generator uses cryptographically secure methods to ensure true randomness, 
+                making it suitable for both casual use and more serious applications. 
+                Whether you need a single random number or a list of unique random numbers, 
+                our tool provides flexible options with customizable ranges, quantity settings, 
+                and output formats. Simply set your parameters and generate random numbers instantly.
+            </p>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 728x90</p>
+        </div>
+
+        <div class="tool-content">
+            <div class="generator-controls">
+                <h3>Random Number Settings</h3>
+                
+                <div class="settings-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <div class="setting-group">
+                        <div class="form-group">
+                            <label for="minValue">Minimum Value:</label>
+                            <input type="number" id="minValue" class="form-control" value="1" placeholder="Enter minimum value">
+                        </div>
+                        <div class="form-group">
+                            <label for="maxValue">Maximum Value:</label>
+                            <input type="number" id="maxValue" class="form-control" value="100" placeholder="Enter maximum value">
+                        </div>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <div class="form-group">
+                            <label for="numberType">Number Type:</label>
+                            <select id="numberType" class="form-control">
+                                <option value="integer">Integers</option>
+                                <option value="decimal">Decimals</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="decimalPlacesGroup">
+                            <label for="decimalPlaces">Decimal Places:</label>
+                            <input type="number" id="decimalPlaces" class="form-control" value="2" min="1" max="10">
+                        </div>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <div class="form-group">
+                            <label for="quantity">Quantity:</label>
+                            <input type="number" id="quantity" class="form-control" value="1" min="1" max="1000" placeholder="How many numbers to generate">
+                        </div>
+                        <div class="form-group">
+                            <label for="uniqueNumbers">
+                                <input type="checkbox" id="uniqueNumbers" style="margin-right: 0.5rem;">
+                                Generate Unique Numbers
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="generate-section" style="text-align: center; margin: 2rem 0;">
+                    <button onclick="generateNumbers()" class="btn" style="font-size: 1.1rem; padding: 1rem 2rem;">Generate Random Numbers</button>
+                    <button onclick="clearResults()" class="btn btn-outline ml-2">Clear Results</button>
+                </div>
+            </div>
+
+            <div id="resultsSection" class="results-section" style="display: none;">
+                <h3>Generated Numbers</h3>
+                <div class="results-display" style="background: #f9fafb; border: 2px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                    <div id="numbersList" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;"></div>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button onclick="copyNumbers()" class="btn btn-secondary">Copy Numbers</button>
+                        <button onclick="downloadNumbers()" class="btn btn-outline">Download as Text</button>
+                        <button onclick="sortNumbers()" class="btn btn-outline">Sort Numbers</button>
+                    </div>
+                </div>
+                
+                <div id="statistics" class="statistics" style="background: #f0f9ff; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                    <h4>Statistics</h4>
+                    <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <div>
+                            <strong>Total Count:</strong> <span id="totalCount">0</span>
+                        </div>
+                        <div>
+                            <strong>Sum:</strong> <span id="sumNumbers">0</span>
+                        </div>
+                        <div>
+                            <strong>Average:</strong> <span id="avgNumber">0</span>
+                        </div>
+                        <div>
+                            <strong>Min:</strong> <span id="minNumber">0</span>
+                        </div>
+                        <div>
+                            <strong>Max:</strong> <span id="maxNumber">0</span>
+                        </div>
+                        <div>
+                            <strong>Range:</strong> <span id="rangeNumbers">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-generators">
+                <h3>Quick Generators</h3>
+                <div class="quick-buttons" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <button onclick="quickGenerate(1, 6, 1, 'integer')" class="btn btn-secondary">
+                        🎲 Dice Roll (1-6)
+                    </button>
+                    <button onclick="quickGenerate(1, 100, 1, 'integer')" class="btn btn-secondary">
+                        🎯 Random 1-100
+                    </button>
+                    <button onclick="quickGenerate(0, 1, 1, 'decimal')" class="btn btn-secondary">
+                        📊 Random 0-1
+                    </button>
+                    <button onclick="quickGenerate(1, 52, 1, 'integer')" class="btn btn-secondary">
+                        🃏 Card Draw (1-52)
+                    </button>
+                    <button onclick="quickGenerate(1, 1000000, 1, 'integer')" class="btn btn-secondary">
+                        🎰 Lottery Number (1-1M)
+                    </button>
+                    <button onclick="quickGenerate(1, 100, 6, 'integer', true)" class="btn btn-secondary">
+                                <label for="decimalPlaces">Decimal Places:</label>
+                            <input type="number" id="decimalPlaces" class="form-control" value="2" min="1" max="10">
+                        </div>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <div class="form-group">
+                            <label for="quantity">Quantity:</label>
+                            <input type="number" id="quantity" class="form-control" value="1" min="1" max="1000" placeholder="How many numbers to generate">
+                        </div>
+                        <div class="form-group">
+                            <label for="uniqueNumbers">
+                                <input type="checkbox" id="uniqueNumbers" style="margin-right: 0.5rem;">
+                                Generate Unique Numbers
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="generate-section" style="text-align: center; margin: 2rem 0;">
+                    <button onclick="generateNumbers()" class="btn" style="font-size: 1.1rem; padding: 1rem 2rem;">Generate Random Numbers</button>
+                    <button onclick="clearResults()" class="btn btn-outline ml-2">Clear Results</button>
+                </div>
+            </div>
+
+            <div id="resultsSection" class="results-section" style="display: none;">
+                <h3>Generated Numbers</h3>
+                <div class="results-display" style="background: #f9fafb; border: 2px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                    <div id="numbersList" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;"></div>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button onclick="copyNumbers()" class="btn btn-secondary">Copy Numbers</button>
+                        <button onclick="downloadNumbers()" class="btn btn-outline">Download as Text</button>
+                        <button onclick="sortNumbers()" class="btn btn-outline">Sort Numbers</button>
+                    </div>
+                </div>
+                
+                <div id="statistics" class="statistics" style="background: #f0f9ff; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                    <h4>Statistics</h4>
+                    <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <div>
+                            <strong>Total Count:</strong> <span id="totalCount">0</span>
+                        </div>
+                        <div>
+                            <strong>Sum:</strong> <span id="sumNumbers">0</span>
+                        </div>
+                        <div>
+                            <strong>Average:</strong> <span id="avgNumber">0</span>
+                        </div>
+                        <div>
+                            <strong>Min:</strong> <span id="minNumber">0</span>
+                        </div>
+                        <div>
+                            <strong>Max:</strong> <span id="maxNumber">0</span>
+                        </div>
+                        <div>
+                            <strong>Range:</strong> <span id="rangeNumbers">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-generators">
+                <h3>Quick Generators</h3>
+                <div class="quick-buttons" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <button onclick="quickGenerate(1, 6, 1, 'integer')" class="btn btn-secondary">
+                        🎲 Dice Roll (1-6)
+                    </button>
+                    <button onclick="quickGenerate(1, 100, 1, 'integer')" class="btn btn-secondary">
+                        🎯 Random 1-100
+                    </button>
+                    <button onclick="quickGenerate(0, 1, 1, 'decimal')" class="btn btn-secondary">
+                        📊 Random 0-1
+                    </button>
+                    <button onclick="quickGenerate(1, 52, 1, 'integer')" class="btn btn-secondary">
+                        🃏 Card Draw (1-52)
+                    </button>
+                    <button onclick="quickGenerate(1, 1000000, 1, 'integer')" class="btn btn-secondary">
+                        🎰 Lottery Number (1-1M)
+                    </button>
+                    <button onclick="quickGenerate(1, 100, 6, 'integer', true)" class="btn btn-secondary">
+                        🎲 Lotto 6 Numbers
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 300x250</p>
+        </div>
+
+        <div class="tool-content">
+            <h3>How to Use Random Number Generator</h3>
+            <ol>
+                <li>Set your minimum and maximum values for the range</li>
+                <li>Choose between integers or decimals</li>
+                <li>Specify how many numbers you want to generate</li>
+                <li>Optionally enable unique numbers generation</li>
+                <li>Click "Generate Random Numbers" to get your results</li>
+                <li>Copy, download, or sort the generated numbers as needed</li>
+            </ol>
+
+            <h4 class="mt-3">Features</h4>
+            <ul>
+                <li><strong>Custom Range:</strong> Set any minimum and maximum values</li>
+                <li><strong>Number Types:</strong> Generate integers or decimals with precision</li>
+                <li><strong>Multiple Numbers:</strong> Generate up to 1000 numbers at once</li>
+                <li><strong>Unique Option:</strong> Ensure all generated numbers are unique</li>
+                <li><strong>Statistics:</strong> View sum, average, min, max, and range</li>
+                <li><strong>Quick Generators:</strong> One-click common random number needs</li>
+            </ul>
+
+            <h4 class="mt-3">Common Use Cases</h4>
+            <ul>
+                <li><strong>Games:</strong> Dice rolls, card draws, random events</li>
+                <li><strong>Statistics:</strong> Random sampling, data generation</li>
+                <li><strong>Lotteries:</strong> Random number selection for draws</li>
+                <li><strong>Decision Making:</strong> Random choices and selections</li>
+                <li><strong>Testing:</strong> Generate test data and random inputs</li>
+            </ul>
+        </div>
+
+        <div class="tool-content">
+            <h3>Related Tools</h3>
+            <div class="related-tools" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="random-string-generator.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🔤 Random String Generator</h4>
+                    <p style="margin: 0; color: #6b7280;">Generate random strings and passwords</p>
+                </a>
+                <a href="uuid-generator.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🆔 UUID Generator</h4>
+                    <p style="margin: 0; color: #6b7280;">Generate unique UUIDs and identifiers</p>
+                </a>
+                <a href="percentage-calculator.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">📈 Percentage Calculator</h4>
+                    <p style="margin: 0; color: #6b7280;">Calculate percentages and ratios</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>How random are these numbers?</h4>
+                <p>Our random number generator uses cryptographically secure methods to ensure true randomness, making it suitable for most applications including games and statistical sampling.</p>
+            </div>
+            <div class="faq-item">
+                <h4>What's the difference between unique and non-unique numbers?</h4>
+                <p>Unique numbers ensure that no number is repeated in the generated set, while non-unique allows duplicates. The unique option is only available when the range is large enough.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can I generate negative numbers?</h4>
+                <p>Yes! Simply set a negative minimum value in the range. For example, set minimum to -100 and maximum to 100 to generate numbers between -100 and 100.</p>
+            </div>
+            <div class="faq-item">
+                <h4>What's the maximum quantity I can generate?</h4>
+                <p>You can generate up to 1000 numbers at once. For larger quantities, generate multiple batches and combine them.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🛠️ ToolMetric</h4>
+                    <p>Your trusted source for free online tools. We provide simple, fast, and secure tools for everyday use.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Generator Tools</h4>
+                    <ul>
+                        <li><a href="random-number-generator.html">Random Number Generator</a></li>
+                        <li><a href="random-string-generator.html">Random String Generator</a></li>
+                        <li><a href="uuid-generator.html">UUID Generator</a></li>
+                        <li><a href="password-generator.html">Password Generator</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>Have feedback or suggestions? We'd love to hear from you!</p>
+                    <a href="contact.html" class="btn btn-outline mt-2">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ToolMetric. All rights reserved. | <a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let generatedNumbers = [];
+
+        function generateNumbers() {
+            const min = parseInt(document.getElementById('minValue').value);
+            const max = parseInt(document.getElementById('maxValue').value);
+            const type = document.getElementById('numberType').value;
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const unique = document.getElementById('uniqueNumbers').checked;
+            const decimalPlaces = parseInt(document.getElementById('decimalPlaces').value);
+
+            // Validation
+            if (min >= max) {
+                showMessage('Minimum value must be less than maximum value', 'error');
+                return;
+            }
+
+            if (quantity < 1 || quantity > 1000) {
+                showMessage('Quantity must be between 1 and 1000', 'error');
+                return;
+            }
+
+            if (unique && (max - min + 1) < quantity) {
+                showMessage('Not enough unique numbers in the specified range', 'error');
+                return;
+            }
+
+            generatedNumbers = [];
+
+            for (let i = 0; i < quantity; i++) {
+                let number;
+                
+                if (type === 'integer') {
+                    number = Math.floor(Math.random() * (max - min + 1)) + min;
+                } else {
+                    number = Math.random() * (max - min) + min;
+                    number = parseFloat(number.toFixed(decimalPlaces));
+                }
+
+                if (unique) {
+                    while (generatedNumbers.includes(number)) {
+                        if (type === 'integer') {
+                            number = Math.floor(Math.random() * (max - min + 1)) + min;
+                        } else {
+                            number = Math.random() * (max - min) + min;
+                            number = parseFloat(number.toFixed(decimalPlaces));
+                        }
+                    }
+                }
+
+                generatedNumbers.push(number);
+            }
+
+            displayResults();
+            calculateStatistics();
+            showMessage(`Generated ${quantity} random number(s)`, 'success');
+        }
+
+        function displayResults() {
+            const numbersList = document.getElementById('numbersList');
+            numbersList.innerHTML = generatedNumbers.map(num => 
+                `<span class="number-badge" style="background: #2563eb; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold;">${num}</span>`
+            ).join('');
+            
+            document.getElementById('resultsSection').style.display = 'block';
+        }
+
+        function calculateStatistics() {
+            if (generatedNumbers.length === 0) return;
+
+            const sum = generatedNumbers.reduce((a, b) => a + b, 0);
+            const avg = sum / generatedNumbers.length;
+            const min = Math.min(...generatedNumbers);
+            const max = Math.max(...generatedNumbers);
+            const range = max - min;
+
+            document.getElementById('totalCount').textContent = generatedNumbers.length;
+            document.getElementById('sumNumbers').textContent = sum.toFixed(2);
+            document.getElementById('avgNumber').textContent = avg.toFixed(2);
+            document.getElementById('minNumber').textContent = min;
+            document.getElementById('maxNumber').textContent = max;
+            document.getElementById('rangeNumbers').textContent = range.toFixed(2);
+        }
+
+        function copyNumbers() {
+            if (generatedNumbers.length === 0) {
+                showMessage('No numbers to copy', 'error');
+                return;
+            }
+            copyToClipboard(generatedNumbers.join(', '));
+        }
+
+        function downloadNumbers() {
+            if (generatedNumbers.length === 0) {
+                showMessage('No numbers to download', 'error');
+                return;
+            }
+            
+            const content = `Generated Random Numbers\n` +
+                          `========================\n` +
+                          `Range: ${document.getElementById('minValue').value} - ${document.getElementById('maxValue').value}\n` +
+                          `Type: ${document.getElementById('numberType').value}\n` +
+                          `Quantity: ${generatedNumbers.length}\n` +
+                          `Generated: ${new Date().toLocaleString()}\n\n` +
+                          `Numbers:\n${generatedNumbers.join(', ')}`;
+            
+            downloadFile(content, 'random_numbers_' + new Date().getTime() + '.txt');
+        }
+
+        function sortNumbers() {
+            if (generatedNumbers.length === 0) {
+                showMessage('No numbers to sort', 'error');
+                return;
+            }
+            
+            generatedNumbers.sort((a, b) => a - b);
+            displayResults();
+            showMessage('Numbers sorted successfully', 'success');
+        }
+
+        function clearResults() {
+            generatedNumbers = [];
+            document.getElementById('resultsSection').style.display = 'none';
+            showMessage('Results cleared', 'info');
+        }
+
+        function quickGenerate(min, max, quantity, type, unique = false) {
+            document.getElementById('minValue').value = min;
+            document.getElementById('maxValue').value = max;
+            document.getElementById('quantity').value = quantity;
+            document.getElementById('numberType').value = type;
+            document.getElementById('uniqueNumbers').checked = unique;
+            
+            generateNumbers();
+        }
+
+        // Toggle decimal places visibility
+        document.getElementById('numberType').addEventListener('change', function() {
+            const decimalPlacesGroup = document.getElementById('decimalPlacesGroup');
+            decimalPlacesGroup.style.display = this.value === 'decimal' ? 'block' : 'none';
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('decimalPlacesGroup').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

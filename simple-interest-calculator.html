@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Interest Calculator - Calculate Simple Interest Online | ToolMetric</title>
+    <meta name="description" content="Free online simple interest calculator. Calculate interest, principal, rate, and time instantly. Perfect for financial planning and education.">
+    <meta name="keywords" content="simple interest calculator, interest calculator, financial calculator, calculate interest, principal calculator, rate calculator">
+    <meta name="author" content="ToolMetric">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Simple Interest Calculator - ToolMetric">
+    <meta property="og:description" content="Calculate simple interest instantly">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolmetric.com/simple-interest-calculator.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🛠️ ToolMetric</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container tool-container">
+        <div class="tool-header">
+            <h1>Simple Interest Calculator</h1>
+            <h2>Calculate simple interest, principal, rate, and time instantly</h2>
+            <p class="tool-description">
+                Calculate simple interest instantly with our comprehensive simple interest calculator tool. 
+                This essential utility for financial planning, education, and investment analysis helps you 
+                calculate interest earned, total amount, and solve for any variable in the simple interest 
+                formula. Perfect for students learning finance, investors planning returns, and anyone needing 
+                quick interest calculations. Our tool supports various time periods, compounding frequencies, 
+                and provides detailed breakdowns of calculations with step-by-step explanations. Whether you're 
+                calculating loan interest, investment returns, or teaching financial concepts, our calculator 
+                provides accurate results with multiple calculation modes and comprehensive analysis. Simply 
+                input your known values and get instant calculations with detailed explanations.
+            </p>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 728x90</p>
+        </div>
+
+        <div class="tool-content">
+            <div class="calculator-controls">
+                <h3>Calculation Mode</h3>
+                <div class="mode-selector" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                    <button onclick="setMode('interest')" class="mode-btn btn btn-secondary" id="modeInterest">Calculate Interest</button>
+                    <button onclick="setMode('principal')" class="mode-btn btn btn-outline" id="modePrincipal">Calculate Principal</button>
+                    <button onclick="setMode('rate')" class="mode-btn btn btn-outline" id="modeRate">Calculate Rate</button>
+                    <button onclick="setMode('time')" class="mode-btn btn btn-outline" id="modeTime">Calculate Time</button>
+                </div>
+                
+                <div class="input-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                    <div class="input-group" id="principalGroup">
+                        <label for="principal">Principal Amount ($):</label>
+                        <input type="number" id="principal" class="form-control" placeholder="10000" step="0.01" min="0">
+                    </div>
+                    
+                    <div class="input-group" id="rateGroup">
+                        <label for="rate">Annual Interest Rate (%):</label>
+                        <input type="number" id="rate" class="form-control" placeholder="5" step="0.01" min="0">
+                    </div>
+                    
+                    <div class="input-group" id="timeGroup">
+                        <label for="time">Time Period:</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="number" id="time" class="form-control" placeholder="2" step="0.01" min="0">
+                            <select id="timeUnit" class="form-control">
+                                <option value="years">Years</option>
+                                <option value="months">Months</option>
+                                <option value="days">Days</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group" id="interestGroup" style="display: none;">
+                        <label for="interest">Interest Amount ($):</label>
+                        <input type="number" id="interest" class="form-control" placeholder="1000" step="0.01" min="0">
+                    </div>
+                </div>
+                
+                <div class="additional-options" style="margin: 1.5rem 0;">
+                    <h4>Additional Options</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <div class="form-group">
+                            <label for="currency">Currency:</label>
+                            <select id="currency" class="form-control">
+                                <option value="$">US Dollar ($)</option>
+                                <option value="€">Euro (€)</option>
+                                <option value="£">British Pound (£)</option>
+                                <option value="₹">Indian Rupee (₹)</option>
+                                <option value="¥">Japanese Yen (¥)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="showSteps">
+                                <input type="checkbox" id="showSteps" checked style="margin-right: 0.5rem;">
+                                Show Calculation Steps
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="showFormula">
+                                <input type="checkbox" id="showFormula" checked style="margin-right: 0.5rem;">
+                                Show Formula
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="calculate-section" style="text-align: center; margin: 2rem 0;">
+                    <button onclick="calculate()" class="btn" style="font-size: 1.1rem; padding: 1rem 2rem;">Calculate</button>
+                    <button onclick="clearAll()" class="btn btn-outline ml-2">Clear</button>
+                    <button onclick="loadExample()" class="btn btn-secondary ml-2">Load Example</button>
+                </div>
+            </div>
+
+            <div id="resultsSection" class="results-section" style="display: none;">
+                <h3>Calculation Results</h3>
+                
+                <div class="results-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                    <div class="result-card" style="background: #f0f9ff; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0ea5e9;">
+                        <h4 style="margin: 0 0 1rem 0; color: #0ea5e9;">💰 Principal</h4>
+                        <div style="font-size: 1.8rem; font-weight: bold; color: #0ea5e9;" id="resultPrincipal">$0.00</div>
+                    </div>
+                    
+                    <div class="result-card" style="background: #f0fdf4; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #22c55e;">
+                        <h4 style="margin: 0 0 1rem 0; color: #22c55e;">📈 Interest</h4>
+                        <div style="font-size: 1.8rem; font-weight: bold; color: #22c55e;" id="resultInterest">$0.00</div>
+                    </div>
+                    
+                    <div class="result-card" style="background: #fefce8; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #eab308;">
+                        <h4 style="margin: 0 0 1rem 0; color: #eab308;">📊 Rate</h4>
+                        <div style="font-size: 1.8rem; font-weight: bold; color: #eab308;" id="resultRate">0.00%</div>
+                    </div>
+                    
+                    <div class="result-card" style="background: #fdf4ff; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #d946ef;">
+                        <h4 style="margin: 0 0 1rem 0; color: #d946ef;">⏱️ Time</h4>
+                        <div style="font-size: 1.8rem; font-weight: bold; color: #d946ef;" id="resultTime">0 years</div>
+                    </div>
+                </div>
+                
+                <div class="total-amount" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; text-align: center;">
+                    <h4>Total Amount (Principal + Interest)</h4>
+                    <div style="font-size: 2.5rem; font-weight: bold; color: #2563eb; margin-top: 0.5rem;" id="totalAmount">$0.00</div>
+                </div>
+                
+                <div id="formulaSection" class="formula-section" style="background: #f0f9ff; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+                    <h4>Formula Used</h4>
+                    <div id="formulaDisplay" style="font-family: monospace; font-size: 1.1rem; margin-top: 1rem;">
+                        <!-- Formula will be displayed here -->
+                    </div>
+                </div>
+                
+                <div id="stepsSection" class="steps-section" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px;">
+                    <h4>Calculation Steps</h4>
+                    <div id="stepsDisplay" style="margin-top: 1rem;">
+                        <!-- Steps will be displayed here -->
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <button onclick="copyResults()" class="btn btn-secondary">Copy Results</button>
+                    <button onclick="downloadResults()" class="btn btn-outline">Download Results</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 300x250</p>
+        </div>
+
+        <div class="tool-content">
+            <h3>How to Use Simple Interest Calculator</h3>
+            <ol>
+                <li>Choose what you want to calculate (interest, principal, rate, or time)</li>
+                <li>Enter the known values in the input fields</li>
+                <li>Select time unit (years, months, or days)</li>
+                <li>Choose currency and additional options</li>
+                <li>Click "Calculate" to get results</li>
+                <li>View detailed steps and formula explanation</li>
+            </ol>
+
+            <h4 class="mt-3">Features</h4>
+            <ul>
+                <li><strong>Multiple Calculations:</strong> Calculate interest, principal, rate, or time</li>
+                <li><strong>Flexible Time Units:</strong> Support for years, months, and days</li>
+                <li><strong>Multiple Currencies:</strong> USD, EUR, GBP, INR, JPY support</li>
+                <li><strong>Step-by-Step:</strong> Detailed calculation explanations</li>
+                <li><strong>Formula Display:</strong> Shows the mathematical formula used</li>
+                <li><strong>Total Amount:</strong> Calculates principal plus interest</li>
+            </ul>
+
+            <h4 class="mt-3">Common Use Cases</h4>
+            <ul>
+                <li><strong>Loan Planning:</strong> Calculate loan interest and total payments</li>
+                <li><strong>Investment Returns:</strong> Calculate simple interest earnings</li>
+                <li><strong>Financial Education:</strong> Teach simple interest concepts</li>
+                <li><strong>Savings Planning:</strong> Calculate interest on savings accounts</li>
+                <li><strong>Business Planning:</strong> Calculate interest on business loans</li>
+            </ul>
+        </div>
+
+        <div class="tool-content">
+            <h3>Related Tools</h3>
+            <div class="related-tools" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="number-to-words.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🔢 Number to Words</h4>
+                    <p style="margin: 0; color: #6b7280;">Convert numbers to words</p>
+                </a>
+                <a href="word-counter.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">📝 Word Counter</h4>
+                    <p style="margin: 0; color: #6b7280;">Count words and characters</p>
+                </a>
+                <a href="character-counter.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🔤 Character Counter</h4>
+                    <p style="margin: 0; color: #6b7280;">Count characters instantly</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>What is simple interest?</h4>
+                <p>Simple interest is calculated only on the principal amount, not on accumulated interest. The formula is: Interest = Principal × Rate × Time.</p>
+            </div>
+            <div class="faq-item">
+                <h4>How is simple interest different from compound interest?</h4>
+                <p>Simple interest is calculated only on the original principal, while compound interest is calculated on both the principal and accumulated interest.</p>
+            </div>
+            <div class="faq-item">
+                <h4>What time units can I use?</h4>
+                <p>You can use years, months, or days. The calculator automatically converts the time to years for the calculation.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can I calculate any variable in the formula?</h4>
+                <p>Yes! You can calculate interest, principal, rate, or time by entering the other three known values.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🛠️ ToolMetric</h4>
+                    <p>Your trusted source for free online tools. We provide simple, fast, and secure tools for everyday use.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Calculator Tools</h4>
+                    <ul>
+                        <li><a href="simple-interest-calculator.html">Simple Interest Calculator</a></li>
+                        <li><a href="number-to-words.html">Number to Words</a></li>
+                        <li><a href="word-counter.html">Word Counter</a></li>
+                        <li><a href="character-counter.html">Character Counter</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>Have feedback or suggestions? We'd love to hear from you!</p>
+                    <a href="contact.html" class="btn btn-outline mt-2">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ToolMetric. All rights reserved. | <a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let currentMode = 'interest';
+
+        function setMode(mode) {
+            currentMode = mode;
+            
+            // Update button styles
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.classList.remove('btn-secondary');
+                btn.classList.add('btn-outline');
+            });
+            
+            const activeBtn = document.getElementById('mode' + mode.charAt(0).toUpperCase() + mode.slice(1));
+            activeBtn.classList.remove('btn-outline');
+            activeBtn.classList.add('btn-secondary');
+            
+            // Show/hide input groups based on mode
+            document.getElementById('principalGroup').style.display = mode === 'principal' ? 'none' : 'block';
+            document.getElementById('rateGroup').style.display = mode === 'rate' ? 'none' : 'block';
+            document.getElementById('timeGroup').style.display = mode === 'time' ? 'none' : 'block';
+            document.getElementById('interestGroup').style.display = mode === 'interest' ? 'none' : 'block';
+        }
+
+        function calculate() {
+            const currency = document.getElementById('currency').value;
+            const showSteps = document.getElementById('showSteps').checked;
+            const showFormula = document.getElementById('showFormula').checked;
+            
+            let principal, rate, time, interest;
+            
+            try {
+                switch (currentMode) {
+                    case 'interest':
+                        principal = parseFloat(document.getElementById('principal').value);
+                        rate = parseFloat(document.getElementById('rate').value);
+                        time = getTimeInYears();
+                        
+                        if (isNaN(principal) || isNaN(rate) || isNaN(time)) {
+                            throw new Error('Please enter valid values for principal, rate, and time');
+                        }
+                        
+                        interest = principal * (rate / 100) * time;
+                        break;
+                        
+                    case 'principal':
+                        interest = parseFloat(document.getElementById('interest').value);
+                        rate = parseFloat(document.getElementById('rate').value);
+                        time = getTimeInYears();
+                        
+                        if (isNaN(interest) || isNaN(rate) || isNaN(time)) {
+                            throw new Error('Please enter valid values for interest, rate, and time');
+                        }
+                        
+                        principal = interest / ((rate / 100) * time);
+                        break;
+                        
+                    case 'rate':
+                        principal = parseFloat(document.getElementById('principal').value);
+                        interest = parseFloat(document.getElementById('interest').value);
+                        time = getTimeInYears();
+                        
+                        if (isNaN(principal) || isNaN(interest) || isNaN(time)) {
+                            throw new Error('Please enter valid values for principal, interest, and time');
+                        }
+                        
+                        rate = (interest / (principal * time)) * 100;
+                        break;
+                        
+                    case 'time':
+                        principal = parseFloat(document.getElementById('principal').value);
+                        interest = parseFloat(document.getElementById('interest').value);
+                        rate = parseFloat(document.getElementById('rate').value);
+                        
+                        if (isNaN(principal) || isNaN(interest) || isNaN(rate)) {
+                            throw new Error('Please enter valid values for principal, interest, and rate');
+                        }
+                        
+                        time = interest / (principal * (rate / 100));
+                        break;
+                }
+                
+                const totalAmount = principal + interest;
+                
+                // Display results
+                displayResults(principal, rate, time, interest, totalAmount, currency, showSteps, showFormula);
+                
+                document.getElementById('resultsSection').style.display = 'block';
+                showMessage('Calculation completed successfully', 'success');
+                
+            } catch (error) {
+                showMessage('Calculation error: ' + error.message, 'error');
+            }
+        }
+
+        function getTimeInYears() {
+            const timeValue = parseFloat(document.getElementById('time').value);
+            const timeUnit = document.getElementById('timeUnit').value;
+            
+            switch (timeUnit) {
+                case 'years':
+                    return timeValue;
+                case 'months':
+                    return timeValue / 12;
+                case 'days':
+                    return timeValue / 365;
+                default:
+                    return timeValue;
+            }
+        }
+
+        function formatTime(years) {
+            const timeUnit = document.getElementById('timeUnit').value;
+            
+            switch (timeUnit) {
+                case 'years':
+                    return years.toFixed(2) + ' years';
+                case 'months':
+                    return (years * 12).toFixed(2) + ' months';
+                case 'days':
+                    return (years * 365).toFixed(2) + ' days';
+                default:
+                    return years.toFixed(2) + ' years';
+            }
+        }
+
+        function displayResults(principal, rate, time, interest, totalAmount, currency, showSteps, showFormula) {
+            // Display individual results
+            document.getElementById('resultPrincipal').textContent = currency + principal.toFixed(2);
+            document.getElementById('resultInterest').textContent = currency + interest.toFixed(2);
+            document.getElementById('resultRate').textContent = rate.toFixed(2) + '%';
+            document.getElementById('resultTime').textContent = formatTime(time);
+            document.getElementById('totalAmount').textContent = currency + totalAmount.toFixed(2);
+            
+            // Display formula
+            if (showFormula) {
+                let formula = '';
+                switch (currentMode) {
+                    case 'interest':
+                        formula = `Interest = Principal × Rate × Time<br>`;
+                        formula += `Interest = ${currency}${principal.toFixed(2)} × ${rate.toFixed(2)}% × ${formatTime(time)}<br>`;
+                        formula += `Interest = ${currency}${interest.toFixed(2)}`;
+                        break;
+                    case 'principal':
+                        formula = `Principal = Interest ÷ (Rate × Time)<br>`;
+                        formula += `Principal = ${currency}${interest.toFixed(2)} ÷ (${rate.toFixed(2)}% × ${formatTime(time)})<br>`;
+                        formula += `Principal = ${currency}${principal.toFixed(2)}`;
+                        break;
+                    case 'rate':
+                        formula = `Rate = (Interest ÷ Principal) ÷ Time × 100<br>`;
+                        formula += `Rate = (${currency}${interest.toFixed(2)} ÷ ${currency}${principal.toFixed(2)}) ÷ ${formatTime(time)} × 100<br>`;
+                        formula += `Rate = ${rate.toFixed(2)}%`;
+                        break;
+                    case 'time':
+                        formula = `Time = Interest ÷ (Principal × Rate)<br>`;
+                        formula += `Time = ${currency}${interest.toFixed(2)} ÷ (${currency}${principal.toFixed(2)} × ${rate.toFixed(2)}%)<br>`;
+                        formula += `Time = ${formatTime(time)}`;
+                        break;
+                }
+                document.getElementById('formulaDisplay').innerHTML = formula;
+                document.getElementById('formulaSection').style.display = 'block';
+            } else {
+                document.getElementById('formulaSection').style.display = 'none';
+            }
+            
+            // Display steps
+            if (showSteps) {
+                let steps = '';
+                switch (currentMode) {
+                    case 'interest':
+                        steps = `
+                            <div style="display: grid; gap: 0.5rem;">
+                                <div>Step 1: Convert rate to decimal: ${rate.toFixed(2)}% = ${(rate/100).toFixed(4)}</div>
+                                <div>Step 2: Multiply principal by rate: ${currency}${principal.toFixed(2)} × ${(rate/100).toFixed(4)} = ${currency}${(principal * rate/100).toFixed(2)}</div>
+                                <div>Step 3: Multiply by time: ${currency}${(principal * rate/100).toFixed(2)} × ${formatTime(time)} = ${currency}${interest.toFixed(2)}</div>
+                                <div>Step 4: Total amount = Principal + Interest = ${currency}${principal.toFixed(2)} + ${currency}${interest.toFixed(2)} = ${currency}${totalAmount.toFixed(2)}</div>
+                            </div>
+                        `;
+                        break;
+                    case 'principal':
+                        steps = `
+                            <div style="display: grid; gap: 0.5rem;">
+                                <div>Step 1: Convert rate to decimal: ${rate.toFixed(2)}% = ${(rate/100).toFixed(4)}</div>
+                                <div>Step 2: Multiply rate by time: ${(rate/100).toFixed(4)} × ${formatTime(time)} = ${(rate/100 * time).toFixed(4)}</div>
+                                <div>Step 3: Divide interest by result: ${currency}${interest.toFixed(2)} ÷ ${(rate/100 * time).toFixed(4)} = ${currency}${principal.toFixed(2)}</div>
+                                <div>Step 4: Total amount = Principal + Interest = ${currency}${principal.toFixed(2)} + ${currency}${interest.toFixed(2)} = ${currency}${totalAmount.toFixed(2)}</div>
+                            </div>
+                        `;
+                        break;
+                    case 'rate':
+                        steps = `
+                            <div style="display: grid; gap: 0.5rem;">
+                                <div>Step 1: Divide interest by principal: ${currency}${interest.toFixed(2)} ÷ ${currency}${principal.toFixed(2)} = ${(interest/principal).toFixed(4)}</div>
+                                <div>Step 2: Divide by time: ${(interest/principal).toFixed(4)} ÷ ${formatTime(time)} = ${(interest/principal/time).toFixed(4)}</div>
+                                <div>Step 3: Convert to percentage: ${(interest/principal/time).toFixed(4)} × 100 = ${rate.toFixed(2)}%</div>
+                                <div>Step 4: Total amount = Principal + Interest = ${currency}${principal.toFixed(2)} + ${currency}${interest.toFixed(2)} = ${currency}${totalAmount.toFixed(2)}</div>
+                            </div>
+                        `;
+                        break;
+                    case 'time':
+                        steps = `
+                            <div style="display: grid; gap: 0.5rem;">
+                                <div>Step 1: Convert rate to decimal: ${rate.toFixed(2)}% = ${(rate/100).toFixed(4)}</div>
+                                <div>Step 2: Multiply principal by rate: ${currency}${principal.toFixed(2)} × ${(rate/100).toFixed(4)} = ${currency}${(principal * rate/100).toFixed(2)}</div>
+                                <div>Step 3: Divide interest by result: ${currency}${interest.toFixed(2)} ÷ ${currency}${(principal * rate/100).toFixed(2)} = ${formatTime(time)}</div>
+                                <div>Step 4: Total amount = Principal + Interest = ${currency}${principal.toFixed(2)} + ${currency}${interest.toFixed(2)} = ${currency}${totalAmount.toFixed(2)}</div>
+                            </div>
+                        `;
+                        break;
+                }
+                document.getElementById('stepsDisplay').innerHTML = steps;
+                document.getElementById('stepsSection').style.display = 'block';
+            } else {
+                document.getElementById('stepsSection').style.display = 'none';
+            }
+        }
+
+        function clearAll() {
+            document.getElementById('principal').value = '';
+            document.getElementById('rate').value = '';
+            document.getElementById('time').value = '';
+            document.getElementById('interest').value = '';
+            document.getElementById('resultsSection').style.display = 'none';
+            showMessage('Cleared', 'info');
+        }
+
+        function loadExample() {
+            document.getElementById('principal').value = '10000';
+            document.getElementById('rate').value = '5';
+            document.getElementById('time').value = '2';
+            document.getElementById('timeUnit').value = 'years';
+            setMode('interest');
+            calculate();
+        }
+
+        function copyResults() {
+            const results = `Simple Interest Calculation Results\n` +
+                          `===================================\n` +
+                          `Principal: ${document.getElementById('resultPrincipal').textContent}\n` +
+                          `Interest: ${document.getElementById('resultInterest').textContent}\n` +
+                          `Rate: ${document.getElementById('resultRate').textContent}\n` +
+                          `Time: ${document.getElementById('resultTime').textContent}\n` +
+                          `Total Amount: ${document.getElementById('totalAmount').textContent}\n` +
+                          `Calculated: ${new Date().toLocaleString()}`;
+            
+            copyToClipboard(results);
+        }
+
+        function downloadResults() {
+            const results = `Simple Interest Calculation Results\n` +
+                          `===================================\n` +
+                          `Calculation Mode: ${currentMode}\n` +
+                          `Principal: ${document.getElementById('resultPrincipal').textContent}\n` +
+                          `Interest: ${document.getElementById('resultInterest').textContent}\n` +
+                          `Rate: ${document.getElementById('resultRate').textContent}\n` +
+                          `Time: ${document.getElementById('resultTime').textContent}\n` +
+                          `Total Amount: ${document.getElementById('totalAmount').textContent}\n` +
+                          `Currency: ${document.getElementById('currency').value}\n\n` +
+                          `Formula:\n${document.getElementById('formulaDisplay').textContent}\n\n` +
+                          `Calculation Steps:\n${document.getElementById('stepsDisplay').textContent}\n\n` +
+                          `Generated: ${new Date().toLocaleString()}`;
+            
+            downloadFile(results, 'simple_interest_calculation_' + new Date().getTime() + '.txt');
+        }
+
+        // Initialize
+        setMode('interest');
+    </script>
+</body>
+</html>

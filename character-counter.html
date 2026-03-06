@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Counter Online - Count Characters Instantly | ToolMetric</title>
+    <meta name="description" content="Free online character counter tool. Count characters with or without spaces, track character limit, and analyze text statistics. Perfect for social media, essays, and content writing.">
+    <meta name="keywords" content="character counter, character count, text character counter, online character counter, character limit, character counter tool">
+    <meta name="author" content="ToolMetric">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Character Counter Online - ToolMetric">
+    <meta property="og:description" content="Count characters instantly with our free online character counter tool">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolmetric.com/character-counter.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🛠️ ToolMetric</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container tool-container">
+        <div class="tool-header">
+            <h1>Character Counter Online</h1>
+            <p class="tool-description">
+                Count characters instantly with our comprehensive character counter tool. 
+                This essential utility helps you track character count with or without spaces, 
+                making it perfect for social media posts, essays, content writing, and any text 
+                with character limits. Our tool provides real-time character counting, 
+                detailed text statistics, and character limit tracking to help you stay within 
+                required constraints. Whether you're writing a tweet, crafting an SMS message, 
+                or working on an academic paper with specific requirements, our character counter 
+                ensures you never exceed character limits again. Simply paste or type your text, 
+                and watch the character count update in real-time with comprehensive statistics.
+            </p>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 728x90</p>
+        </div>
+
+        <div class="tool-content">
+            <div class="form-group">
+                <label for="inputText">Enter or Paste Your Text:</label>
+                <textarea id="inputText" class="form-control" rows="8" placeholder="Type or paste your text here to count characters..."></textarea>
+                <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+                    <button onclick="clearText()" class="btn btn-outline">Clear Text</button>
+                    <button onclick="loadSample()" class="btn btn-secondary">Load Sample</button>
+                    <button onclick="copyText()" class="btn btn-outline">Copy Text</button>
+                </div>
+            </div>
+
+            <div class="character-stats">
+                <h3>Character Statistics</h3>
+                <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                    <div class="stat-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; text-align: center; border-left: 4px solid #2563eb;">
+                        <div style="font-size: 2rem; font-weight: bold; color: #2563eb;" id="totalChars">0</div>
+                        <div style="color: #6b7280;">Total Characters</div>
+                    </div>
+                    <div class="stat-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; text-align: center; border-left: 4px solid #10b981;">
+                        <div style="font-size: 2rem; font-weight: bold; color: #10b981;" id="charsNoSpaces">0</div>
+                        <div style="color: #6b7280;">Characters (No Spaces)</div>
+                    </div>
+                    <div class="stat-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; text-align: center; border-left: 4px solid #f59e0b;">
+                        <div style="font-size: 2rem; font-weight: bold; color: #f59e0b;" id="spaceCount">0</div>
+                        <div style="color: #6b7280;">Space Count</div>
+                    </div>
+                    <div class="stat-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; text-align: center; border-left: 4px solid #ef4444;">
+                        <div style="font-size: 2rem; font-weight: bold; color: #ef4444;" id="wordCount">0</div>
+                        <div style="color: #6b7280;">Word Count</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-limits">
+                <h3>Common Character Limits</h3>
+                <div class="limits-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                    <div class="limit-item" style="background: #f0f9ff; padding: 1rem; border-radius: 6px; border-left: 4px solid #0ea5e9;">
+                        <div style="font-weight: bold;">Twitter</div>
+                        <div style="color: #6b7280;">280 characters</div>
+                        <div style="margin-top: 0.5rem;">
+                            <div style="background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+                                <div id="twitterProgress" style="height: 100%; width: 0%; background: #0ea5e9; transition: width 0.3s ease;"></div>
+                            </div>
+                            <div style="font-size: 0.8rem; color: #6b7280; margin-top: 0.25rem;">
+                                <span id="twitterRemaining">280</span> remaining
+                            </div>
+                        </div>
+                    </div>
+                    <div class="limit-item" style="background: #f0fdf4; padding: 1rem; border-radius: 6px; border-left: 4px solid #22c55e;">
+                        <div style="font-weight: bold;">SMS</div>
+                        <div style="color: #6b7280;">160 characters</div>
+                        <div style="margin-top: 0.5rem;">
+                            <div style="background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+                                <div id="smsProgress" style="height: 100%; width: 0%; background: #22c55e; transition: width 0.3s ease;"></div>
+                            </div>
+                            <div style="font-size: 0.8rem; color: #6b7280; margin-top: 0.25rem;">
+                                <span id="smsRemaining">160</span> remaining
+                            </div>
+                        </div>
+                    </div>
+                    <div class="limit-item" style="background: #fefce8; padding: 1rem; border-radius: 6px; border-left: 4px solid #eab308;">
+                        <div style="font-weight: bold;">LinkedIn Post</div>
+                        <div style="color: #6b7280;">3000 characters</div>
+                        <div style="margin-top: 0.5rem;">
+                            <div style="background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+                                <div id="linkedinProgress" style="height: 100%; width: 0%; background: #eab308; transition: width 0.3s ease;"></div>
+                            </div>
+                            <div style="font-size: 0.8rem; color: #6b7280; margin-top: 0.25rem;">
+                                <span id="linkedinRemaining">3000</span> remaining
+                            </div>
+                        </div>
+                    </div>
+                    <div class="limit-item" style="background: #fdf4ff; padding: 1rem; border-radius: 6px; border-left: 4px solid #d946ef;">
+                        <div style="font-weight: bold;">Instagram Bio</div>
+                        <div style="color: #6b7280;">150 characters</div>
+                        <div style="margin-top: 0.5rem;">
+                            <div style="background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+                                <div id="instagramProgress" style="height: 100%; width: 0%; background: #d946ef; transition: width 0.3s ease;"></div>
+                            </div>
+                            <div style="font-size: 0.8rem; color: #6b7280; margin-top: 0.25rem;">
+                                <span id="instagramRemaining">150</span> remaining
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-details">
+                <h3>Text Analysis</h3>
+                <div class="analysis-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div class="analysis-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px;">
+                        <div style="font-weight: bold; color: #2563eb;">Paragraphs</div>
+                        <div style="font-size: 1.5rem; font-weight: bold;" id="paragraphCount">0</div>
+                    </div>
+                    <div class="analysis-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px;">
+                        <div style="font-weight: bold; color: #10b981;">Sentences</div>
+                        <div style="font-size: 1.5rem; font-weight: bold;" id="sentenceCount">0</div>
+                    </div>
+                    <div class="analysis-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px;">
+                        <div style="font-weight: bold; color: #f59e0b;">Lines</div>
+                        <div style="font-size: 1.5rem; font-weight: bold;" id="lineCount">0</div>
+                    </div>
+                    <div class="analysis-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px;">
+                        <div style="font-weight: bold; color: #ef4444;">Digits</div>
+                        <div style="font-size: 1.5rem; font-weight: bold;" id="digitCount">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 300x250</p>
+        </div>
+
+        <div class="tool-content">
+            <h3>How to Use Character Counter</h3>
+            <ol>
+                <li>Enter or paste your text in the input field above</li>
+                <li>View real-time character statistics as you type</li>
+                <li>Check character limits for common platforms</li>
+                <li>Monitor your progress with visual progress bars</li>
+                <li>Use the analysis section for detailed text insights</li>
+                <li>Copy or clear text as needed</li>
+            </ol>
+
+            <h4 class="mt-3">Features</h4>
+            <ul>
+                <li><strong>Real-time Counting:</strong> Instant character count updates as you type</li>
+                <li><strong>Multiple Metrics:</strong> Total characters, characters without spaces, word count</li>
+                <li><strong>Platform Limits:</strong> Built-in limits for Twitter, SMS, LinkedIn, Instagram</li>
+                <li><strong>Visual Progress:</strong> Progress bars showing remaining characters</li>
+                <li><strong>Text Analysis:</strong> Paragraphs, sentences, lines, and digit counting</li>
+                <li><strong>Free Tool:</strong> No registration or payment required</li>
+            </ul>
+
+            <h4 class="mt-3">Common Use Cases</h4>
+            <ul>
+                <li><strong>Social Media:</strong> Stay within Twitter, Instagram, LinkedIn character limits</li>
+                <li><strong>SMS Messages:</strong> Keep text messages under 160 characters</li>
+                <li><strong>Academic Writing:</strong> Meet essay character requirements</li>
+                <li><strong>Content Creation:</strong> Optimize content for character limits</li>
+                <li><strong>SEO Optimization:</strong> Meta description and title character counting</li>
+            </ul>
+        </div>
+
+        <div class="tool-content">
+            <h3>Related Tools</h3>
+            <div class="related-tools" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="word-counter.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">📝 Word Counter</h4>
+                    <p style="margin: 0; color: #6b7280;">Count words and estimate reading time</p>
+                </a>
+                <a href="case-converter.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🔤 Case Converter</h4>
+                    <p style="margin: 0; color: #6b7280;">Convert text between different cases</p>
+                </a>
+                <a href="remove-spaces.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🧹 Remove Spaces</h4>
+                    <p style="margin: 0; color: #6b7280;">Clean up extra spaces and formatting</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>What's the difference between total characters and characters without spaces?</h4>
+                <p>Total characters include all letters, numbers, spaces, and punctuation. Characters without spaces exclude space characters, which is useful for platforms that don't count spaces toward character limits.</p>
+            </div>
+            <div class="faq-item">
+                <h4>How accurate is the character counter?</h4>
+                <p>Our character counter is 100% accurate and counts every character including letters, numbers, spaces, punctuation, and special characters.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can I use this for SEO purposes?</h4>
+                <p>Yes! This tool is perfect for checking SEO meta descriptions (recommended 150-160 characters) and title tags (recommended 50-60 characters).</p>
+            </div>
+            <div class="faq-item">
+                <h4>Does this work for different languages?</h4>
+                <p>Yes, the character counter works with all languages and character sets, including Unicode characters and emojis.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🛠️ ToolMetric</h4>
+                    <p>Your trusted source for free online tools. We provide simple, fast, and secure tools for everyday use.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Text Tools</h4>
+                    <ul>
+                        <li><a href="character-counter.html">Character Counter</a></li>
+                        <li><a href="word-counter.html">Word Counter</a></li>
+                        <li><a href="case-converter.html">Case Converter</a></li>
+                        <li><a href="text-reverser.html">Text Reverser</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>Have feedback or suggestions? We'd love to hear from you!</p>
+                    <a href="contact.html" class="btn btn-outline mt-2">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ToolMetric. All rights reserved. | <a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Character counting functionality
+        function updateCharacterCount() {
+            const text = document.getElementById('inputText').value;
+            
+            // Basic counts
+            const totalChars = text.length;
+            const charsNoSpaces = text.replace(/\s/g, '').length;
+            const spaces = (text.match(/\s/g) || []).length;
+            const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+            
+            // Update basic stats
+            document.getElementById('totalChars').textContent = totalChars;
+            document.getElementById('charsNoSpaces').textContent = charsNoSpaces;
+            document.getElementById('spaceCount').textContent = spaces;
+            document.getElementById('wordCount').textContent = words;
+            
+            // Update platform limits
+            updatePlatformLimit('twitter', totalChars, 280);
+            updatePlatformLimit('sms', totalChars, 160);
+            updatePlatformLimit('linkedin', totalChars, 3000);
+            updatePlatformLimit('instagram', totalChars, 150);
+            
+            // Text analysis
+            const paragraphs = text.trim() === '' ? 0 : text.trim().split(/\n\n+/).length;
+            const sentences = text.trim() === '' ? 0 : text.split(/[.!?]+/).filter(s => s.trim()).length;
+            const lines = text === '' ? 0 : text.split('\n').length;
+            const digits = (text.match(/\d/g) || []).length;
+            
+            document.getElementById('paragraphCount').textContent = paragraphs;
+            document.getElementById('sentenceCount').textContent = sentences;
+            document.getElementById('lineCount').textContent = lines;
+            document.getElementById('digitCount').textContent = digits;
+        }
+        
+        function updatePlatformLimit(platform, current, limit) {
+            const progress = Math.min((current / limit) * 100, 100);
+            const remaining = Math.max(limit - current, 0);
+            
+            document.getElementById(`${platform}Progress`).style.width = progress + '%';
+            document.getElementById(`${platform}Remaining`).textContent = remaining;
+            
+            // Change color if over limit
+            const progressBar = document.getElementById(`${platform}Progress`);
+            if (current > limit) {
+                progressBar.style.background = '#ef4444';
+            } else if (current > limit * 0.8) {
+                progressBar.style.background = '#f59e0b';
+            } else {
+                const colors = {
+                    twitter: '#0ea5e9',
+                    sms: '#22c55e',
+                    linkedin: '#eab308',
+                    instagram: '#d946ef'
+                };
+                progressBar.style.background = colors[platform];
+            }
+        }
+        
+        function clearText() {
+            document.getElementById('inputText').value = '';
+            updateCharacterCount();
+            showMessage('Text cleared', 'info');
+        }
+        
+        function loadSample() {
+            const sampleText = `This is a sample text for testing the character counter tool. It contains exactly 150 characters which is the limit for Instagram bios. You can see how the progress bars update in real-time as you type or paste text into the input field above. This helps you stay within character limits for various platforms.`;
+            document.getElementById('inputText').value = sampleText;
+            updateCharacterCount();
+            showMessage('Sample text loaded', 'success');
+        }
+        
+        function copyText() {
+            const text = document.getElementById('inputText').value;
+            if (text.trim() === '') {
+                showMessage('No text to copy', 'error');
+                return;
+            }
+            copyToClipboard(text);
+        }
+        
+        // Event listener for real-time updates
+        document.getElementById('inputText').addEventListener('input', updateCharacterCount);
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', updateCharacterCount);
+    </script>
+</body>
+</html>

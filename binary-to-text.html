@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary to Text Converter - Convert Binary to Text Online | ToolMetric</title>
+    <meta name="description" content="Free online binary to text converter. Convert binary code to readable text instantly. Perfect for developers and data conversion.">
+    <meta name="keywords" content="binary to text, binary converter, binary decoder, convert binary to text, online binary converter, binary translation">
+    <meta name="author" content="ToolMetric">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Binary to Text Converter - ToolMetric">
+    <meta property="og:description" content="Convert binary code to text instantly">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolmetric.com/binary-to-text.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🛠️ ToolMetric</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container tool-container">
+        <div class="tool-header">
+            <h1>Binary to Text Converter</h1>
+            <p class="tool-description">
+                Convert binary code to readable text instantly with our comprehensive binary to text converter tool. 
+                This essential utility for developers and data analysts transforms binary sequences into human-readable 
+                text using ASCII and UTF-8 encoding standards. Perfect for decoding binary messages, analyzing 
+                binary data, or understanding computer representations of text. Our tool handles various binary 
+                formats including 8-bit ASCII, UTF-8, and custom bit lengths with automatic format detection 
+                and error checking. Whether you're working with encoded messages, debugging binary data, or learning 
+                about computer encoding, our converter provides fast, accurate conversion with detailed analysis 
+                of the binary structure. Simply paste your binary code and watch it transform into readable text instantly.
+            </p>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 728x90</p>
+        </div>
+
+        <div class="tool-content">
+            <div class="binary-controls">
+                <div class="control-buttons" style="display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                    <button onclick="convertBinary()" class="btn">Convert to Text</button>
+                    <button onclick="swapData()" class="btn btn-secondary">Swap Input/Output</button>
+                    <button onclick="clearData()" class="btn btn-outline">Clear</button>
+                    <button onclick="loadSample()" class="btn btn-secondary">Load Sample</button>
+                </div>
+                
+                <div class="conversion-options" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+                    <div class="form-group">
+                        <label for="bitLength">Bit Length:</label>
+                        <select id="bitLength" class="form-control">
+                            <option value="8" selected>8-bit (ASCII)</option>
+                            <option value="7">7-bit (ASCII)</option>
+                            <option value="16">16-bit (Unicode)</option>
+                            <option value="auto">Auto-detect</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="separator">Binary Separator:</label>
+                        <select id="separator" class="form-control">
+                            <option value="space">Space</option>
+                            <option value="none">None</option>
+                            <option value="comma">Comma</option>
+                            <option value="newline">Newline</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="showBinary">
+                            <input type="checkbox" id="showBinary" checked style="margin-right: 0.5rem;">
+                            Show Binary Analysis
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="binary-editor" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="input-section">
+                    <h3>Binary Input</h3>
+                    <textarea id="binaryInput" class="form-control" rows="20" placeholder="Enter binary code here..."></textarea>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button onclick="copyInput()" class="btn btn-outline">Copy Input</button>
+                        <button onclick="validateBinary()" class="btn btn-outline">Validate Binary</button>
+                    </div>
+                </div>
+                
+                <div class="output-section">
+                    <h3>Text Output</h3>
+                    <div id="textOutput" style="background: #f9fafb; border: 2px solid #e5e7eb; border-radius: 8px; padding: 1rem; min-height: 400px; font-family: monospace; white-space: pre-wrap; overflow: auto;"></div>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button onclick="copyOutput()" class="btn btn-secondary">Copy Output</button>
+                        <button onclick="downloadOutput()" class="btn btn-outline">Download Text</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="validationResult" class="validation-result" style="display: none; margin-top: 1rem;">
+                <!-- Validation results will be shown here -->
+            </div>
+
+            <div id="binaryAnalysis" class="binary-analysis" style="display: none; margin-top: 1rem;">
+                <h3>Binary Analysis</h3>
+                <div id="analysisContent" style="background: #f0f9ff; padding: 1.5rem; border-radius: 8px;">
+                    <!-- Analysis content will be shown here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 300x250</p>
+        </div>
+
+        <div class="tool-content">
+            <h3>How to Use Binary to Text Converter</h3>
+            <ol>
+                <li>Enter your binary code in the input field</li>
+                <li>Choose bit length (8-bit for ASCII, 16-bit for Unicode)</li>
+                <li>Select binary separator (space, comma, none, etc.)</li>
+                <li>Click "Convert to Text" to decode the binary</li>
+                <li>View the decoded text and binary analysis</li>
+                <li>Copy the result or download as text file</li>
+            </ol>
+
+            <h4 class="mt-3">Features</h4>
+            <ul>
+                <li><strong>Multiple Formats:</strong> Support for 7-bit, 8-bit, and 16-bit binary</li>
+                <li><strong>Auto-detection:</strong> Automatically detect binary format</li>
+                <li><strong>Flexible Separators:</strong> Handle various binary separators</li>
+                <li><strong>Validation:</strong> Check binary format and validity</li>
+                <li><strong>Analysis:</strong> Detailed binary breakdown and analysis</li>
+                <li><strong>Error Handling:</strong> Graceful handling of invalid binary</li>
+            </ul>
+
+            <h4 class="mt-3">Common Use Cases</h4>
+            <ul>
+                <li><strong>Decoding Messages:</strong> Convert binary messages to text</li>
+                <li><strong>Data Analysis:</strong> Analyze binary data representations</li>
+                <li><strong>Education:</strong> Learn about binary encoding</li>
+                <li><strong>Debugging:</strong> Debug binary data issues</li>
+                <li><strong>Cryptography:</strong> Decode binary-encoded messages</li>
+            </ul>
+        </div>
+
+        <div class="tool-content">
+            <h3>Related Tools</h3>
+            <div class="related-tools" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="text-to-binary.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🔤 Text to Binary</h4>
+                    <p style="margin: 0; color: #6b7280;">Convert text to binary code</p>
+                </a>
+                <a href="base64-encoder.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">📋 Base64 Encoder</h4>
+                    <p style="margin: 0; color: #6b7280;">Encode and decode Base64 data</p>
+                </a>
+                <a href="url-encoder.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🔗 URL Encoder</h4>
+                    <p style="margin: 0; color: #6b7280;">Encode and decode URLs</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>What is binary to text conversion?</h4>
+                <p>Binary to text conversion translates binary code (0s and 1s) into human-readable characters using character encoding standards like ASCII or Unicode.</p>
+            </div>
+            <div class="faq-item">
+                <h4>What's the difference between 7-bit and 8-bit binary?</h4>
+                <p>7-bit binary represents 128 characters (standard ASCII), while 8-bit represents 256 characters (extended ASCII) including special characters.</p>
+            </div>
+            <div class="faq-item">
+                <h4>How does auto-detection work?</h4>
+                <p>Auto-detection analyzes the binary input to determine the most appropriate bit length and format based on patterns and common encodings.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can I convert Unicode text with this tool?</h4>
+                <p>Yes, the 16-bit option supports Unicode characters, allowing conversion of international text and emojis.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🛠️ ToolMetric</h4>
+                    <p>Your trusted source for free online tools. We provide simple, fast, and secure tools for everyday use.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Converter Tools</h4>
+                    <ul>
+                        <li><a href="binary-to-text.html">Binary to Text</a></li>
+                        <li><a href="text-to-binary.html">Text to Binary</a></li>
+                        <li><a href="base64-encoder.html">Base64 Encoder</a></li>
+                        <li><a href="url-encoder.html">URL Encoder</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>Have feedback or suggestions? We'd love to hear from you!</p>
+                    <a href="contact.html" class="btn btn-outline mt-2">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ToolMetric. All rights reserved. | <a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function convertBinary() {
+            const input = document.getElementById('binaryInput').value.trim();
+            
+            if (!input) {
+                showMessage('Please enter binary code to convert', 'error');
+                return;
+            }
+            
+            try {
+                const bitLength = document.getElementById('bitLength').value;
+                const separator = document.getElementById('separator').value;
+                const showAnalysis = document.getElementById('showBinary').checked;
+                
+                // Clean and parse binary input
+                let cleanBinary = cleanBinaryInput(input, separator);
+                
+                // Validate binary format
+                if (!isValidBinary(cleanBinary)) {
+                    throw new Error('Invalid binary format');
+                }
+                
+                // Convert to text
+                const text = binaryToText(cleanBinary, bitLength);
+                
+                document.getElementById('textOutput').textContent = text;
+                document.getElementById('textOutput').style.color = '#1f2937';
+                
+                if (showAnalysis) {
+                    showBinaryAnalysis(cleanBinary, text, bitLength);
+                }
+                
+                showValidation(true, 'Binary converted to text successfully!');
+                showMessage('Binary converted successfully', 'success');
+            } catch (error) {
+                showValidation(false, 'Error: ' + error.message);
+                document.getElementById('textOutput').textContent = 'Conversion failed';
+                document.getElementById('textOutput').style.color = '#ef4444';
+                showMessage('Conversion failed', 'error');
+            }
+        }
+
+        function cleanBinaryInput(input, separator) {
+            // Remove separators based on selection
+            switch (separator) {
+                case 'space':
+                    return input.replace(/\s+/g, '');
+                case 'comma':
+                    return input.replace(/,/g, '');
+                case 'newline':
+                    return input.replace(/\n/g, '');
+                case 'none':
+                    return input;
+                default:
+                    return input.replace(/\s+/g, '');
+            }
+        }
+
+        function isValidBinary(binary) {
+            return /^[01]+$/.test(binary);
+        }
+
+        function binaryToText(binary, bitLength) {
+            let text = '';
+            let actualBitLength = bitLength;
+            
+            // Auto-detect bit length if needed
+            if (bitLength === 'auto') {
+                actualBitLength = detectBitLength(binary);
+            }
+            
+            // Split binary into chunks
+            const chunks = [];
+            for (let i = 0; i < binary.length; i += actualBitLength) {
+                const chunk = binary.substr(i, actualBitLength);
+                if (chunk.length === actualBitLength) {
+                    chunks.push(chunk);
+                }
+            }
+            
+            // Convert each chunk to character
+            for (const chunk of chunks) {
+                const decimal = parseInt(chunk, 2);
+                text += String.fromCharCode(decimal);
+            }
+            
+            return text;
+        }
+
+        function detectBitLength(binary) {
+            const length = binary.length;
+            
+            // Try common bit lengths
+            if (length % 8 === 0) return 8;
+            if (length % 7 === 0) return 7;
+            if (length % 16 === 0) return 16;
+            
+            // Default to 8-bit
+            return 8;
+        }
+
+        function showBinaryAnalysis(binary, text, bitLength) {
+            const analysisDiv = document.getElementById('binaryAnalysis');
+            const contentDiv = document.getElementById('analysisContent');
+            
+            const actualBitLength = bitLength === 'auto' ? detectBitLength(binary) : bitLength;
+            const chunks = [];
+            for (let i = 0; i < binary.length; i += actualBitLength) {
+                const chunk = binary.substr(i, actualBitLength);
+                if (chunk.length === actualBitLength) {
+                    chunks.push(chunk);
+                }
+            }
+            
+            let analysisHTML = `
+                <div class="analysis-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div>
+                        <strong>Binary Length:</strong> ${binary.length} bits
+                    </div>
+                    <div>
+                        <strong>Bit Length:</strong> ${actualBitLength} bits per character
+                    </div>
+                    <div>
+                        <strong>Characters:</strong> ${chunks.length}
+                    </div>
+                    <div>
+                        <strong>Text Length:</strong> ${text.length} characters
+                    </div>
+                </div>
+                <h4 style="margin-top: 1rem;">Character Breakdown:</h4>
+                <div style="margin-top: 0.5rem; max-height: 200px; overflow-y: auto;">
+            `;
+            
+            chunks.forEach((chunk, index) => {
+                const decimal = parseInt(chunk, 2);
+                const char = text[index] || '?';
+                analysisHTML += `
+                    <div style="display: flex; gap: 1rem; padding: 0.5rem; border-bottom: 1px solid #e5e7eb;">
+                        <span style="font-family: monospace; min-width: 80px;">${chunk}</span>
+                        <span style="min-width: 40px;">${decimal}</span>
+                        <span style="font-weight: bold;">'${char}'</span>
+                    </div>
+                `;
+            });
+            
+            contentDiv.innerHTML = analysisHTML;
+            analysisDiv.style.display = 'block';
+        }
+
+        function validateBinary() {
+            const input = document.getElementById('binaryInput').value.trim();
+            
+            if (!input) {
+                showMessage('Please enter binary code to validate', 'error');
+                return;
+            }
+            
+            const separator = document.getElementById('separator').value;
+            const cleanBinary = cleanBinaryInput(input, separator);
+            
+            if (isValidBinary(cleanBinary)) {
+                const bitLength = detectBitLength(cleanBinary);
+                showValidation(true, `Valid binary format! Detected ${bitLength}-bit encoding.`);
+                showMessage('Binary validation successful', 'success');
+            } else {
+                showValidation(false, 'Invalid binary format. Please check for non-binary characters.');
+                showMessage('Binary validation failed', 'error');
+            }
+        }
+
+        function showValidation(isValid, message) {
+            const resultDiv = document.getElementById('validationResult');
+            resultDiv.style.display = 'block';
+            
+            if (isValid) {
+                resultDiv.innerHTML = `
+                    <div class="message success">
+                        <h4>✅ ${message}</h4>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="message error">
+                        <h4>❌ ${message}</h4>
+                    </div>
+                `;
+            }
+        }
+
+        function swapData() {
+            const binaryInput = document.getElementById('binaryInput').value;
+            const textOutput = document.getElementById('textOutput').textContent;
+            
+            document.getElementById('binaryInput').value = textToBinary(textOutput);
+            document.getElementById('textOutput').textContent = binaryInput;
+            
+            showMessage('Data swapped', 'info');
+        }
+
+        function clearData() {
+            document.getElementById('binaryInput').value = '';
+            document.getElementById('textOutput').textContent = '';
+            document.getElementById('validationResult').style.display = 'none';
+            document.getElementById('binaryAnalysis').style.display = 'none';
+            showMessage('Data cleared', 'info');
+        }
+
+        function loadSample() {
+            const sampleBinary = '01001000 01100101 01101100 01101100 01101111 00100000 01010111 01101111 01110010 01101100 01100100';
+            document.getElementById('binaryInput').value = sampleBinary;
+            showMessage('Sample binary loaded', 'success');
+        }
+
+        function copyInput() {
+            const input = document.getElementById('binaryInput').value;
+            if (!input) {
+                showMessage('No input to copy', 'error');
+                return;
+            }
+            copyToClipboard(input);
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('textOutput').textContent;
+            if (!output || output === 'Conversion failed') {
+                showMessage('No output to copy', 'error');
+                return;
+            }
+            copyToClipboard(output);
+        }
+
+        function downloadOutput() {
+            const output = document.getElementById('textOutput').textContent;
+            if (!output || output === 'Conversion failed') {
+                showMessage('No output to download', 'error');
+                return;
+            }
+            
+            const content = `Binary to Text Conversion Result\n` +
+                          `===============================\n` +
+                          `Converted: ${new Date().toLocaleString()}\n\n` +
+                          `Text Output:\n${output}`;
+            
+            downloadFile(content, 'binary_to_text_' + new Date().getTime() + '.txt');
+        }
+
+        function textToBinary(text) {
+            let binary = '';
+            for (let i = 0; i < text.length; i++) {
+                const binaryChar = text.charCodeAt(i).toString(2).padStart(8, '0');
+                binary += binaryChar + ' ';
+            }
+            return binary.trim();
+        }
+    </script>
+</body>
+</html>

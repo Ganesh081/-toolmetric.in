@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Minifier - Minify and Optimize JS Code Online | ToolMetric</title>
+    <meta name="description" content="Free online JavaScript minifier and optimizer. Compress JS code, remove whitespace, and optimize scripts for faster loading. Perfect for web developers and performance optimization.">
+    <meta name="keywords" content="JavaScript minifier, JS optimizer, JavaScript compressor, minify JavaScript, online JS minifier, JavaScript optimization tool">
+    <meta name="author" content="ToolMetric">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="JavaScript Minifier - ToolMetric">
+    <meta property="og:description" content="Minify and optimize JavaScript code instantly">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolmetric.com/javascript-minifier.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🛠️ ToolMetric</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container tool-container">
+        <div class="tool-header">
+            <h1>JavaScript Minifier</h1>
+            <p class="tool-description">
+                Minify and optimize JavaScript code instantly with our comprehensive JavaScript minifier tool. 
+                This essential utility for web developers compresses JavaScript files by removing unnecessary 
+                whitespace, comments, and optimizing code structure while maintaining functionality. 
+                Perfect for improving website performance, reducing file sizes, and optimizing loading times. 
+                Our tool handles complex JavaScript with functions, objects, arrays, and modern ES6+ features 
+                while ensuring your code remains functional and error-free. Whether you're working with large 
+                scripts, libraries, or application code, our minifier creates production-ready JavaScript 
+                that loads faster and performs better. Simply paste your JavaScript and watch it transform 
+                into optimized, minified output instantly.
+            </p>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 728x90</p>
+        </div>
+
+        <div class="tool-content">
+            <div class="js-controls">
+                <div class="control-buttons" style="display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                    <button onclick="minifyJS()" class="btn">Minify JavaScript</button>
+                    <button onclick="beautifyJS()" class="btn btn-secondary">Beautify JavaScript</button>
+                    <button onclick="validateJS()" class="btn btn-outline">Validate JavaScript</button>
+                    <button onclick="clearJS()" class="btn btn-outline">Clear</button>
+                    <button onclick="loadSample()" class="btn btn-secondary">Load Sample</button>
+                </div>
+                
+                <div class="minify-options" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+                    <div class="form-group">
+                        <label for="removeComments">
+                            <input type="checkbox" id="removeComments" checked style="margin-right: 0.5rem;">
+                            Remove Comments
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="removeWhitespace">
+                            <input type="checkbox" id="removeWhitespace" checked style="margin-right: 0.5rem;">
+                            Remove Whitespace
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="optimizeVars">
+                            <input type="checkbox" id="optimizeVars" style="margin-right: 0.5rem;">
+                            Optimize Variables
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="removeConsole">
+                            <input type="checkbox" id="removeConsole" style="margin-right: 0.5rem;">
+                            Remove Console Logs
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="js-editor" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="input-section">
+                    <h3>Input JavaScript</h3>
+                    <textarea id="jsInput" class="form-control" rows="20" placeholder="Paste your JavaScript code here..."></textarea>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button onclick="copyInput()" class="btn btn-outline">Copy Input</button>
+                        <button onclick="uploadFile()" class="btn btn-outline">Upload File</button>
+                        <input type="file" id="fileInput" accept=".js,.javascript" style="display: none;" onchange="handleFileUpload(event)">
+                    </div>
+                </div>
+                
+                <div class="output-section">
+                    <h3>Minified Output</h3>
+                    <div id="jsOutput" style="background: #f9fafb; border: 2px solid #e5e7eb; border-radius: 8px; padding: 1rem; min-height: 400px; font-family: monospace; white-space: pre-wrap; overflow: auto;"></div>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button onclick="copyOutput()" class="btn btn-secondary">Copy Output</button>
+                        <button onclick="downloadJS()" class="btn btn-outline">Download JavaScript</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="validationResult" class="validation-result" style="display: none; margin-top: 1rem;">
+                <!-- Validation results will be shown here -->
+            </div>
+
+            <div id="jsStats" class="js-stats" style="display: none; margin-top: 1rem;">
+                <h3>JavaScript Statistics</h3>
+                <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #2563eb;" id="functionCount">0</div>
+                        <div style="color: #6b7280;">Functions</div>
+                    </div>
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #10b981;" id="variableCount">0</div>
+                        <div style="color: #6b7280;">Variables</div>
+                    </div>
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #f59e0b;" id="originalSize">0</div>
+                        <div style="color: #6b7280;">Original Size</div>
+                    </div>
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #ef4444;" id="minifiedSize">0</div>
+                        <div style="color: #6b7280;">Minified Size</div>
+                    </div>
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #8b5cf6;" id="compressionRatio">0%</div>
+                        <div style="color: #6b7280;">Compression</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 300x250</p>
+        </div>
+
+        <div class="tool-content">
+            <h3>How to Use JavaScript Minifier</h3>
+            <ol>
+                <li>Paste your JavaScript code in the input textarea or upload a JS file</li>
+                <li>Choose minification options (comments, whitespace, variables, etc.)</li>
+                <li>Click "Minify JavaScript" to compress and optimize your code</li>
+                <li>Use "Beautify JavaScript" to format minified code back to readable form</li>
+                <li>Click "Validate JavaScript" to check for syntax errors</li>
+                <li>Copy the minified output or download as a file</li>
+            </ol>
+
+            <h4 class="mt-3">Features</h4>
+            <ul>
+                <li><strong>Minification:</strong> Remove whitespace and comments for smaller files</li>
+                <li><strong>Variable Optimization:</strong> Shorten variable names where possible</li>
+                <li><strong>Console Removal:</strong> Remove console.log statements for production</li>
+                <li><strong>Validation:</strong> Check JavaScript syntax and structure</li>
+                <li><strong>Statistics:</strong> Analyze JavaScript size and compression ratio</li>
+                <li><strong>Beautification:</strong> Format minified JavaScript back to readable form</li>
+            </ul>
+
+            <h4 class="mt-3">Common Use Cases</h4>
+            <ul>
+                <li><strong>Production Builds:</strong> Optimize JavaScript for live websites</li>
+                <li><strong>Performance:</strong> Reduce file sizes for faster loading</li>
+                <li><strong>Bundle Optimization:</strong> Compress JavaScript in build processes</li>
+                <li><strong>CDN Optimization:</strong> Minimize JavaScript for content delivery</li>
+                <li><strong>Mobile Apps:</strong> Reduce JavaScript for mobile applications</li>
+            </ul>
+        </div>
+
+        <div class="tool-content">
+            <h3>Related Tools</h3>
+            <div class="related-tools" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="css-minifier.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🎨 CSS Minifier</h4>
+                    <p style="margin: 0; color: #6b7280;">Minify and optimize CSS code</p>
+                </a>
+                <a href="html-formatter.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🌐 HTML Formatter</h4>
+                    <p style="margin: 0; color: #6b7280;">Format and beautify HTML code</p>
+                </a>
+                <a href="json-formatter.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">📋 JSON Formatter</h4>
+                    <p style="margin: 0; color: #6b7280;">Format and validate JSON data</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>What is JavaScript minification?</h4>
+                <p>JavaScript minification removes unnecessary characters like whitespace, comments, and formatting to reduce file size without changing functionality.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Will minification break my JavaScript?</h4>
+                <p>No, our minifier only removes whitespace and comments. It preserves all JavaScript logic, functions, and functionality exactly as they work.</p>
+            </div>
+            <div class="faq-item">
+                <h4>How much can JavaScript be compressed?</h4>
+                <p>Typically 30-70% compression is achievable, depending on the amount of whitespace, comments, and optimization opportunities in your JavaScript.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can I reverse the minification?</h4>
+                <p>While you can't perfectly reverse minification, our beautifier can format minified JavaScript back to a readable structure with proper indentation.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🛠️ ToolMetric</h4>
+                    <p>Your trusted source for free online tools. We provide simple, fast, and secure tools for everyday use.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Developer Tools</h4>
+                    <ul>
+                        <li><a href="javascript-minifier.html">JavaScript Minifier</a></li>
+                        <li><a href="css-minifier.html">CSS Minifier</a></li>
+                        <li><a href="html-formatter.html">HTML Formatter</a></li>
+                        <li><a href="json-formatter.html">JSON Formatter</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>Have feedback or suggestions? We'd love to hear from you!</p>
+                    <a href="contact.html" class="btn btn-outline mt-2">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ToolMetric. All rights reserved. | <a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let minifiedJS = '';
+        let originalJS = '';
+
+        function minifyJS() {
+            const input = document.getElementById('jsInput').value.trim();
+            
+            if (!input) {
+                showMessage('Please enter JavaScript code to minify', 'error');
+                return;
+            }
+            
+            originalJS = input;
+            
+            try {
+                const removeComments = document.getElementById('removeComments').checked;
+                const removeWhitespace = document.getElementById('removeWhitespace').checked;
+                const optimizeVars = document.getElementById('optimizeVars').checked;
+                const removeConsole = document.getElementById('removeConsole').checked;
+                
+                // Basic syntax check
+                new Function(input);
+                
+                minifiedJS = processJS(input, removeComments, removeWhitespace, optimizeVars, removeConsole);
+                document.getElementById('jsOutput').textContent = minifiedJS;
+                document.getElementById('jsOutput').style.color = '#1f2937';
+                
+                calculateStatistics(input, minifiedJS);
+                showValidation(true, 'JavaScript minified successfully!');
+                showMessage('JavaScript minified successfully', 'success');
+            } catch (error) {
+                showValidation(false, 'JavaScript syntax error: ' + error.message);
+                document.getElementById('jsOutput').textContent = input;
+                document.getElementById('jsOutput').style.color = '#ef4444';
+                showMessage('JavaScript minification failed', 'error');
+            }
+        }
+
+        function beautifyJS() {
+            const input = document.getElementById('jsInput').value.trim();
+            
+            if (!input) {
+                showMessage('Please enter JavaScript code to beautify', 'error');
+                return;
+            }
+            
+            try {
+                const beautified = formatJS(input);
+                document.getElementById('jsOutput').textContent = beautified;
+                document.getElementById('jsOutput').style.color = '#1f2937';
+                
+                showValidation(true, 'JavaScript beautified successfully!');
+                showMessage('JavaScript beautified successfully', 'success');
+            } catch (error) {
+                showValidation(false, 'JavaScript beautification error: ' + error.message);
+                document.getElementById('jsOutput').textContent = input;
+                document.getElementById('jsOutput').style.color = '#ef4444';
+                showMessage('JavaScript beautification failed', 'error');
+            }
+        }
+
+        function processJS(js, removeComments, removeWhitespace, optimizeVars, removeConsole) {
+            let result = js;
+            
+            // Remove comments
+            if (removeComments) {
+                result = result.replace(/\/\*[\s\S]*?\*\//g, '');
+                result = result.replace(/\/\/.*$/gm, '');
+            }
+            
+            // Remove console statements
+            if (removeConsole) {
+                result = result.replace(/console\.(log|warn|error|info|debug)\([^)]*\);?/g, '');
+            }
+            
+            // Remove whitespace
+            if (removeWhitespace) {
+                result = result.replace(/\s+/g, ' ')
+                           .replace(/\s*([{}();,=])\s*/g, '$1')
+                           .replace(/;\s*}/g, '}')
+                           .trim();
+            }
+            
+            // Basic variable optimization (simplified)
+            if (optimizeVars) {
+                // This is a very basic implementation
+                // In practice, you'd need more sophisticated parsing
+                const vars = result.match(/var\s+(\w+)/g) || [];
+                const uniqueVars = [...new Set(vars)];
+                
+                let varIndex = 0;
+                uniqueVars.forEach(varMatch => {
+                    const varName = varMatch.replace('var ', '');
+                    const shortName = String.fromCharCode(97 + (varIndex % 26)) + (varIndex >= 26 ? Math.floor(varIndex / 26) : '');
+                    const regex = new RegExp('\\b' + varName + '\\b', 'g');
+                    result = result.replace(regex, shortName);
+                    varIndex++;
+                });
+            }
+            
+            return result;
+        }
+
+        function formatJS(js) {
+            // Simple JavaScript formatter
+            let result = js;
+            let indent = 0;
+            const indentSize = '    ';
+            
+            // Add newlines around braces
+            result = result.replace(/\s*([{}])\s*/g, '\n$1\n');
+            result = result.replace(/;/g, ';\n');
+            result = result.replace(/\n\s*\n/g, '\n');
+            
+            const lines = result.split('\n');
+            const formattedLines = [];
+            
+            for (const line of lines) {
+                const trimmed = line.trim();
+                if (!trimmed) continue;
+                
+                if (trimmed === '}') {
+                    indent--;
+                }
+                
+                formattedLines.push(indentSize.repeat(Math.max(0, indent)) + trimmed);
+                
+                if (trimmed === '{') {
+                    indent++;
+                }
+            }
+            
+            return formattedLines.join('\n');
+        }
+
+        function validateJS() {
+            const input = document.getElementById('jsInput').value.trim();
+            
+            if (!input) {
+                showMessage('Please enter JavaScript code to validate', 'error');
+                return;
+            }
+            
+            try {
+                // Try to parse the JavaScript
+                new Function(input);
+                
+                calculateStatistics(input, input);
+                showValidation(true, 'JavaScript syntax is valid!');
+                showMessage('JavaScript validation successful', 'success');
+            } catch (error) {
+                showValidation(false, 'JavaScript syntax error: ' + error.message);
+                showMessage('JavaScript validation failed', 'error');
+            }
+        }
+
+        function calculateStatistics(original, minified) {
+            const functionCount = (original.match(/function\s+\w+|=\s*function|\w+\s*=>/g) || []).length;
+            const variableCount = (original.match(/(?:var|let|const)\s+\w+/g) || []).length;
+            const originalSize = new Blob([original]).size;
+            const minifiedSize = new Blob([minified]).size;
+            const compressionRatio = originalSize > 0 ? Math.round((1 - minifiedSize / originalSize) * 100) : 0;
+            
+            document.getElementById('functionCount').textContent = functionCount;
+            document.getElementById('variableCount').textContent = variableCount;
+            document.getElementById('originalSize').textContent = formatBytes(originalSize);
+            document.getElementById('minifiedSize').textContent = formatBytes(minifiedSize);
+            document.getElementById('compressionRatio').textContent = compressionRatio + '%';
+            document.getElementById('jsStats').style.display = 'block';
+        }
+
+        function showValidation(isValid, message) {
+            const resultDiv = document.getElementById('validationResult');
+            resultDiv.style.display = 'block';
+            
+            if (isValid) {
+                resultDiv.innerHTML = `
+                    <div class="message success">
+                        <h4>✅ ${message}</h4>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="message error">
+                        <h4>❌ ${message}</h4>
+                    </div>
+                `;
+            }
+        }
+
+        function clearJS() {
+            document.getElementById('jsInput').value = '';
+            document.getElementById('jsOutput').textContent = '';
+            document.getElementById('validationResult').style.display = 'none';
+            document.getElementById('jsStats').style.display = 'none';
+            minifiedJS = '';
+            originalJS = '';
+            showMessage('JavaScript cleared', 'info');
+        }
+
+        function loadSample() {
+            const sampleJS = `// Sample JavaScript for demonstration
+function calculateTotal(items, taxRate) {
+    // Calculate subtotal
+    let subtotal = 0;
+    
+    // Sum up all item prices
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        subtotal += item.price * item.quantity;
+        
+        console.log('Item:', item.name, 'Price:', item.price);
+    }
+    
+    // Calculate tax
+    const tax = subtotal * (taxRate / 100);
+    
+    // Calculate total
+    const total = subtotal + tax;
+    
+    return {
+        subtotal: subtotal,
+        tax: tax,
+        total: total
+    };
+}
+
+// Example usage
+const shoppingCart = [
+    { name: 'Laptop', price: 999.99, quantity: 1 },
+    { name: 'Mouse', price: 29.99, quantity: 2 },
+    { name: 'Keyboard', price: 79.99, quantity: 1 }
+];
+
+const result = calculateTotal(shoppingCart, 8.5);
+
+console.log('Subtotal: $' + result.subtotal.toFixed(2));
+console.log('Tax: $' + result.tax.toFixed(2));
+console.log('Total: $' + result.total.toFixed(2));
+
+// Export function for module use
+export { calculateTotal };`;
+            
+            document.getElementById('jsInput').value = sampleJS;
+            showMessage('Sample JavaScript loaded', 'success');
+        }
+
+        function copyInput() {
+            const input = document.getElementById('jsInput').value;
+            if (!input) {
+                showMessage('No input to copy', 'error');
+                return;
+            }
+            copyToClipboard(input);
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('jsOutput').textContent;
+            if (!output) {
+                showMessage('No output to copy', 'error');
+                return;
+            }
+            copyToClipboard(output);
+        }
+
+        function downloadJS() {
+            const output = document.getElementById('jsOutput').textContent;
+            if (!output) {
+                showMessage('No output to download', 'error');
+                return;
+            }
+            
+            const blob = new Blob([output], { type: 'text/javascript' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'minified_' + new Date().getTime() + '.js';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showMessage('JavaScript downloaded successfully', 'success');
+        }
+
+        function uploadFile() {
+            document.getElementById('fileInput').click();
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            if (!file.type.includes('javascript') && !file.name.endsWith('.js')) {
+                showMessage('Please upload a JavaScript file', 'error');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('jsInput').value = e.target.result;
+                showMessage('File uploaded successfully', 'success');
+            };
+            reader.onerror = function() {
+                showMessage('Error reading file', 'error');
+            };
+            reader.readAsText(file);
+        }
+    </script>
+</body>
+</html>

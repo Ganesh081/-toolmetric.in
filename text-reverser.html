@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Reverser Tool - ToolMetric</title>
+    <meta name="description" content="Free online text reverser tool to reverse text, words, and create mirror text. Perfect for creative writing, puzzles, and fun text transformations.">
+    <meta name="keywords" content="text reverser, reverse text, mirror text, backwards text, text flipper, word reverser, reverse words">
+    <meta name="author" content="ToolMetric">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Text Reverser Tool - ToolMetric">
+    <meta property="og:description" content="Reverse text, words, and create mirror text instantly">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolmetric.com/text-reverser.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🛠️ ToolMetric</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container tool-container">
+        <div class="tool-header">
+            <h1>Text Reverser Tool</h1>
+            <p class="tool-description">
+                Transform your text in creative ways with our comprehensive text reverser tool. 
+                This fun and versatile utility allows you to reverse text completely, reverse word order, 
+                create mirror text, flip text upside down, and generate various text transformations. 
+                Perfect for creating puzzles, social media posts, creative writing, or just having fun with text. 
+                Whether you want to write backwards, create mirror effects, or generate unique text styles, 
+                our tool provides multiple reversal options with instant results. Simply enter your text, 
+                choose your transformation type, and watch your text get reversed in fascinating ways.
+            </p>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 728x90</p>
+        </div>
+
+        <div class="tool-content">
+            <div class="form-group">
+                <label for="inputText">Enter or Paste Your Text:</label>
+                <textarea id="inputText" class="form-control" rows="8" placeholder="Enter your text here to reverse it in creative ways..."></textarea>
+                <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+                    <button onclick="clearText()" class="btn btn-outline">Clear Text</button>
+                    <button onclick="loadSample()" class="btn btn-secondary">Load Sample Text</button>
+                    <button onclick="copyInput()" class="btn btn-outline">Copy Input</button>
+                </div>
+            </div>
+
+            <div class="reversal-options">
+                <h3>Text Transformation Options</h3>
+                <div class="button-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                    <button onclick="reverseText('full')" class="btn btn-reverse">
+                        <span style="display: block; font-size: 1.2rem; margin-bottom: 0.25rem;">🔄</span>
+                        Reverse Text
+                    </button>
+                    <button onclick="reverseText('words')" class="btn btn-reverse">
+                        <span style="display: block; font-size: 1.2rem; margin-bottom: 0.25rem;">📝</span>
+                        Reverse Words
+                    </button>
+                    <button onclick="reverseText('mirror')" class="btn btn-reverse">
+                        <span style="display: block; font-size: 1.2rem; margin-bottom: 0.25rem;">🪞</span>
+                        Mirror Text
+                    </button>
+                    <button onclick="reverseText('upside')" class="btn btn-reverse">
+                        <span style="display: block; font-size: 1.2rem; margin-bottom: 0.25rem;">🙃</span>
+                        Upside Down
+                    </button>
+                    <button onclick="reverseText('backwards')" class="btn btn-reverse">
+                        <span style="display: block; font-size: 1.2rem; margin-bottom: 0.25rem;">⏪</span>
+                        Backwards
+                    </button>
+                    <button onclick="reverseText('eachword')" class="btn btn-reverse">
+                        <span style="display: block; font-size: 1.2rem; margin-bottom: 0.25rem;">🔀</span>
+                        Reverse Each Word
+                    </button>
+                </div>
+            </div>
+
+            <div id="resultSection" class="result-section" style="display: none;">
+                <h3>Transformed Text</h3>
+                <div class="result-container">
+                    <textarea id="outputText" class="form-control" rows="8" readonly></textarea>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+                        <button onclick="copyResult()" class="btn btn-secondary">Copy Result</button>
+                        <button onclick="downloadResult()" class="btn btn-outline">Download Text</button>
+                        <button onclick="swapText()" class="btn btn-outline">Swap Input/Output</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="comparisonSection" class="comparison-section" style="display: none; margin-top: 2rem;">
+                <h3>Quick Comparison</h3>
+                <div class="comparison-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+                    <div class="comparison-item">
+                        <h4>Original</h4>
+                        <div class="comparison-text" id="compOriginal" style="background: #f9fafb; padding: 1rem; border-radius: 6px; min-height: 60px; font-family: monospace; word-break: break-all;"></div>
+                    </div>
+                    <div class="comparison-item">
+                        <h4>Reversed</h4>
+                        <div class="comparison-text" id="compReversed" style="background: #f9fafb; padding: 1rem; border-radius: 6px; min-height: 60px; font-family: monospace; word-break: break-all;"></div>
+                    </div>
+                    <div class="comparison-item">
+                        <h4>Words Reversed</h4>
+                        <div class="comparison-text" id="compWords" style="background: #f9fafb; padding: 1rem; border-radius: 6px; min-height: 60px; font-family: monospace; word-break: break-all;"></div>
+                    </div>
+                    <div class="comparison-item">
+                        <h4>Each Word Reversed</h4>
+                        <div class="comparison-text" id="compEachWord" style="background: #f9fafb; padding: 1rem; border-radius: 6px; min-height: 60px; font-family: monospace; word-break: break-all;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 300x250</p>
+        </div>
+
+        <div class="tool-content">
+            <h3>Transformation Types Explained</h3>
+            <div class="transformation-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+                <div class="transform-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2563eb;">
+                    <h4>Reverse Text</h4>
+                    <p>Reverses the entire text character by character. Perfect for creating backwards text effects.</p>
+                    <div style="background: white; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem; font-family: monospace;">
+                        "Hello World" → "dlroW olleH"
+                    </div>
+                </div>
+                <div class="transform-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #10b981;">
+                    <h4>Reverse Words</h4>
+                    <p>Reverses the order of words but keeps each word intact. Great for sentence scrambling.</p>
+                    <div style="background: white; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem; font-family: monospace;">
+                        "Hello World" → "World Hello"
+                    </div>
+                </div>
+                <div class="transform-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                    <h4>Mirror Text</h4>
+                    <p>Creates a mirror effect by reversing text and using mirror-compatible characters.</p>
+                    <div style="background: white; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem; font-family: monospace;">
+                        "Hello" → "ollǝH"
+                    </div>
+                </div>
+                <div class="transform-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #ef4444;">
+                    <h4>Upside Down</h4>
+                    <p>Flips text upside down using special Unicode characters. Creates fun visual effects.</p>
+                    <div style="background: white; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem; font-family: monospace;">
+                        "Hello" → "ɥǝllo"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>Fun Text Effects</h3>
+            <div class="effects-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <button onclick="applyEffect('zigzag')" class="btn btn-effect" style="background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);">
+                    🌊 Zigzag Effect
+                </button>
+                <button onclick="applyEffect('spiral')" class="btn btn-effect" style="background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);">
+                    🌀 Spiral Text
+                </button>
+                <button onclick="applyEffect('scramble')" class="btn btn-effect" style="background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);">
+                    🔀 Scramble Words
+                </button>
+                <button onclick="applyEffect('alternating')" class="btn btn-effect" style="background: linear-gradient(45deg, #43e97b 0%, #38f9d7 100%);">
+                    🎨 Alternating Case
+                </button>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>How to Use Text Reverser</h3>
+            <ol>
+                <li>Enter or paste your text in the input field</li>
+                <li>Click on any transformation button to reverse your text</li>
+                <li>View the transformed text in the result section</li>
+                <li>Copy the result or download it as a text file</li>
+                <li>Try different effects for creative text transformations</li>
+                <li>Use the comparison view to see different formats</li>
+            </ol>
+
+            <h4 class="mt-3">Creative Uses</h4>
+            <ul>
+                <li><strong>Social Media:</strong> Create eye-catching posts with reversed text</li>
+                <li><strong>Puzzles:</strong> Generate word puzzles and brain teasers</li>
+                <li><strong>Creative Writing:</strong> Add unique text effects to stories</li>
+                <li><strong>Art Projects:</strong> Create visual text art and designs</li>
+                <li><strong>Pranks:</strong> Send fun messages to friends</li>
+                <li><strong>Learning:</strong> Practice reading backwards text</li>
+            </ul>
+
+            <h4 class="mt-3">Features</h4>
+            <ul>
+                <li><strong>Multiple Transformations:</strong> 6+ text reversal options</li>
+                <li><strong>Special Effects:</strong> Zigzag, spiral, and more</li>
+                <li><strong>Instant Results:</strong> Real-time text transformation</li>
+                <li><strong>Comparison View:</strong> See multiple formats side-by-side</li>
+                <li><strong>Copy & Download:</strong> Easy export options</li>
+                <li><strong>Swap Function:</strong> Quickly swap input and output</li>
+            </ul>
+        </div>
+
+        <div class="tool-content">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>What's the difference between "Reverse Text" and "Reverse Each Word"?</h4>
+                <p>"Reverse Text" reverses the entire text as one string, while "Reverse Each Word" keeps the word order but reverses each individual word.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can I use reversed text in professional documents?</h4>
+                <p>While reversed text is great for creative projects, it's not recommended for formal documents as it can be difficult to read.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Do upside down and mirror text work on all devices?</h4>
+                <p>Most modern devices support Unicode characters used for these effects, but some older systems may not display them correctly.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can I reverse text with emojis and special characters?</h4>
+                <p>Yes! The tool works with emojis and special characters, though some effects may work differently with complex Unicode.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🛠️ ToolMetric</h4>
+                    <p>Your trusted source for free online tools. We provide simple, fast, and secure tools for everyday use.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Text Tools</h4>
+                    <ul>
+                        <li><a href="word-counter.html">Word Counter</a></li>
+                        <li><a href="case-converter.html">Case Converter</a></li>
+                        <li><a href="remove-spaces.html">Remove Spaces</a></li>
+                        <li><a href="text-reverser.html">Text Reverser</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>Have feedback or suggestions? We'd love to hear from you!</p>
+                    <a href="contact.html" class="btn btn-outline mt-2">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ToolMetric. All rights reserved. | <a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let currentTransformation = '';
+
+        // Upside down character map
+        const upsideDownMap = {
+            'a': 'ɐ', 'b': 'q', 'c': 'ɔ', 'd': 'p', 'e': 'ǝ', 'f': 'ɟ', 'g': 'ɓ',
+            'h': 'ɥ', 'i': 'ᴉ', 'j': 'ɾ', 'k': 'ʞ', 'l': 'l', 'm': 'ɯ', 'n': 'u',
+            'o': 'o', 'p': 'd', 'q': 'b', 'r': 'ɹ', 's': 's', 't': 'ʇ', 'u': 'n',
+            'v': 'ʌ', 'w': 'ʍ', 'x': 'x', 'y': 'ʎ', 'z': 'z',
+            'A': '∀', 'B': 'Ƃ', 'C': 'Ɔ', 'D': 'ᴰ', 'E': 'Ǝ', 'F': 'Ⅎ', 'G': 'פ',
+            'H': 'H', 'I': 'I', 'J': 'ſ', 'K': 'K', 'L': '˥', 'M': 'W', 'N': 'N',
+            'O': 'O', 'P': 'Ԁ', 'Q': 'Q', 'R': 'R', 'S': 'S', 'T': '┴', 'U': '∩',
+            'V': 'Λ', 'W': 'M', 'X': 'X', 'Y': '⅄', 'Z': 'Z',
+            '1': 'Ɩ', '2': 'ᄅ', '3': 'Ɛ', '4': 'ㄣ', '5': 'ϛ', '6': '9', '7': 'ㄥ',
+            '8': '8', '9': '6', '0': '0', '.': '˙', ',': '´', '?': '¿', '!': '¡',
+            '"': '„', "'": '‛', '(': ')', ')': '(', '[': ']', ']': '[',
+            '{': '}', '}': '{', '<': '>', '>': '<'
+        };
+
+        function reverseText(type) {
+            const inputText = document.getElementById('inputText').value;
+            
+            if (inputText.trim() === '') {
+                showMessage('Please enter some text to reverse', 'error');
+                return;
+            }
+            
+            let result = '';
+            
+            switch(type) {
+                case 'full':
+                    result = inputText.split('').reverse().join('');
+                    break;
+                case 'words':
+                    result = inputText.split(' ').reverse().join(' ');
+                    break;
+                case 'mirror':
+                    result = createMirrorText(inputText);
+                    break;
+                case 'upside':
+                    result = createUpsideDownText(inputText);
+                    break;
+                case 'backwards':
+                    result = createBackwardsText(inputText);
+                    break;
+                case 'eachword':
+                    result = inputText.split(' ').map(word => word.split('').reverse().join('')).join(' ');
+                    break;
+            }
+            
+            // Display result
+            document.getElementById('outputText').value = result;
+            document.getElementById('resultSection').style.display = 'block';
+            
+            // Update comparison
+            updateComparison(inputText);
+            
+            // Scroll to result
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            currentTransformation = type;
+            showMessage(`Text transformed with ${type} effect`, 'success');
+        }
+        
+        function createMirrorText(text) {
+            // Simple mirror effect using Unicode characters
+            const mirrorMap = {
+                'a': 'ɒ', 'b': 'q', 'c': 'ɔ', 'd': 'p', 'e': 'ǝ', 'f': 'ɟ', 'g': 'b',
+                'h': 'ɥ', 'i': 'ᴉ', 'j': 'ɾ', 'k': 'ʞ', 'l': 'l', 'm': 'ɯ', 'n': 'u',
+                'r': 'ɹ', 't': 'ʇ', 'v': 'ʌ', 'w': 'ʍ', 'y': 'ʎ',
+                'A': '∀', 'C': 'Ɔ', 'E': 'Ǝ', 'J': 'ſ', 'L': '˥', 'M': 'W'
+            };
+            
+            return text.split('').reverse().map(char => mirrorMap[char] || char).join('');
+        }
+        
+        function createUpsideDownText(text) {
+            return text.split('').reverse().map(char => upsideDownMap[char] || char).join('');
+        }
+        
+        function createBackwardsText(text) {
+            // Create a more artistic backwards effect
+            return text.split('').reverse().map((char, index) => {
+                if (index % 2 === 0) {
+                    return char.toUpperCase();
+                }
+                return char.toLowerCase();
+            }).join('');
+        }
+        
+        function applyEffect(effect) {
+            const inputText = document.getElementById('inputText').value;
+            
+            if (inputText.trim() === '') {
+                showMessage('Please enter some text first', 'error');
+                return;
+            }
+            
+            let result = '';
+            
+            switch(effect) {
+                case 'zigzag':
+                    result = createZigzagEffect(inputText);
+                    break;
+                case 'spiral':
+                    result = createSpiralEffect(inputText);
+                    break;
+                case 'scramble':
+                    result = createScrambleEffect(inputText);
+                    break;
+                case 'alternating':
+                    result = createAlternatingEffect(inputText);
+                    break;
+            }
+            
+            document.getElementById('outputText').value = result;
+            document.getElementById('resultSection').style.display = 'block';
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            showMessage(`Applied ${effect} effect`, 'success');
+        }
+        
+        function createZigzagEffect(text) {
+            let result = '';
+            let upper = true;
+            for (let i = 0; i < text.length; i++) {
+                if (/[a-zA-Z]/.test(text[i])) {
+                    result += upper ? text[i].toUpperCase() : text[i].toLowerCase();
+                    if (text[i] !== ' ') upper = !upper;
+                } else {
+                    result += text[i];
+                }
+            }
+            return result;
+        }
+        
+        function createSpiralEffect(text) {
+            const words = text.split(' ');
+            let result = '';
+            for (let i = 0; i < words.length; i++) {
+                if (i % 2 === 0) {
+                    result += words[i].split('').reverse().join('');
+                } else {
+                    result += words[i];
+                }
+                if (i < words.length - 1) result += ' ';
+            }
+            return result;
+        }
+        
+        function createScrambleEffect(text) {
+            const words = text.split(' ');
+            return words.sort(() => Math.random() - 0.5).join(' ');
+        }
+        
+        function createAlternatingEffect(text) {
+            return text.split('').map((char, index) => {
+                if (/[a-zA-Z]/.test(char)) {
+                    return index % 2 === 0 ? char.toUpperCase() : char.toLowerCase();
+                }
+                return char;
+            }).join('');
+        }
+        
+        function updateComparison(text) {
+            document.getElementById('compOriginal').textContent = text;
+            document.getElementById('compReversed').textContent = text.split('').reverse().join('');
+            document.getElementById('compWords').textContent = text.split(' ').reverse().join(' ');
+            document.getElementById('compEachWord').textContent = text.split(' ').map(word => word.split('').reverse().join('')).join(' ');
+            document.getElementById('comparisonSection').style.display = 'block';
+        }
+        
+        function clearText() {
+            document.getElementById('inputText').value = '';
+            document.getElementById('outputText').value = '';
+            document.getElementById('resultSection').style.display = 'none';
+            document.getElementById('comparisonSection').style.display = 'none';
+            showMessage('Text cleared', 'info');
+        }
+        
+        function loadSample() {
+            const sampleText = `Hello World! This is a sample text for demonstrating the text reverser tool. You can create amazing effects with reversed text, mirror text, and upside down text. Try different transformations to see how creative you can be with text formatting!`;
+            document.getElementById('inputText').value = sampleText;
+            showMessage('Sample text loaded', 'success');
+        }
+        
+        function copyInput() {
+            const inputText = document.getElementById('inputText').value;
+            if (inputText.trim() === '') {
+                showMessage('No text to copy', 'error');
+                return;
+            }
+            copyToClipboard(inputText);
+        }
+        
+        function copyResult() {
+            const outputText = document.getElementById('outputText').value;
+            if (outputText.trim() === '') {
+                showMessage('No result to copy', 'error');
+                return;
+            }
+            copyToClipboard(outputText);
+        }
+        
+        function downloadResult() {
+            const outputText = document.getElementById('outputText').value;
+            if (outputText.trim() === '') {
+                showMessage('No result to download', 'error');
+                return;
+            }
+            const filename = `reversed_text_${currentTransformation}_${new Date().getTime()}.txt`;
+            downloadFile(outputText, filename);
+        }
+        
+        function swapText() {
+            const inputText = document.getElementById('inputText').value;
+            const outputText = document.getElementById('outputText').value;
+            
+            document.getElementById('inputText').value = outputText;
+            document.getElementById('outputText').value = inputText;
+            
+            if (inputText.trim()) {
+                updateComparison(inputText);
+            }
+            
+            showMessage('Input and output swapped', 'success');
+        }
+        
+        // Auto-update comparison as user types
+        document.getElementById('inputText').addEventListener('input', debounce(function() {
+            const text = this.value;
+            if (text.trim()) {
+                updateComparison(text);
+            } else {
+                document.getElementById('comparisonSection').style.display = 'none';
+            }
+        }, 500));
+    </script>
+</body>
+</html>

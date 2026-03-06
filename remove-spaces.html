@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Extra Spaces Tool - ToolMetric</title>
+    <meta name="description" content="Free online tool to remove extra spaces, line breaks, and clean up text formatting. Perfect for tidying up messy text and removing unwanted whitespace.">
+    <meta name="keywords" content="remove spaces, clean text, remove whitespace, text cleaner, remove line breaks, format text, text formatter">
+    <meta name="author" content="ToolMetric">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Remove Extra Spaces Tool - ToolMetric">
+    <meta property="og:description" content="Clean up your text by removing extra spaces and formatting issues">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolmetric.com/remove-spaces.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🛠️ ToolMetric</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container tool-container">
+        <div class="tool-header">
+            <h1>Remove Extra Spaces Tool</h1>
+            <p class="tool-description">
+                Clean up your text instantly with our comprehensive space removal tool. 
+                This utility helps you remove extra spaces, line breaks, tabs, and other formatting issues from your text. 
+                Perfect for cleaning up messy text copied from PDFs, websites, or other sources. 
+                Whether you need to remove double spaces, trim leading/trailing spaces, eliminate line breaks, 
+                or normalize text formatting, this tool provides multiple cleaning options to make your text look professional. 
+                Simply paste your messy text, choose your cleaning options, and get perfectly formatted text in seconds. 
+                Essential for writers, editors, developers, and anyone working with text content.
+            </p>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 728x90</p>
+        </div>
+
+        <div class="tool-content">
+            <div class="form-group">
+                <label for="inputText">Enter or Paste Your Text:</label>
+                <textarea id="inputText" class="form-control" rows="10" placeholder="Paste your messy text here with extra spaces, line breaks, or formatting issues..."></textarea>
+                <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+                    <button onclick="clearText()" class="btn btn-outline">Clear Text</button>
+                    <button onclick="loadSample()" class="btn btn-secondary">Load Sample Text</button>
+                    <button onclick="copyInput()" class="btn btn-outline">Copy Input</button>
+                </div>
+            </div>
+
+            <div class="cleaning-options">
+                <h3>Cleaning Options</h3>
+                <div class="options-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                    <label class="option-item" style="display: flex; align-items: center; padding: 1rem; background: #f9fafb; border-radius: 8px; cursor: pointer;">
+                        <input type="checkbox" id="removeExtraSpaces" checked style="margin-right: 0.75rem;">
+                        <div>
+                            <strong>Remove Extra Spaces</strong>
+                            <p style="font-size: 0.9rem; color: #6b7280; margin: 0;">Convert multiple spaces to single space</p>
+                        </div>
+                    </label>
+                    <label class="option-item" style="display: flex; align-items: center; padding: 1rem; background: #f9fafb; border-radius: 8px; cursor: pointer;">
+                        <input type="checkbox" id="trimSpaces" checked style="margin-right: 0.75rem;">
+                        <div>
+                            <strong>Trim Leading/Trailing Spaces</strong>
+                            <p style="font-size: 0.9rem; color: #6b7280; margin: 0;">Remove spaces at start and end</p>
+                        </div>
+                    </label>
+                    <label class="option-item" style="display: flex; align-items: center; padding: 1rem; background: #f9fafb; border-radius: 8px; cursor: pointer;">
+                        <input type="checkbox" id="removeLineBreaks" style="margin-right: 0.75rem;">
+                        <div>
+                            <strong>Remove All Line Breaks</strong>
+                            <p style="font-size: 0.9rem; color: #6b7280; margin: 0;">Convert text to single line</p>
+                        </div>
+                    </label>
+                    <label class="option-item" style="display: flex; align-items: center; padding: 1rem; background: #f9fafb; border-radius: 8px; cursor: pointer;">
+                        <input type="checkbox" id="removeTabs" checked style="margin-right: 0.75rem;">
+                        <div>
+                            <strong>Remove Tabs</strong>
+                            <p style="font-size: 0.9rem; color: #6b7280; margin: 0;">Replace tabs with spaces</p>
+                        </div>
+                    </label>
+                    <label class="option-item" style="display: flex; align-items: center; padding: 1rem; background: #f9fafb; border-radius: 8px; cursor: pointer;">
+                        <input type="checkbox" id="removeExtraLineBreaks" style="margin-right: 0.75rem;">
+                        <div>
+                            <strong>Remove Extra Line Breaks</strong>
+                            <p style="font-size: 0.9rem; color: #6b7280; margin: 0;">Keep single line breaks only</p>
+                        </div>
+                    </label>
+                    <label class="option-item" style="display: flex; align-items: center; padding: 1rem; background: #f9fafb; border-radius: 8px; cursor: pointer;">
+                        <input type="checkbox" id="removePunctuationSpaces" style="margin-right: 0.75rem;">
+                        <div>
+                            <strong>Remove Spaces Before Punctuation</strong>
+                            <p style="font-size: 0.9rem; color: #6b7280; margin: 0;">Clean up punctuation spacing</p>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="quick-actions">
+                    <h4>Quick Actions</h4>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+                        <button onclick="selectAllOptions()" class="btn btn-secondary">Select All</button>
+                        <button onclick="deselectAllOptions()" class="btn btn-outline">Deselect All</button>
+                        <button onclick="selectCommonOptions()" class="btn btn-outline">Common Options</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <button onclick="cleanText()" class="btn">Clean Text</button>
+                <button onclick="swapText()" class="btn btn-outline ml-2">Swap Input/Output</button>
+            </div>
+
+            <div id="resultSection" class="result-section" style="display: none;">
+                <h3>Cleaned Text</h3>
+                <div class="result-container">
+                    <textarea id="outputText" class="form-control" rows="10" readonly></textarea>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+                        <button onclick="copyResult()" class="btn btn-secondary">Copy Result</button>
+                        <button onclick="downloadResult()" class="btn btn-outline">Download Text</button>
+                        <button onclick="showStatistics()" class="btn btn-outline">Show Statistics</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="statisticsSection" class="statistics-section" style="display: none;">
+                <h3>Cleaning Statistics</h3>
+                <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div class="stat-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; text-align: center; border-left: 4px solid #2563eb;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #2563eb;" id="originalLength">0</div>
+                        <div style="color: #6b7280; margin-top: 0.5rem;">Original Characters</div>
+                    </div>
+                    <div class="stat-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; text-align: center; border-left: 4px solid #10b981;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #10b981;" id="cleanedLength">0</div>
+                        <div style="color: #6b7280; margin-top: 0.5rem;">Cleaned Characters</div>
+                    </div>
+                    <div class="stat-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; text-align: center; border-left: 4px solid #f59e0b;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #f59e0b;" id="removedChars">0</div>
+                        <div style="color: #6b7280; margin-top: 0.5rem;">Characters Removed</div>
+                    </div>
+                    <div class="stat-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; text-align: center; border-left: 4px solid #ef4444;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #ef4444;" id="reductionPercent">0%</div>
+                        <div style="color: #6b7280; margin-top: 0.5rem;">Size Reduction</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 300x250</p>
+        </div>
+
+        <div class="tool-content">
+            <h3>Text Cleaning Options Explained</h3>
+            <div class="options-explanation" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+                <div class="option-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2563eb;">
+                    <h4>Remove Extra Spaces</h4>
+                    <p>Converts multiple consecutive spaces into a single space. Essential for cleaning up text with inconsistent spacing.</p>
+                    <div style="background: white; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem; font-family: monospace; font-size: 0.9rem;">
+                        "Hello    World" → "Hello World"
+                    </div>
+                </div>
+                <div class="option-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #10b981;">
+                    <h4>Trim Leading/Trailing Spaces</h4>
+                    <p>Removes spaces at the beginning and end of each line. Perfect for cleaning up indented or poorly formatted text.</p>
+                    <div style="background: white; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem; font-family: monospace; font-size: 0.9rem;">
+                        "   Hello World   " → "Hello World"
+                    </div>
+                </div>
+                <div class="option-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                    <h4>Remove Line Breaks</h4>
+                    <p>Eliminates all line breaks, converting text to a single continuous line. Useful for creating paragraph text.</p>
+                    <div style="background: white; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem; font-family: monospace; font-size: 0.9rem;">
+                        "Hello\nWorld" → "Hello World"
+                    </div>
+                </div>
+                <div class="option-card" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #ef4444;">
+                    <h4>Remove Extra Line Breaks</h4>
+                    <p>Keeps single line breaks but removes multiple consecutive line breaks. Maintains paragraph structure.</p>
+                    <div style="background: white; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem; font-family: monospace; font-size: 0.9rem;">
+                        "Hello\n\n\nWorld" → "Hello\nWorld"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>How to Use Remove Extra Spaces Tool</h3>
+            <ol>
+                <li>Paste or type your messy text in the input field</li>
+                <li>Select the cleaning options you want to apply</li>
+                <li>Click "Clean Text" to process your text</li>
+                <li>View the cleaned text in the result section</li>
+                <li>Copy the result or download it as a text file</li>
+                <li>Check statistics to see what was cleaned</li>
+            </ol>
+
+            <h4 class="mt-3">Common Use Cases</h4>
+            <ul>
+                <li><strong>Cleaning PDF Text:</strong> Remove formatting issues from text copied from PDFs</li>
+                <li><strong>Web Content:</strong> Clean text copied from websites with inconsistent formatting</li>
+                <li><strong>Code Cleanup:</strong> Remove extra whitespace from code or configuration files</li>
+                <li><strong>Data Processing:</strong> Normalize text data for analysis or database entry</li>
+                <li><strong>Document Formatting:</strong> Prepare text for professional documents or publications</li>
+                <li><strong>Email Cleanup:</strong> Fix formatting issues in copied email content</li>
+            </ul>
+
+            <h4 class="mt-3">Features</h4>
+            <ul>
+                <li><strong>Multiple Cleaning Options:</strong> Choose exactly what to clean</li>
+                <li><strong>Real-time Statistics:</strong> See what was removed</li>
+                <li><strong>Quick Actions:</strong> Pre-configured option sets</li>
+                <li><strong>Copy & Download:</strong> Easy export options</li>
+                <li><strong>Swap Function:</strong> Quickly swap input and output</li>
+                <li><strong>Sample Text:</strong> Test with messy sample text</li>
+            </ul>
+        </div>
+
+        <div class="tool-content">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>What's the difference between "Remove Line Breaks" and "Remove Extra Line Breaks"?</h4>
+                <p>"Remove Line Breaks" eliminates all line breaks, making text a single line. "Remove Extra Line Breaks" keeps single line breaks but removes multiple consecutive ones, preserving paragraph structure.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Will this tool affect my text content?</h4>
+                <p>The tool only removes spaces, tabs, and line breaks. It doesn't change words, punctuation, or the actual content of your text.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can I undo the changes?</h4>
+                <p>Yes! Use the "Swap Input/Output" button to restore your original text, or keep a copy of the original before cleaning.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Is there a limit to how much text I can clean?</h4>
+                <p>There's no strict limit. The tool works with text of any length, though very large documents may take slightly longer to process.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🛠️ ToolMetric</h4>
+                    <p>Your trusted source for free online tools. We provide simple, fast, and secure tools for everyday use.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Text Tools</h4>
+                    <ul>
+                        <li><a href="word-counter.html">Word Counter</a></li>
+                        <li><a href="case-converter.html">Case Converter</a></li>
+                        <li><a href="remove-spaces.html">Remove Spaces</a></li>
+                        <li><a href="text-reverser.html">Text Reverser</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>Have feedback or suggestions? We'd love to hear from you!</p>
+                    <a href="contact.html" class="btn btn-outline mt-2">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ToolMetric. All rights reserved. | <a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let originalText = '';
+        let cleanedText = '';
+
+        function cleanText() {
+            const inputText = document.getElementById('inputText').value;
+            
+            if (inputText.trim() === '') {
+                showMessage('Please enter some text to clean', 'error');
+                return;
+            }
+            
+            originalText = inputText;
+            let result = inputText;
+            
+            // Apply cleaning options
+            if (document.getElementById('removeTabs').checked) {
+                result = result.replace(/\t/g, ' ');
+            }
+            
+            if (document.getElementById('trimSpaces').checked) {
+                result = result.split('\n').map(line => line.trim()).join('\n');
+            }
+            
+            if (document.getElementById('removeExtraSpaces').checked) {
+                result = result.replace(/ +/g, ' ');
+            }
+            
+            if (document.getElementById('removePunctuationSpaces').checked) {
+                result = result.replace(/\s+([.,;:!?])/g, '$1');
+            }
+            
+            if (document.getElementById('removeLineBreaks').checked) {
+                result = result.replace(/\n+/g, ' ');
+                // Clean up any extra spaces that might have been created
+                result = result.replace(/ +/g, ' ');
+            } else if (document.getElementById('removeExtraLineBreaks').checked) {
+                result = result.replace(/\n{3,}/g, '\n\n');
+            }
+            
+            // Final trim if there are still leading/trailing spaces
+            if (document.getElementById('trimSpaces').checked) {
+                result = result.trim();
+            }
+            
+            cleanedText = result;
+            document.getElementById('outputText').value = cleanedText;
+            document.getElementById('resultSection').style.display = 'block';
+            
+            // Scroll to result
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            showMessage('Text cleaned successfully!', 'success');
+        }
+        
+        function showStatistics() {
+            if (!originalText || !cleanedText) {
+                showMessage('No statistics available', 'error');
+                return;
+            }
+            
+            const originalLength = originalText.length;
+            const cleanedLength = cleanedText.length;
+            const removedChars = originalLength - cleanedLength;
+            const reductionPercent = originalLength > 0 ? ((removedChars / originalLength) * 100).toFixed(1) : 0;
+            
+            document.getElementById('originalLength').textContent = formatNumber(originalLength);
+            document.getElementById('cleanedLength').textContent = formatNumber(cleanedLength);
+            document.getElementById('removedChars').textContent = formatNumber(removedChars);
+            document.getElementById('reductionPercent').textContent = reductionPercent + '%';
+            
+            document.getElementById('statisticsSection').style.display = 'block';
+            document.getElementById('statisticsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        function selectAllOptions() {
+            const checkboxes = document.querySelectorAll('.cleaning-options input[type="checkbox"]');
+            checkboxes.forEach(checkbox => checkbox.checked = true);
+            showMessage('All options selected', 'info');
+        }
+        
+        function deselectAllOptions() {
+            const checkboxes = document.querySelectorAll('.cleaning-options input[type="checkbox"]');
+            checkboxes.forEach(checkbox => checkbox.checked = false);
+            showMessage('All options deselected', 'info');
+        }
+        
+        function selectCommonOptions() {
+            // Deselect all first
+            deselectAllOptions();
+            
+            // Select commonly used options
+            document.getElementById('removeExtraSpaces').checked = true;
+            document.getElementById('trimSpaces').checked = true;
+            document.getElementById('removeTabs').checked = true;
+            
+            showMessage('Common options selected', 'info');
+        }
+        
+        function clearText() {
+            document.getElementById('inputText').value = '';
+            document.getElementById('outputText').value = '';
+            document.getElementById('resultSection').style.display = 'none';
+            document.getElementById('statisticsSection').style.display = 'none';
+            originalText = '';
+            cleanedText = '';
+            showMessage('Text cleared', 'info');
+        }
+        
+        function loadSample() {
+            const sampleText = `This is a sample text with    extra spaces and
+			tabs and inconsistent formatting.
+			
+			
+			It has multiple line breaks    and   leading/trailing spaces.   
+			
+			There are also spaces   before punctuation marks , like this one .
+			
+			
+			The text is messy   and needs cleaning   to look professional.   			
+			
+			Let's see how the cleaning tool   handles all these formatting issues!   `;
+            
+            document.getElementById('inputText').value = sampleText;
+            showMessage('Sample text loaded', 'success');
+        }
+        
+        function copyInput() {
+            const inputText = document.getElementById('inputText').value;
+            if (inputText.trim() === '') {
+                showMessage('No text to copy', 'error');
+                return;
+            }
+            copyToClipboard(inputText);
+        }
+        
+        function copyResult() {
+            const outputText = document.getElementById('outputText').value;
+            if (outputText.trim() === '') {
+                showMessage('No result to copy', 'error');
+                return;
+            }
+            copyToClipboard(outputText);
+        }
+        
+        function downloadResult() {
+            const outputText = document.getElementById('outputText').value;
+            if (outputText.trim() === '') {
+                showMessage('No result to download', 'error');
+                return;
+            }
+            const filename = `cleaned_text_${new Date().getTime()}.txt`;
+            downloadFile(outputText, filename);
+        }
+        
+        function swapText() {
+            const inputText = document.getElementById('inputText').value;
+            const outputText = document.getElementById('outputText').value;
+            
+            document.getElementById('inputText').value = outputText;
+            document.getElementById('outputText').value = inputText;
+            
+            // Update original and cleaned text variables
+            const temp = originalText;
+            originalText = cleanedText;
+            cleanedText = temp;
+            
+            showMessage('Input and output swapped', 'success');
+        }
+        
+        // Auto-clean on option change (if text is already processed)
+        document.querySelectorAll('.cleaning-options input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if (originalText && cleanedText) {
+                    cleanText();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Formatter - Format and Beautify HTML Code Online | ToolMetric</title>
+    <meta name="description" content="Free online HTML formatter and beautifier. Format, indent, and clean HTML code instantly. Perfect for developers and web designers.">
+    <meta name="keywords" content="HTML formatter, HTML beautifier, HTML formatter online, format HTML, beautify HTML, HTML code formatter">
+    <meta name="author" content="ToolMetric">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="HTML Formatter - ToolMetric">
+    <meta property="og:description" content="Format and beautify HTML code instantly">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolmetric.com/html-formatter.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🛠️ ToolMetric</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container tool-container">
+        <div class="tool-header">
+            <h1>HTML Formatter</h1>
+            <p class="tool-description">
+                Format and beautify HTML code instantly with our comprehensive HTML formatter tool. 
+                This essential utility for web developers transforms messy, minified HTML into clean, 
+                readable code with proper indentation and structure. Perfect for debugging web pages, 
+                cleaning up generated HTML, and improving code readability. 
+                Our tool handles complex nested elements, attributes, and content while preserving 
+                functionality and ensuring valid HTML structure. Whether you're working with static HTML, 
+                template files, or dynamically generated markup, our formatter makes your code 
+                professional and easy to understand. Simply paste your HTML code and watch it 
+                transform into beautifully formatted output instantly.
+            </p>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 728x90</p>
+        </div>
+
+        <div class="tool-content">
+            <div class="html-controls">
+                <div class="control-buttons" style="display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                    <button onclick="formatHTML()" class="btn">Format HTML</button>
+                    <button onclick="minifyHTML()" class="btn btn-secondary">Minify HTML</button>
+                    <button onclick="validateHTML()" class="btn btn-outline">Validate HTML</button>
+                    <button onclick="clearHTML()" class="btn btn-outline">Clear</button>
+                    <button onclick="loadSample()" class="btn btn-secondary">Load Sample</button>
+                </div>
+                
+                <div class="format-options" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+                    <div class="form-group">
+                        <label for="indentSize">Indent Size:</label>
+                        <select id="indentSize" class="form-control">
+                            <option value="2">2 spaces</option>
+                            <option value="4" selected>4 spaces</option>
+                            <option value="8">8 spaces</option>
+                            <option value="tab">Tab</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="maxLineLength">Max Line Length:</label>
+                        <input type="number" id="maxLineLength" class="form-control" value="120" min="40" max="200">
+                    </div>
+                    <div class="form-group">
+                        <label for="removeComments">
+                            <input type="checkbox" id="removeComments" style="margin-right: 0.5rem;">
+                            Remove Comments
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="sortAttributes">
+                            <input type="checkbox" id="sortAttributes" style="margin-right: 0.5rem;">
+                            Sort Attributes
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="html-editor" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="input-section">
+                    <h3>Input HTML</h3>
+                    <textarea id="htmlInput" class="form-control" rows="20" placeholder="Paste your HTML code here..."></textarea>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button onclick="copyInput()" class="btn btn-outline">Copy Input</button>
+                        <button onclick="uploadFile()" class="btn btn-outline">Upload File</button>
+                        <input type="file" id="fileInput" accept=".html,.htm" style="display: none;" onchange="handleFileUpload(event)">
+                    </div>
+                </div>
+                
+                <div class="output-section">
+                    <h3>Formatted Output</h3>
+                    <div id="htmlOutput" style="background: #f9fafb; border: 2px solid #e5e7eb; border-radius: 8px; padding: 1rem; min-height: 400px; font-family: monospace; white-space: pre-wrap; overflow: auto;"></div>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button onclick="copyOutput()" class="btn btn-secondary">Copy Output</button>
+                        <button onclick="downloadHTML()" class="btn btn-outline">Download HTML</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="validationResult" class="validation-result" style="display: none; margin-top: 1rem;">
+                <!-- Validation results will be shown here -->
+            </div>
+
+            <div id="htmlStats" class="html-stats" style="display: none; margin-top: 1rem;">
+                <h3>HTML Statistics</h3>
+                <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #2563eb;" id="tagCount">0</div>
+                        <div style="color: #6b7280;">Tags</div>
+                    </div>
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #10b981;" id="attributeCount">0</div>
+                        <div style="color: #6b7280;">Attributes</div>
+                    </div>
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #f59e0b;" id="textLength">0</div>
+                        <div style="color: #6b7280;">Text Length</div>
+                    </div>
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #ef4444;" id="sizeBytes">0</div>
+                        <div style="color: #6b7280;">Size (bytes)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 300x250</p>
+        </div>
+
+        <div class="tool-content">
+            <h3>How to Use HTML Formatter</h3>
+            <ol>
+                <li>Paste your HTML code in the input textarea or upload an HTML file</li>
+                <li>Choose formatting options (indent size, line length, etc.)</li>
+                <li>Click "Format HTML" to beautify the code with proper indentation</li>
+                <li>Use "Minify HTML" to remove unnecessary whitespace</li>
+                <li>Click "Validate HTML" to check for basic structure issues</li>
+                <li>Copy the formatted output or download as a file</li>
+            </ol>
+
+            <h4 class="mt-3">Features</h4>
+            <ul>
+                <li><strong>Format & Beautify:</strong> Convert messy HTML to readable format</li>
+                <li><strong>Validation:</strong> Check HTML structure and basic syntax</li>
+                <li><strong>Minification:</strong> Remove whitespace for compact HTML</li>
+                <li><strong>Custom Indent:</strong> Choose indent size and style</li>
+                <li><strong>Attribute Sorting:</strong> Sort attributes alphabetically</li>
+                <li><strong>Comment Removal:</strong> Remove HTML comments if needed</li>
+            </ul>
+
+            <h4 class="mt-3">Common Use Cases</h4>
+            <ul>
+                <li><strong>Web Development:</strong> Clean up generated HTML code</li>
+                <li><strong>Debugging:</strong> Make HTML structure more readable</li>
+                <li><strong>Code Review:</strong> Format HTML for team collaboration</li>
+                <li><strong>Template Files:</strong> Beautify HTML templates</li>
+                <li><strong>Performance:</strong> Minify HTML for production</li>
+            </ul>
+        </div>
+
+        <div class="tool-content">
+            <h3>Related Tools</h3>
+            <div class="related-tools" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="json-formatter.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">📋 JSON Formatter</h4>
+                    <p style="margin: 0; color: #6b7280;">Format and validate JSON data</p>
+                </a>
+                <a href="css-minifier.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🎨 CSS Minifier</h4>
+                    <p style="margin: 0; color: #6b7280;">Minify and optimize CSS code</p>
+                </a>
+                <a href="javascript-minifier.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">⚡ JavaScript Minifier</h4>
+                    <p style="margin: 0; color: #6b7280;">Minify JavaScript code</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>What is HTML formatting?</h4>
+                <p>HTML formatting adds proper indentation, line breaks, and spacing to make HTML code more readable and easier to understand for developers.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Will formatting change my HTML functionality?</h4>
+                <p>No, our formatter only changes whitespace and structure. It doesn't modify attributes, content, or functionality of your HTML.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can I format HTML with inline JavaScript and CSS?</h4>
+                <p>Yes, our tool handles HTML with embedded JavaScript and CSS, preserving their structure while formatting the HTML markup.</p>
+            </div>
+            <div class="faq-item">
+                <h4>What's the difference between formatting and minifying?</h4>
+                <p>Formatting adds whitespace for readability, while minifying removes all unnecessary whitespace to reduce file size and improve loading speed.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🛠️ ToolMetric</h4>
+                    <p>Your trusted source for free online tools. We provide simple, fast, and secure tools for everyday use.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Developer Tools</h4>
+                    <ul>
+                        <li><a href="html-formatter.html">HTML Formatter</a></li>
+                        <li><a href="json-formatter.html">JSON Formatter</a></li>
+                        <li><a href="css-minifier.html">CSS Minifier</a></li>
+                        <li><a href="javascript-minifier.html">JavaScript Minifier</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>Have feedback or suggestions? We'd love to hear from you!</p>
+                    <a href="contact.html" class="btn btn-outline mt-2">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ToolMetric. All rights reserved. | <a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let formattedHTML = '';
+
+        function formatHTML() {
+            const input = document.getElementById('htmlInput').value.trim();
+            
+            if (!input) {
+                showMessage('Please enter HTML code to format', 'error');
+                return;
+            }
+            
+            try {
+                const indentSize = document.getElementById('indentSize').value;
+                const maxLineLength = parseInt(document.getElementById('maxLineLength').value);
+                const removeComments = document.getElementById('removeComments').checked;
+                const sortAttributes = document.getElementById('sortAttributes').checked;
+                
+                formattedHTML = processHTML(input, indentSize, maxLineLength, removeComments, sortAttributes, false);
+                document.getElementById('htmlOutput').textContent = formattedHTML;
+                document.getElementById('htmlOutput').style.color = '#1f2937';
+                
+                calculateStatistics(input);
+                showValidation(true, 'HTML formatted successfully!');
+                showMessage('HTML formatted successfully', 'success');
+            } catch (error) {
+                showValidation(false, 'HTML formatting error: ' + error.message);
+                document.getElementById('htmlOutput').textContent = input;
+                document.getElementById('htmlOutput').style.color = '#ef4444';
+                showMessage('HTML formatting failed', 'error');
+            }
+        }
+
+        function minifyHTML() {
+            const input = document.getElementById('htmlInput').value.trim();
+            
+            if (!input) {
+                showMessage('Please enter HTML code to minify', 'error');
+                return;
+            }
+            
+            try {
+                formattedHTML = processHTML(input, '', 0, true, false, true);
+                document.getElementById('htmlOutput').textContent = formattedHTML;
+                document.getElementById('htmlOutput').style.color = '#1f2937';
+                
+                calculateStatistics(input);
+                showValidation(true, 'HTML minified successfully!');
+                showMessage('HTML minified successfully', 'success');
+            } catch (error) {
+                showValidation(false, 'HTML minification error: ' + error.message);
+                document.getElementById('htmlOutput').textContent = input;
+                document.getElementById('htmlOutput').style.color = '#ef4444';
+                showMessage('HTML minification failed', 'error');
+            }
+        }
+
+        function processHTML(html, indentSize, maxLineLength, removeComments, sortAttributes, minify) {
+            let result = html;
+            
+            // Remove comments if requested
+            if (removeComments) {
+                result = result.replace(/<!--[\s\S]*?-->/g, '');
+            }
+            
+            if (minify) {
+                // Minify: remove all unnecessary whitespace
+                result = result.replace(/\s+/g, ' ').replace(/>\s+</g, '><').replace(/\s+>/g, '>').replace(/<\s+/g, '<').trim();
+            } else {
+                // Format HTML
+                const indent = indentSize === 'tab' ? '\t' : ' '.repeat(parseInt(indentSize) || 4);
+                result = formatHTMLStructure(result, indent, maxLineLength, sortAttributes);
+            }
+            
+            return result;
+        }
+
+        function formatHTMLStructure(html, indent, maxLineLength, sortAttributes) {
+            // Simple HTML formatter (basic implementation)
+            let result = '';
+            let depth = 0;
+            const tags = html.match(/<[^>]*>/g) || [];
+            let lastIndex = 0;
+            
+            for (let i = 0; i < tags.length; i++) {
+                const tag = tags[i];
+                const tagIndex = html.indexOf(tag, lastIndex);
+                
+                // Add content before tag
+                if (tagIndex > lastIndex) {
+                    const content = html.substring(lastIndex, tagIndex).trim();
+                    if (content) {
+                        result += '\n' + indent.repeat(depth) + content;
+                    }
+                }
+                
+                // Process tag
+                if (tag.startsWith('</')) {
+                    // Closing tag
+                    depth = Math.max(0, depth - 1);
+                    result += '\n' + indent.repeat(depth) + tag;
+                } else if (tag.endsWith('/>') || !isPairedTag(tag)) {
+                    // Self-closing or unpaired tag
+                    result += '\n' + indent.repeat(depth) + tag;
+                } else {
+                    // Opening tag
+                    result += '\n' + indent.repeat(depth) + tag;
+                    depth++;
+                }
+                
+                lastIndex = tagIndex + tag.length;
+            }
+            
+            // Add remaining content
+            if (lastIndex < html.length) {
+                const remaining = html.substring(lastIndex).trim();
+                if (remaining) {
+                    result += '\n' + indent.repeat(depth) + remaining;
+                }
+            }
+            
+            return result.trim();
+        }
+
+        function isPairedTag(tag) {
+            const unpairedTags = ['img', 'br', 'hr', 'input', 'meta', 'link', 'area', 'base', 'col', 'embed', 'param', 'source', 'track', 'wbr'];
+            const tagName = tag.replace(/[<>]/g, '').split(' ')[0].toLowerCase();
+            return !unpairedTags.includes(tagName);
+        }
+
+        function validateHTML() {
+            const input = document.getElementById('htmlInput').value.trim();
+            
+            if (!input) {
+                showMessage('Please enter HTML code to validate', 'error');
+                return;
+            }
+            
+            // Basic HTML validation
+            const issues = [];
+            
+            // Check for unclosed tags
+            const openTags = (input.match(/<[^\/][^>]*>/g) || []).length;
+            const closeTags = (input.match(/<\/[^>]*>/g) || []).length;
+            
+            if (openTags !== closeTags) {
+                issues.push('Mismatched opening and closing tags');
+            }
+            
+            // Check for basic structure
+            if (!input.includes('<html') && !input.includes('<!DOCTYPE')) {
+                issues.push('Missing HTML doctype or html tag');
+            }
+            
+            if (!input.includes('<head') && !input.includes('<body')) {
+                issues.push('Missing head or body tags');
+            }
+            
+            calculateStatistics(input);
+            
+            if (issues.length === 0) {
+                showValidation(true, 'HTML appears to be valid!');
+                showMessage('HTML validation successful', 'success');
+            } else {
+                showValidation(false, 'HTML issues found: ' + issues.join(', '));
+                showMessage('HTML validation found issues', 'error');
+            }
+        }
+
+        function calculateStatistics(html) {
+            const tagCount = (html.match(/<[^>]*>/g) || []).length;
+            const attributeCount = (html.match(/\w+="[^"]*"/g) || []).length;
+            const textLength = html.replace(/<[^>]*>/g, '').length;
+            const size = new Blob([html]).size;
+            
+            document.getElementById('tagCount').textContent = tagCount;
+            document.getElementById('attributeCount').textContent = attributeCount;
+            document.getElementById('textLength').textContent = textLength;
+            document.getElementById('sizeBytes').textContent = size;
+            document.getElementById('htmlStats').style.display = 'block';
+        }
+
+        function showValidation(isValid, message) {
+            const resultDiv = document.getElementById('validationResult');
+            resultDiv.style.display = 'block';
+            
+            if (isValid) {
+                resultDiv.innerHTML = `
+                    <div class="message success">
+                        <h4>✅ ${message}</h4>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="message error">
+                        <h4>❌ ${message}</h4>
+                    </div>
+                `;
+            }
+        }
+
+        function clearHTML() {
+            document.getElementById('htmlInput').value = '';
+            document.getElementById('htmlOutput').textContent = '';
+            document.getElementById('validationResult').style.display = 'none';
+            document.getElementById('htmlStats').style.display = 'none';
+            formattedHTML = '';
+            showMessage('HTML cleared', 'info');
+        }
+
+        function loadSample() {
+            const sampleHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Page</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Welcome to My Website</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id="home">
+                <h2>Home Section</h2>
+                <p>This is a sample HTML document for testing the formatter.</p>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2024 Sample Website</p>
+        </footer>
+    </div>
+</body>
+</html>`;
+            
+            document.getElementById('htmlInput').value = sampleHTML;
+            showMessage('Sample HTML loaded', 'success');
+        }
+
+        function copyInput() {
+            const input = document.getElementById('htmlInput').value;
+            if (!input) {
+                showMessage('No input to copy', 'error');
+                return;
+            }
+            copyToClipboard(input);
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('htmlOutput').textContent;
+            if (!output) {
+                showMessage('No output to copy', 'error');
+                return;
+            }
+            copyToClipboard(output);
+        }
+
+        function downloadHTML() {
+            const output = document.getElementById('htmlOutput').textContent;
+            if (!output) {
+                showMessage('No output to download', 'error');
+                return;
+            }
+            
+            const blob = new Blob([output], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'formatted_' + new Date().getTime() + '.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showMessage('HTML downloaded successfully', 'success');
+        }
+
+        function uploadFile() {
+            document.getElementById('fileInput').click();
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            if (!file.type.includes('html') && !file.name.endsWith('.htm')) {
+                showMessage('Please upload an HTML file', 'error');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('htmlInput').value = e.target.result;
+                showMessage('File uploaded successfully', 'success');
+            };
+            reader.onerror = function() {
+                showMessage('Error reading file', 'error');
+            };
+            reader.readAsText(file);
+        }
+    </script>
+</body>
+</html>

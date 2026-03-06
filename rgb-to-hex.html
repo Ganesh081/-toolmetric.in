@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RGB to HEX Converter - Convert RGB Colors to HEX Online | ToolMetric</title>
+    <meta name="description" content="Free online RGB to HEX color converter. Convert RGB values to HEX color codes instantly. Perfect for web designers and developers.">
+    <meta name="keywords" content="RGB to HEX, color converter, RGB color, HEX color, color conversion, online color converter, web colors">
+    <meta name="author" content="ToolMetric">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="RGB to HEX Converter - ToolMetric">
+    <meta property="og:description" content="Convert RGB colors to HEX codes instantly">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolmetric.com/rgb-to-hex.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🛠️ ToolMetric</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container tool-container">
+        <div class="tool-header">
+            <h1>RGB to HEX Converter</h1>
+            <h2>Convert RGB color values to HEX codes instantly</h2>
+            <p class="tool-description">
+                Convert RGB color values to HEX codes instantly with our comprehensive RGB to HEX converter tool. 
+                This essential utility for web designers and developers transforms RGB (Red, Green, Blue) values 
+                into hexadecimal color codes with precise color conversion and visual preview. 
+                Perfect for converting CSS colors, design specifications, and web color formats. 
+                Our tool supports various RGB input formats including sliders, number inputs, and alpha channel 
+                support with real-time color preview and HEX output. Whether you're working with web design, 
+                graphic design, or need to convert color formats for development, our converter provides 
+                accurate results with detailed color information and multiple output formats. Simply enter 
+                your RGB values and watch them transform into HEX codes instantly.
+            </p>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 728x90</p>
+        </div>
+
+        <div class="tool-content">
+            <div class="color-converter">
+                <div class="converter-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div class="rgb-section">
+                        <h3>RGB Input</h3>
+                        
+                        <div class="rgb-sliders" style="margin-bottom: 1.5rem;">
+                            <div class="slider-group" style="margin-bottom: 1rem;">
+                                <label for="redSlider">Red: <span id="redSliderValue">255</span></label>
+                                <input type="range" id="redSlider" min="0" max="255" value="255" style="width: 100%;">
+                            </div>
+                            
+                            <div class="slider-group" style="margin-bottom: 1rem;">
+                                <label for="greenSlider">Green: <span id="greenSliderValue">87</span></label>
+                                <input type="range" id="greenSlider" min="0" max="255" value="87" style="width: 100%;">
+                            </div>
+                            
+                            <div class="slider-group" style="margin-bottom: 1rem;">
+                                <label for="blueSlider">Blue: <span id="blueSliderValue">51</span></label>
+                                <input type="range" id="blueSlider" min="0" max="255" value="51" style="width: 100%;">
+                            </div>
+                            
+                            <div class="slider-group" style="margin-bottom: 1rem;">
+                                <label for="alphaSlider">Alpha: <span id="alphaSliderValue">1.0</span></label>
+                                <input type="range" id="alphaSlider" min="0" max="100" value="100" style="width: 100%;">
+                            </div>
+                        </div>
+                        
+                        <div class="rgb-inputs" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-bottom: 1rem;">
+                            <div>
+                                <label for="redInput" style="font-size: 0.8rem;">R</label>
+                                <input type="number" id="redInput" min="0" max="255" value="255" class="form-control">
+                            </div>
+                            <div>
+                                <label for="greenInput" style="font-size: 0.8rem;">G</label>
+                                <input type="number" id="greenInput" min="0" max="255" value="87" class="form-control">
+                            </div>
+                            <div>
+                                <label for="blueInput" style="font-size: 0.8rem;">B</label>
+                                <input type="number" id="blueInput" min="0" max="255" value="51" class="form-control">
+                            </div>
+                            <div>
+                                <label for="alphaInput" style="font-size: 0.8rem;">A</label>
+                                <input type="number" id="alphaInput" min="0" max="1" step="0.01" value="1" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <div class="color-preview" style="margin: 1rem 0;">
+                            <h4>Color Preview:</h4>
+                            <div id="colorPreview" style="width: 100%; height: 100px; border: 2px solid #e5e7eb; border-radius: 8px; background: rgb(255, 87, 51); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                                Preview
+                            </div>
+                        </div>
+                        
+                        <button onclick="convertRgbToHex()" class="btn" style="width: 100%;">Convert to HEX</button>
+                    </div>
+                    
+                    <div class="hex-section">
+                        <h3>HEX Output</h3>
+                        <div class="hex-values" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                            <div class="hex-display" style="text-align: center; margin-bottom: 1rem;">
+                                <div style="font-family: monospace; font-size: 2rem; font-weight: bold; color: #2563eb;" id="hexValue">#FF5733</div>
+                            </div>
+                            
+                            <div id="hex8Display" style="display: none; text-align: center; margin-bottom: 1rem;">
+                                <div style="font-family: monospace; font-size: 1.2rem; color: #8b5cf6;" id="hex8Value">#FF5733FF</div>
+                                <div style="color: #6b7280; font-size: 0.8rem;">8-digit HEX (with alpha)</div>
+                            </div>
+                            
+                            <div style="text-align: center; padding: 1rem; background: white; border-radius: 6px;">
+                                <div style="font-family: monospace; font-size: 1rem;" id="rgbString">rgb(255, 87, 51)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="output-formats" style="display: grid; gap: 0.5rem;">
+                            <div class="format-item" style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: #f9fafb; border-radius: 4px;">
+                                <span>3-digit HEX:</span>
+                                <code id="hex3Value" style="background: white; padding: 0.25rem 0.5rem; border-radius: 3px;">#F53</code>
+                            </div>
+                            <div class="format-item" style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: #f9fafb; border-radius: 4px;">
+                                <span>CSS RGB:</span>
+                                <code id="cssRgb" style="background: white; padding: 0.25rem 0.5rem; border-radius: 3px;">rgb(255, 87, 51)</code>
+                            </div>
+                            <div class="format-item" style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: #f9fafb; border-radius: 4px;">
+                                <span>CSS RGBA:</span>
+                                <code id="cssRgba" style="background: white; padding: 0.25rem 0.5rem; border-radius: 3px;">rgba(255, 87, 51, 1)</code>
+                            </div>
+                            <div class="format-item" style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: #f9fafb; border-radius: 4px;">
+                                <span>HSL:</span>
+                                <code id="hslValue" style="background: white; padding: 0.25rem 0.5rem; border-radius: 3px;">hsl(18, 100%, 60%)</code>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                            <button onclick="copyHex()" class="btn btn-secondary" style="flex: 1;">Copy HEX</button>
+                            <button onclick="copyAllFormats()" class="btn btn-outline" style="flex: 1;">Copy All</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="batch-converter" style="margin-top: 2rem;">
+                    <h3>Batch Converter</h3>
+                    <div class="batch-input" style="margin-bottom: 1rem;">
+                        <label for="batchRgb">Multiple RGB Colors (one per line):</label>
+                        <textarea id="batchRgb" class="form-control" rows="4" placeholder="255, 87, 51&#10;52, 152, 219&#10;46, 204, 113"></textarea>
+                    </div>
+                    <button onclick="convertBatch()" class="btn">Convert All</button>
+                    <div id="batchResults" style="margin-top: 1rem; display: none;">
+                        <!-- Batch results will be shown here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 300x250</p>
+        </div>
+
+        <div class="tool-content">
+            <h3>How to Use RGB to HEX Converter</h3>
+            <ol>
+                <li>Adjust RGB values using sliders or number inputs</li>
+                <li>Set alpha channel for transparency (optional)</li>
+                <li>View real-time color preview</li>
+                <li>Click "Convert to HEX" to see HEX codes</li>
+                <li>Copy HEX values or use batch converter for multiple colors</li>
+            </ol>
+
+            <h4 class="mt-3">Features</h4>
+            <ul>
+                <li><strong>Interactive Sliders:</strong> Visual RGB value adjustment</li>
+                <li><strong>Real-time Preview:</strong> Live color visualization</li>
+                <li><strong>Multiple Formats:</strong> 3-digit, 6-digit, and 8-digit HEX</li>
+                <li><strong>Alpha Support:</strong> Handle transparency values</li>
+                <li><strong>Batch Conversion:</strong> Convert multiple colors at once</li>
+                <li><strong>Multiple Outputs:</strong> HEX, RGB, RGBA, and HSL formats</li>
+            </ul>
+
+            <h4 class="mt-3">Common Use Cases</h4>
+            <ul>
+                <li><strong>Web Design:</strong> Convert RGB colors to HEX for CSS</li>
+                <li><strong>Graphic Design:</strong> Convert design colors to web formats</li>
+                <li><strong>CSS Development:</strong> Get HEX values for styling</li>
+                <li><strong>Color Analysis:</strong> Understand color composition</li>
+                <li><strong>Batch Processing:</strong> Convert multiple colors efficiently</li>
+            </ul>
+        </div>
+
+        <div class="tool-content">
+            <h3>Related Tools</h3>
+            <div class="related-tools" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="hex-to-rgb.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🎨 HEX to RGB</h4>
+                    <p style="margin: 0; color: #6b7280;">Convert HEX to RGB colors</p>
+                </a>
+                <a href="color-picker.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🎨 Color Picker</h4>
+                    <p style="margin: 0; color: #6b7280;">Pick colors from screen</p>
+                </a>
+                <a href="base64-encoder.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">📋 Base64 Encoder</h4>
+                    <p style="margin: 0; color: #6b7280;">Encode and decode data</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>What is the difference between RGB and HEX?</h4>
+                <p>RGB uses decimal values (0-255) for each color channel, while HEX uses hexadecimal notation (#RRGGBB). Both represent the same color but in different formats.</p>
+            </div>
+            <div class="faq-item">
+                <h4>What do the RGB values mean?</h4>
+                <p>RGB values represent the intensity of Red, Green, and Blue channels, each ranging from 0 (no color) to 255 (full intensity).</p>
+            </div>
+            <div class="faq-item">
+                <h4>What is the alpha channel?</h4>
+                <p>The alpha channel represents transparency, where 0 is fully transparent and 1 is fully opaque.</p>
+            </div>
+            <div class="faq-item">
+                <h4>When should I use 3-digit vs 6-digit HEX?</h4>
+                <p>3-digit HEX (#RGB) is shorthand for colors where each digit is repeated (e.g., #F53 = #FF5533). Use 6-digit for precise colors.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🛠️ ToolMetric</h4>
+                    <p>Your trusted source for free online tools. We provide simple, fast, and secure tools for everyday use.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Color Tools</h4>
+                    <ul>
+                        <li><a href="rgb-to-hex.html">RGB to HEX</a></li>
+                        <li><a href="hex-to-rgb.html">HEX to RGB</a></li>
+                        <li><a href="color-picker.html">Color Picker</a></li>
+                        <li><a href="base64-encoder.html">Base64 Encoder</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>Have feedback or suggestions? We'd love to hear from you!</p>
+                    <a href="contact.html" class="btn btn-outline mt-2">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ToolMetric. All rights reserved. | <a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function convertRgbToHex() {
+            const r = parseInt(document.getElementById('redInput').value);
+            const g = parseInt(document.getElementById('greenInput').value);
+            const b = parseInt(document.getElementById('blueInput').value);
+            const a = parseFloat(document.getElementById('alphaInput').value);
+            
+            if (isNaN(r) || isNaN(g) || isNaN(b) || r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
+                showMessage('Please enter valid RGB values (0-255)', 'error');
+                return;
+            }
+            
+            if (isNaN(a) || a < 0 || a > 1) {
+                showMessage('Please enter a valid alpha value (0-1)', 'error');
+                return;
+            }
+            
+            // Convert to HEX
+            const hex = rgbToHex(r, g, b);
+            const hex8 = rgbToHex(r, g, b, a);
+            const hex3 = rgbToHex3(r, g, b);
+            
+            // Update HEX values
+            document.getElementById('hexValue').textContent = hex;
+            document.getElementById('hex8Value').textContent = hex8;
+            document.getElementById('hex3Value').textContent = hex3;
+            
+            // Show/hide 8-digit HEX
+            if (a < 1) {
+                document.getElementById('hex8Display').style.display = 'block';
+            } else {
+                document.getElementById('hex8Display').style.display = 'none';
+            }
+            
+            // Update RGB string
+            const rgbString = a < 1 ? `rgba(${r}, ${g}, ${b}, ${a})` : `rgb(${r}, ${g}, ${b})`;
+            document.getElementById('rgbString').textContent = rgbString;
+            
+            // Update other formats
+            document.getElementById('cssRgb').textContent = `rgb(${r}, ${g}, ${b})`;
+            document.getElementById('cssRgba').textContent = rgbString;
+            document.getElementById('hslValue').textContent = rgbToHsl(r, g, b);
+            
+            // Update color preview
+            document.getElementById('colorPreview').style.background = rgbString;
+            
+            showMessage('RGB converted to HEX successfully', 'success');
+        }
+
+        function rgbToHex(r, g, b, a = null) {
+            const toHex = (n) => n.toString(16).padStart(2, '0').toUpperCase();
+            let hex = '#' + toHex(r) + toHex(g) + toHex(b);
+            
+            if (a !== null && a < 1) {
+                const alphaHex = Math.round(a * 255).toString(16).padStart(2, '0').toUpperCase();
+                hex += alphaHex;
+            }
+            
+            return hex;
+        }
+
+        function rgbToHex3(r, g, b) {
+            const toHex3 = (n) => {
+                const hex = n.toString(16).toUpperCase();
+                return hex[0] === hex[1] ? hex[0] : hex;
+            };
+            
+            const r3 = toHex3(r);
+            const g3 = toHex3(g);
+            const b3 = toHex3(b);
+            
+            return '#' + r3 + g3 + b3;
+        }
+
+        function rgbToHsl(r, g, b) {
+            r /= 255;
+            g /= 255;
+            b /= 255;
+            
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+            
+            if (max === min) {
+                h = s = 0;
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                
+                switch (max) {
+                    case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+                    case g: h = ((b - r) / d + 2) / 6; break;
+                    case b: h = ((r - g) / d + 4) / 6; break;
+                }
+            }
+            
+            return `hsl(${Math.round(h * 360)}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%)`;
+        }
+
+        function copyHex() {
+            const hexValue = document.getElementById('hexValue').textContent;
+            copyToClipboard(hexValue);
+        }
+
+        function copyAllFormats() {
+            const formats = [
+                document.getElementById('hexValue').textContent,
+                document.getElementById('hex3Value').textContent,
+                document.getElementById('cssRgb').textContent,
+                document.getElementById('cssRgba').textContent,
+                document.getElementById('hslValue').textContent
+            ];
+            
+            const allFormats = formats.join('\n');
+            copyToClipboard(allFormats);
+        }
+
+        function convertBatch() {
+            const batchRgb = document.getElementById('batchRgb').value.trim();
+            
+            if (!batchRgb) {
+                showMessage('Please enter RGB values for batch conversion', 'error');
+                return;
+            }
+            
+            const lines = batchRgb.split('\n');
+            const results = [];
+            
+            for (const line of lines) {
+                const values = line.trim().split(',').map(v => parseFloat(v.trim()));
+                if (values.length >= 3) {
+                    const [r, g, b, a = 1] = values;
+                    if (!isNaN(r) && !isNaN(g) && !isNaN(b) && r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255) {
+                        results.push({
+                            rgb: { r, g, b, a },
+                            hex: rgbToHex(r, g, b, a),
+                            rgbString: a < 1 ? `rgba(${r}, ${g}, ${b}, ${a})` : `rgb(${r}, ${g}, ${b})`
+                        });
+                    }
+                }
+            }
+            
+            displayBatchResults(results);
+        }
+
+        function displayBatchResults(results) {
+            const resultsDiv = document.getElementById('batchResults');
+            
+            if (results.length === 0) {
+                resultsDiv.innerHTML = '<p style="color: #ef4444;">No valid RGB values found</p>';
+            } else {
+                let html = '<h4>Conversion Results:</h4><div style="display: grid; gap: 0.5rem;">';
+                
+                for (const result of results) {
+                    html += `
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: #f9fafb; border-radius: 4px;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <div style="width: 20px; height: 20px; background: ${result.rgbString}; border-radius: 4px;"></div>
+                                <span style="font-family: monospace;">${result.rgb.r}, ${result.rgb.g}, ${result.rgb.b}</span>
+                            </div>
+                            <code style="background: white; padding: 0.25rem 0.5rem; border-radius: 3px;">${result.hex}</code>
+                        </div>
+                    `;
+                }
+                
+                html += '</div>';
+                resultsDiv.innerHTML = html;
+            }
+            
+            resultsDiv.style.display = 'block';
+        }
+
+        // Slider event listeners
+        document.getElementById('redSlider').addEventListener('input', function() {
+            const value = this.value;
+            document.getElementById('redSliderValue').textContent = value;
+            document.getElementById('redInput').value = value;
+            updateColorPreview();
+        });
+
+        document.getElementById('greenSlider').addEventListener('input', function() {
+            const value = this.value;
+            document.getElementById('greenSliderValue').textContent = value;
+            document.getElementById('greenInput').value = value;
+            updateColorPreview();
+        });
+
+        document.getElementById('blueSlider').addEventListener('input', function() {
+            const value = this.value;
+            document.getElementById('blueSliderValue').textContent = value;
+            document.getElementById('blueInput').value = value;
+            updateColorPreview();
+        });
+
+        document.getElementById('alphaSlider').addEventListener('input', function() {
+            const value = this.value / 100;
+            document.getElementById('alphaSliderValue').textContent = value.toFixed(2);
+            document.getElementById('alphaInput').value = value;
+            updateColorPreview();
+        });
+
+        // Input event listeners
+        document.getElementById('redInput').addEventListener('input', function() {
+            const value = this.value;
+            document.getElementById('redSlider').value = value;
+            document.getElementById('redSliderValue').textContent = value;
+            updateColorPreview();
+        });
+
+        document.getElementById('greenInput').addEventListener('input', function() {
+            const value = this.value;
+            document.getElementById('greenSlider').value = value;
+            document.getElementById('greenSliderValue').textContent = value;
+            updateColorPreview();
+        });
+
+        document.getElementById('blueInput').addEventListener('input', function() {
+            const value = this.value;
+            document.getElementById('blueSlider').value = value;
+            document.getElementById('blueSliderValue').textContent = value;
+            updateColorPreview();
+        });
+
+        document.getElementById('alphaInput').addEventListener('input', function() {
+            const value = this.value * 100;
+            document.getElementById('alphaSlider').value = value;
+            document.getElementById('alphaSliderValue').textContent = this.value;
+            updateColorPreview();
+        });
+
+        function updateColorPreview() {
+            const r = parseInt(document.getElementById('redInput').value);
+            const g = parseInt(document.getElementById('greenInput').value);
+            const b = parseInt(document.getElementById('blueInput').value);
+            const a = parseFloat(document.getElementById('alphaInput').value);
+            
+            if (!isNaN(r) && !isNaN(g) && !isNaN(b) && r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255) {
+                const rgbString = a < 1 ? `rgba(${r}, ${g}, ${b}, ${a})` : `rgb(${r}, ${g}, ${b})`;
+                document.getElementById('colorPreview').style.background = rgbString;
+                
+                // Auto-convert
+                convertRgbToHex();
+            }
+        }
+
+        // Initialize
+        updateColorPreview();
+    </script>
+</body>
+</html>

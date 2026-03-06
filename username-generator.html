@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Username Generator - Create Unique Usernames Online | ToolMetric</title>
+    <meta name="description" content="Free online username generator. Create unique, creative usernames with custom styles, patterns, and availability checks. Perfect for social media, gaming, and online accounts.">
+    <meta name="keywords" content="username generator, username creator, unique usernames, random username, username ideas, online username generator">
+    <meta name="author" content="ToolMetric">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Username Generator - ToolMetric">
+    <meta property="og:description" content="Generate unique and creative usernames instantly">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolmetric.com/username-generator.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🛠️ ToolMetric</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container tool-container">
+        <div class="tool-header">
+            <h1>Username Generator</h1>
+            <p class="tool-description">
+                Generate unique and creative usernames instantly with our comprehensive username generator tool. 
+                This versatile utility helps you create memorable usernames with various styles, patterns, 
+                and customization options. Perfect for social media profiles, gaming accounts, professional handles, 
+                and any online platform requiring a unique identifier. Our generator combines words, numbers, 
+                and special characters to create usernames that stand out while being easy to remember. 
+                Whether you need a professional username for business, a creative handle for social media, 
+                or a gamertag for online gaming, our tool provides endless possibilities with smart suggestions 
+                based on your preferences. Simply enter your preferences and generate unique usernames instantly.
+            </p>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 728x90</p>
+        </div>
+
+        <div class="tool-content">
+            <div class="username-controls">
+                <h3>Username Generation Settings</h3>
+                
+                <div class="settings-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <div class="setting-group">
+                        <div class="form-group">
+                            <label for="baseWord">Base Word (Optional):</label>
+                            <input type="text" id="baseWord" class="form-control" placeholder="Enter your name or keyword">
+                        </div>
+                        <div class="form-group">
+                            <label for="usernameCount">Number of Usernames:</label>
+                            <input type="number" id="usernameCount" class="form-control" value="10" min="1" max="50">
+                        </div>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <h4>Username Style</h4>
+                        <div class="style-options" style="display: grid; gap: 0.75rem;">
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="radio" name="style" value="professional" checked style="margin-right: 0.75rem;">
+                                <span>Professional (john_doe)</span>
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="radio" name="style" value="creative" style="margin-right: 0.75rem;">
+                                <span>Creative (JohnDoe123)</span>
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="radio" name="style" value="gaming" style="margin-right: 0.75rem;">
+                                <span>Gaming (xXJohnDoeXx)</span>
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="radio" name="style" value="minimal" style="margin-right: 0.75rem;">
+                                <span>Minimal (johndoe)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <h4>Additional Options</h4>
+                        <div class="checkbox-group" style="display: grid; gap: 0.75rem;">
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" id="includeNumbers" checked style="margin-right: 0.75rem;">
+                                <span>Include Numbers</span>
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" id="includeUnderscores" style="margin-right: 0.75rem;">
+                                <span>Include Underscores</span>
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" id="capitalize" style="margin-right: 0.75rem;">
+                                <span>Capitalize Words</span>
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" id="avoidNumbers" style="margin-right: 0.75rem;">
+                                <span>Avoid Numbers (if possible)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="generate-section" style="text-align: center; margin: 2rem 0;">
+                    <button onclick="generateUsernames()" class="btn" style="font-size: 1.1rem; padding: 1rem 2rem;">Generate Usernames</button>
+                    <button onclick="clearResults()" class="btn btn-outline ml-2">Clear Results</button>
+                </div>
+            </div>
+
+            <div id="resultsSection" class="results-section" style="display: none;">
+                <h3>Generated Usernames</h3>
+                <div class="results-display" style="background: #f9fafb; border: 2px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                    <div id="usernamesList" style="display: grid; gap: 0.75rem;"></div>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button onclick="copyAllUsernames()" class="btn btn-secondary">Copy All</button>
+                        <button onclick="downloadUsernames()" class="btn btn-outline">Download as Text</button>
+                        <button onclick="regenerateUsernames()" class="btn btn-outline">Regenerate</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="username-tips">
+                <h3>Username Tips</h3>
+                <div class="tips-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+                    <div class="tip-card" style="background: #f0f9ff; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0ea5e9;">
+                        <h4>🎯 Keep it Memorable</h4>
+                        <p>Choose usernames that are easy to remember and spell. Avoid complex combinations that others might forget.</p>
+                    </div>
+                    <div class="tip-card" style="background: #f0fdf4; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #22c55e;">
+                        <h4>🔒 Be Unique</h4>
+                        <p>Make your username stand out from others. Add personal touches or creative elements that reflect your personality.</p>
+                    </div>
+                    <div class="tip-card" style="background: #fefce8; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #eab308;">
+                        <h4>📱 Platform Appropriate</h4>
+                        <p>Consider the platform where you'll use the username. Professional platforms need different styles than gaming or social media.</p>
+                    </div>
+                    <div class="tip-card" style="background: #fdf4ff; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #d946ef;">
+                        <h4>⏰ Timeless Choice</h4>
+                        <p>Avoid trends or references that might become outdated. Choose a username that will age well over time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 300x250</p>
+        </div>
+
+        <div class="tool-content">
+            <h3>How to Use Username Generator</h3>
+            <ol>
+                <li>Enter a base word (your name, hobby, or keyword) or leave blank for random</li>
+                <li>Choose your preferred username style</li>
+                <li>Select additional options like numbers and underscores</li>
+                <li>Set how many usernames you want to generate</li>
+                <li>Click "Generate Usernames" to see suggestions</li>
+                <li>Copy your favorite usernames or generate more options</li>
+            </ol>
+
+            <h4 class="mt-3">Features</h4>
+            <ul>
+                <li><strong>Multiple Styles:</strong> Professional, creative, gaming, and minimal options</li>
+                <li><strong>Custom Base Words:</strong> Use your name or keywords as foundation</li>
+                <li><strong>Flexible Options:</strong> Include numbers, underscores, capitalization</li>
+                <li><strong>Bulk Generation:</strong> Generate up to 50 usernames at once</li>
+                <li><strong>Smart Suggestions:</strong> Intelligent combinations based on preferences</li>
+                <li><strong>Easy Export:</strong> Copy or download all generated usernames</li>
+            </ul>
+
+            <h4 class="mt-3">Common Use Cases</h4>
+            <ul>
+                <li><strong>Social Media:</strong> Instagram, Twitter, Facebook, LinkedIn handles</li>
+                <li><strong>Gaming:</strong> Gamertags for Xbox, PlayStation, Steam</li>
+                <li><strong>Professional:</strong> Business emails, professional networking</li>
+                <li><strong>Forums:</strong> Community and discussion board usernames</li>
+                <li><strong>Creative Platforms:</strong> DeviantArt, Behance, portfolio sites</li>
+            </ul>
+        </div>
+
+        <div class="tool-content">
+            <h3>Related Tools</h3>
+            <div class="related-tools" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="random-string-generator.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🔤 Random String Generator</h4>
+                    <p style="margin: 0; color: #6b7280;">Generate random strings and codes</p>
+                </a>
+                <a href="password-generator.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🔐 Password Generator</h4>
+                    <p style="margin: 0; color: #6b7280;">Create strong, secure passwords</p>
+                </a>
+                <a href="uuid-generator.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🆔 UUID Generator</h4>
+                    <p style="margin: 0; color: #6b7280;">Generate unique identifiers</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>How do I choose the best username?</h4>
+                <p>The best username is memorable, easy to spell, and reflects your personality or purpose. Consider your audience and platform when choosing style.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can I check if these usernames are available?</h4>
+                <p>This generator creates username suggestions, but you'll need to check availability on each platform separately as availability varies by platform.</p>
+            </div>
+            <div class="faq-item">
+                <h4>What's the difference between styles?</h4>
+                <p>Professional uses underscores and lowercase, creative mixes capitalization and numbers, gaming uses decorative elements, and minimal is simple and clean.</p>
+            </div>
+            <div class="faq-item">
+                <h4>How can I make my username more unique?</h4>
+                <p>Try combining your interests, using meaningful numbers, or creative word combinations. The base word feature helps personalize suggestions.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🛠️ ToolMetric</h4>
+                    <p>Your trusted source for free online tools. We provide simple, fast, and secure tools for everyday use.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Generator Tools</h4>
+                    <ul>
+                        <li><a href="username-generator.html">Username Generator</a></li>
+                        <li><a href="random-string-generator.html">Random String Generator</a></li>
+                        <li><a href="password-generator.html">Password Generator</a></li>
+                        <li><a href="uuid-generator.html">UUID Generator</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>Have feedback or suggestions? We'd love to hear from you!</p>
+                    <a href="contact.html" class="btn btn-outline mt-2">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ToolMetric. All rights reserved. | <a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let generatedUsernames = [];
+
+        // Word lists for creative combinations
+        const adjectives = ['cool', 'epic', 'awesome', 'mega', 'super', 'hyper', 'ultra', 'pro', 'elite', 'master', 'ninja', 'shadow', 'phantom', 'storm', 'blaze', 'frost', 'thunder', 'lightning', 'crystal', 'golden', 'silver', 'bronze', 'platinum', 'diamond', 'ruby', 'emerald', 'sapphire'];
+        const nouns = ['warrior', 'hunter', 'ranger', 'scout', 'guardian', 'champion', 'legend', 'hero', 'master', 'expert', 'ninja', 'samurai', 'phoenix', 'dragon', 'eagle', 'lion', 'tiger', 'wolf', 'bear', 'hawk'];
+        const suffixes = ['123', '42', '69', '99', '007', '101', '2024', '247', '365', '777', '888', '999', 'x', 'xx', 'xxx', 'pro', 'max', 'plus', 'ultra', 'elite'];
+
+        function generateUsernames() {
+            const baseWord = document.getElementById('baseWord').value.trim().toLowerCase();
+            const count = parseInt(document.getElementById('usernameCount').value);
+            const style = document.querySelector('input[name="style"]:checked').value;
+            const includeNumbers = document.getElementById('includeNumbers').checked;
+            const includeUnderscores = document.getElementById('includeUnderscores').checked;
+            const capitalize = document.getElementById('capitalize').checked;
+            const avoidNumbers = document.getElementById('avoidNumbers').checked;
+
+            // Validation
+            if (count < 1 || count > 50) {
+                showMessage('Number of usernames must be between 1 and 50', 'error');
+                return;
+            }
+
+            generatedUsernames = [];
+
+            for (let i = 0; i < count; i++) {
+                let username = generateSingleUsername(baseWord, style, includeNumbers, includeUnderscores, capitalize, avoidNumbers);
+                generatedUsernames.push(username);
+            }
+
+            displayResults();
+            showMessage(`Generated ${count} username(s)`, 'success');
+        }
+
+        function generateSingleUsername(baseWord, style, includeNumbers, includeUnderscores, capitalize, avoidNumbers) {
+            let username = '';
+
+            switch(style) {
+                case 'professional':
+                    username = generateProfessionalUsername(baseWord, includeUnderscores, capitalize);
+                    break;
+                case 'creative':
+                    username = generateCreativeUsername(baseWord, includeNumbers, capitalize);
+                    break;
+                case 'gaming':
+                    username = generateGamingUsername(baseWord, includeNumbers);
+                    break;
+                case 'minimal':
+                    username = generateMinimalUsername(baseWord);
+                    break;
+            }
+
+            // Ensure uniqueness
+            let attempts = 0;
+            while (generatedUsernames.includes(username) && attempts < 100) {
+                username = generateSingleUsername(baseWord, style, includeNumbers, includeUnderscores, capitalize, avoidNumbers);
+                attempts++;
+            }
+
+            return username;
+        }
+
+        function generateProfessionalUsername(baseWord, includeUnderscores, capitalize) {
+            if (!baseWord) {
+                baseWord = adjectives[Math.floor(Math.random() * adjectives.length)];
+            }
+            
+            const secondWord = nouns[Math.floor(Math.random() * nouns.length)];
+            let username = includeUnderscores ? `${baseWord}_${secondWord}` : `${baseWord}${secondWord}`;
+            
+            if (capitalize) {
+                username = username.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('_');
+            }
+            
+            return username.toLowerCase();
+        }
+
+        function generateCreativeUsername(baseWord, includeNumbers, capitalize) {
+            if (!baseWord) {
+                baseWord = adjectives[Math.floor(Math.random() * adjectives.length)];
+            }
+            
+            const suffix = includeNumbers && Math.random() > 0.5 ? suffixes[Math.floor(Math.random() * suffixes.length)] : '';
+            let username = baseWord + suffix;
+            
+            if (capitalize && Math.random() > 0.5) {
+                username = username.charAt(0).toUpperCase() + username.slice(1);
+            }
+            
+            return username;
+        }
+
+        function generateGamingUsername(baseWord, includeNumbers) {
+            if (!baseWord) {
+                baseWord = nouns[Math.floor(Math.random() * nouns.length)];
+            }
+            
+            const prefix = Math.random() > 0.5 ? 'xX' : '';
+            const suffix = Math.random() > 0.5 ? 'Xx' : '';
+            const number = includeNumbers && Math.random() > 0.5 ? Math.floor(Math.random() * 1000) : '';
+            
+            return prefix + baseWord + number + suffix;
+        }
+
+        function generateMinimalUsername(baseWord) {
+            if (!baseWord) {
+                baseWord = adjectives[Math.floor(Math.random() * adjectives.length)];
+            }
+            
+            return baseWord.toLowerCase();
+        }
+
+        function displayResults() {
+            const usernamesList = document.getElementById('usernamesList');
+            usernamesList.innerHTML = generatedUsernames.map((username, index) => 
+                `<div style="display: flex; align-items: center; gap: 1rem; background: white; padding: 1rem; border-radius: 6px; border: 1px solid #e5e7eb;">
+                    <span style="font-weight: bold; color: #6b7280; min-width: 60px;">${index + 1}.</span>
+                    <code style="flex: 1; font-family: monospace; background: #f9fafb; padding: 0.5rem; border-radius: 4px;">${username}</code>
+                    <button onclick="copyUsername('${username}')" class="btn btn-outline" style="padding: 0.5rem 1rem;">Copy</button>
+                </div>`
+            ).join('');
+            
+            document.getElementById('resultsSection').style.display = 'block';
+        }
+
+        function copyUsername(username) {
+            copyToClipboard(username);
+        }
+
+        function copyAllUsernames() {
+            if (generatedUsernames.length === 0) {
+                showMessage('No usernames to copy', 'error');
+                return;
+            }
+            copyToClipboard(generatedUsernames.join('\n'));
+        }
+
+        function downloadUsernames() {
+            if (generatedUsernames.length === 0) {
+                showMessage('No usernames to download', 'error');
+                return;
+            }
+            
+            const content = `Generated Usernames\n` +
+                          `==================\n` +
+                          `Base Word: ${document.getElementById('baseWord').value || 'Random'}\n` +
+                          `Style: ${document.querySelector('input[name="style"]:checked').value}\n` +
+                          `Count: ${generatedUsernames.length}\n` +
+                          `Generated: ${new Date().toLocaleString()}\n\n` +
+                          `Usernames:\n${generatedUsernames.join('\n')}`;
+            
+            downloadFile(content, 'usernames_' + new Date().getTime() + '.txt');
+        }
+
+        function regenerateUsernames() {
+            if (generatedUsernames.length === 0) {
+                showMessage('Generate usernames first', 'error');
+                return;
+            }
+            generateUsernames();
+        }
+
+        function clearResults() {
+            generatedUsernames = [];
+            document.getElementById('resultsSection').style.display = 'none';
+            showMessage('Results cleared', 'info');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number to Words Converter - Convert Numbers to Words Online | ToolMetric</title>
+    <meta name="description" content="Free online number to words converter. Convert numbers to English words instantly. Perfect for checks, documents, and educational purposes.">
+    <meta name="keywords" content="number to words, convert numbers to words, number spelling, number in words, online number converter, number formatter">
+    <meta name="author" content="ToolMetric">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Number to Words Converter - ToolMetric">
+    <meta property="og:description" content="Convert numbers to English words instantly">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolmetric.com/number-to-words.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🛠️ ToolMetric</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container tool-container">
+        <div class="tool-header">
+            <h1>Number to Words Converter</h1>
+            <h2>Convert numbers to English words instantly</h2>
+            <p class="tool-description">
+                Convert numbers to English words instantly with our comprehensive number to words converter tool. 
+                This essential utility for writers, accountants, and educators transforms numerical values 
+                into their written word equivalents with proper formatting and capitalization. Perfect for 
+                writing checks, creating legal documents, educational materials, and ensuring clarity in 
+                financial communications. Our tool handles various number formats including integers, decimals, 
+                currencies, and large numbers with accurate spelling and grammatical structure. Whether you're 
+                writing a check, preparing financial documents, teaching mathematics, or need to spell out 
+                numbers for clarity, our converter provides professional results with multiple formatting options 
+                and instant conversion. Simply enter your number and get the word representation instantly.
+            </p>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 728x90</p>
+        </div>
+
+        <div class="tool-content">
+            <div class="converter-controls">
+                <h3>Number Input</h3>
+                <div class="input-section">
+                    <div class="form-group">
+                        <label for="numberInput">Enter Number:</label>
+                        <input type="text" id="numberInput" class="form-control" placeholder="Enter a number (e.g., 1234.56)" style="font-size: 1.2rem; padding: 1rem;">
+                    </div>
+                    
+                    <div class="format-options" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0;">
+                        <div class="form-group">
+                            <label for="caseFormat">Case Format:</label>
+                            <select id="caseFormat" class="form-control">
+                                <option value="title">Title Case</option>
+                                <option value="upper">UPPERCASE</option>
+                                <option value="lower">lowercase</option>
+                                <option value="sentence">Sentence case</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="currency">Currency:</label>
+                            <select id="currency" class="form-control">
+                                <option value="none">None</option>
+                                <option value="USD">US Dollars ($)</option>
+                                <option value="EUR">Euros (€)</option>
+                                <option value="GBP">British Pounds (£)</option>
+                                <option value="INR">Indian Rupees (₹)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="decimalStyle">Decimal Style:</label>
+                            <select id="decimalStyle" class="form-control">
+                                <option value="point">Point (e.g., point five)</option>
+                                <option value="and">And (e.g., and five tenths)</option>
+                                <option value="fraction">Fraction (e.g., 5/10)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="includeAnd">
+                                <input type="checkbox" id="includeAnd" checked style="margin-right: 0.5rem;">
+                                Include "and" (e.g., one hundred and one)
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="quick-numbers" style="margin: 1rem 0;">
+                        <h4>Quick Examples:</h4>
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                            <button onclick="setNumber(123)" class="btn btn-outline" style="padding: 0.5rem 1rem;">123</button>
+                            <button onclick="setNumber(1000)" class="btn btn-outline" style="padding: 0.5rem 1rem;">1,000</button>
+                            <button onclick="setNumber(1000000)" class="btn btn-outline" style="padding: 0.5rem 1rem;">1,000,000</button>
+                            <button onclick="setNumber(1234.56)" class="btn btn-outline" style="padding: 0.5rem 1rem;">1,234.56</button>
+                            <button onclick="setNumber(0)" class="btn btn-outline" style="padding: 0.5rem 1rem;">0</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="convert-section" style="text-align: center; margin: 2rem 0;">
+                    <button onclick="convertNumber()" class="btn" style="font-size: 1.1rem; padding: 1rem 2rem;">Convert to Words</button>
+                    <button onclick="clearAll()" class="btn btn-outline ml-2">Clear</button>
+                </div>
+            </div>
+
+            <div id="resultsSection" class="results-section" style="display: none;">
+                <h3>Word Result</h3>
+                <div class="word-output" style="background: #f9fafb; border: 2px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                    <div id="wordsResult" style="font-size: 1.3rem; line-height: 1.6; font-family: Georgia, serif;"></div>
+                </div>
+                
+                <div class="result-actions" style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <button onclick="copyWords()" class="btn btn-secondary">Copy Words</button>
+                    <button onclick="copyAll()" class="btn btn-outline">Copy Number + Words</button>
+                    <button onclick="downloadResult()" class="btn btn-outline">Download Result</button>
+                </div>
+                
+                <div class="number-info" style="background: #f0f9ff; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                    <h4>Number Information</h4>
+                    <div class="info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <div>
+                            <strong>Original Number:</strong> <span id="originalNumber">0</span>
+                        </div>
+                        <div>
+                            <strong>Number Type:</strong> <span id="numberType">Integer</span>
+                        </div>
+                        <div>
+                            <strong>Digits:</strong> <span id="digitCount">0</span>
+                        </div>
+                        <div>
+                            <strong>Word Count:</strong> <span id="wordCountResult">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="batch-converter" style="margin-top: 2rem;">
+                <h3>Batch Converter</h3>
+                <div class="batch-input" style="margin-bottom: 1rem;">
+                    <label for="batchNumbers">Multiple Numbers (one per line):</label>
+                    <textarea id="batchNumbers" class="form-control" rows="4" placeholder="123&#10;4567&#10;89.01&#10;1000"></textarea>
+                </div>
+                <button onclick="convertBatch()" class="btn">Convert All</button>
+                <div id="batchResults" style="margin-top: 1rem; display: none;">
+                    <!-- Batch results will be shown here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 300x250</p>
+        </div>
+
+        <div class="tool-content">
+            <h3>How to Use Number to Words Converter</h3>
+            <ol>
+                <li>Enter a number in the input field (supports integers and decimals)</li>
+                <li>Choose formatting options (case, currency, decimal style)</li>
+                <li>Click "Convert to Words" to get the word representation</li>
+                <li>Copy the result or use batch converter for multiple numbers</li>
+                <li>Download results for documentation purposes</li>
+            </ol>
+
+            <h4 class="mt-3">Features</h4>
+            <ul>
+                <li><strong>Multiple Formats:</strong> Support for integers, decimals, and currencies</li>
+                <li><strong>Case Options:</strong> Title case, uppercase, lowercase, sentence case</li>
+                <li><strong>Currency Support:</strong> USD, EUR, GBP, INR with proper formatting</li>
+                <li><strong>Decimal Handling:</strong> Various decimal representation styles</li>
+                <li><strong>Batch Conversion:</strong> Convert multiple numbers at once</li>
+                <li><strong>Large Numbers:</strong> Handle numbers up to trillions and beyond</li>
+            </ul>
+
+            <h4 class="mt-3">Common Use Cases</h4>
+            <ul>
+                <li><strong>Check Writing:</strong> Write checks with proper amount in words</li>
+                <li><strong>Legal Documents:</strong> Spell out amounts in contracts</li>
+                <li><strong>Financial Reports:</strong> Add clarity to financial statements</li>
+                <li><strong>Education:</strong> Teach number spelling and place value</li>
+                <li><strong>Documentation:</strong> Ensure clarity in official documents</li>
+            </ul>
+        </div>
+
+        <div class="tool-content">
+            <h3>Related Tools</h3>
+            <div class="related-tools" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="simple-interest-calculator.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">📊 Simple Interest Calculator</h4>
+                    <p style="margin: 0; color: #6b7280;">Calculate simple interest</p>
+                </a>
+                <a href="word-counter.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">📝 Word Counter</h4>
+                    <p style="margin: 0; color: #6b7280;">Count words and characters</p>
+                </a>
+                <a href="character-counter.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🔤 Character Counter</h4>
+                    <p style="margin: 0; color: #6b7280;">Count characters instantly</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>What numbers can this converter handle?</h4>
+                <p>Our converter can handle integers, decimals, and very large numbers up to quadrillions and beyond, with proper formatting and spelling.</p>
+            </div>
+            <div class="faq-item">
+                <h4>How are decimals converted?</h4>
+                <p>Decimals can be converted as "point" (e.g., point five), "and" (e.g., and five tenths), or as fractions (e.g., 5/10).</p>
+            </div>
+            <div class="faq-item">
+                <h4>What currencies are supported?</h4>
+                <p>We support US Dollars, Euros, British Pounds, and Indian Rupees with proper currency names and formatting.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Why include "and" in numbers?</h4>
+                <p>Including "and" (e.g., "one hundred and one") follows traditional British English grammar and is often used in formal documents.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🛠️ ToolMetric</h4>
+                    <p>Your trusted source for free online tools. We provide simple, fast, and secure tools for everyday use.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Converter Tools</h4>
+                    <ul>
+                        <li><a href="number-to-words.html">Number to Words</a></li>
+                        <li><a href="simple-interest-calculator.html">Simple Interest Calculator</a></li>
+                        <li><a href="word-counter.html">Word Counter</a></li>
+                        <li><a href="character-counter.html">Character Counter</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>Have feedback or suggestions? We'd love to hear from you!</p>
+                    <a href="contact.html" class="btn btn-outline mt-2">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ToolMetric. All rights reserved. | <a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function convertNumber() {
+            const input = document.getElementById('numberInput').value.trim();
+            
+            if (!input) {
+                showMessage('Please enter a number to convert', 'error');
+                return;
+            }
+            
+            const number = parseFloat(input.replace(/,/g, ''));
+            
+            if (isNaN(number)) {
+                showMessage('Please enter a valid number', 'error');
+                return;
+            }
+            
+            const caseFormat = document.getElementById('caseFormat').value;
+            const currency = document.getElementById('currency').value;
+            const decimalStyle = document.getElementById('decimalStyle').value;
+            const includeAnd = document.getElementById('includeAnd').checked;
+            
+            try {
+                const words = numberToWords(number, caseFormat, currency, decimalStyle, includeAnd);
+                
+                document.getElementById('wordsResult').textContent = words;
+                document.getElementById('originalNumber').textContent = input;
+                document.getElementById('numberType').textContent = Number.isInteger(number) ? 'Integer' : 'Decimal';
+                document.getElementById('digitCount').textContent = input.replace(/[^0-9]/g, '').length;
+                document.getElementById('wordCountResult').textContent = words.split(' ').length;
+                
+                document.getElementById('resultsSection').style.display = 'block';
+                showMessage('Number converted to words successfully', 'success');
+            } catch (error) {
+                showMessage('Error converting number: ' + error.message, 'error');
+            }
+        }
+
+        function numberToWords(number, caseFormat, currency, decimalStyle, includeAnd) {
+            if (number === 0) {
+                return formatCase('zero', caseFormat);
+            }
+            
+            let words = '';
+            const isNegative = number < 0;
+            const absNumber = Math.abs(number);
+            
+            // Handle currency
+            if (currency !== 'none') {
+                words = convertCurrency(absNumber, currency, decimalStyle, includeAnd);
+            } else {
+                words = convertNumber(absNumber, decimalStyle, includeAnd);
+            }
+            
+            if (isNegative) {
+                words = 'minus ' + words;
+            }
+            
+            return formatCase(words, caseFormat);
+        }
+
+        function convertNumber(number, decimalStyle, includeAnd) {
+            const integerPart = Math.floor(number);
+            const decimalPart = Math.round((number - integerPart) * 100);
+            
+            let words = convertInteger(integerPart, includeAnd);
+            
+            if (decimalPart > 0) {
+                words += ' ' + convertDecimal(decimalPart, decimalStyle);
+            }
+            
+            return words;
+        }
+
+        function convertCurrency(number, currency, decimalStyle, includeAnd) {
+            const integerPart = Math.floor(number);
+            const decimalPart = Math.round((number - integerPart) * 100);
+            
+            const currencyNames = {
+                'USD': { singular: 'dollar', plural: 'dollars', cent: 'cent' },
+                'EUR': { singular: 'euro', plural: 'euros', cent: 'cent' },
+                'GBP': { singular: 'pound', plural: 'pounds', cent: 'penny' },
+                'INR': { singular: 'rupee', plural: 'rupees', cent: 'paisa' }
+            };
+            
+            const currencyName = currencyNames[currency];
+            let words = '';
+            
+            // Main currency
+            if (integerPart === 1) {
+                words += 'one ' + currencyName.singular;
+            } else if (integerPart > 1) {
+                words += convertInteger(integerPart, includeAnd) + ' ' + currencyName.plural;
+            } else if (decimalPart > 0) {
+                words += 'zero ' + currencyName.plural;
+            }
+            
+            // Decimal part (cents)
+            if (decimalPart > 0) {
+                words += ' and ';
+                if (decimalPart === 1) {
+                    words += 'one ' + currencyName.cent;
+                } else {
+                    words += convertInteger(decimalPart, false) + ' ' + (currency === 'GBP' ? 'pence' : currencyName.cent + 's');
+                }
+            }
+            
+            return words;
+        }
+
+        function convertInteger(number, includeAnd) {
+            if (number === 0) return '';
+            
+            const units = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+            const teens = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+            const tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+            const thousands = ['', 'thousand', 'million', 'billion', 'trillion'];
+            
+            let words = '';
+            let chunkIndex = 0;
+            
+            while (number > 0) {
+                const chunk = number % 1000;
+                if (chunk > 0) {
+                    const chunkWords = convertChunk(chunk, includeAnd && chunkIndex === 0);
+                    if (thousands[chunkIndex]) {
+                        words = chunkWords + ' ' + thousands[chunkIndex] + (words ? ' ' + words : '');
+                    } else {
+                        words = chunkWords + (words ? ' ' + words : '');
+                    }
+                }
+                number = Math.floor(number / 1000);
+                chunkIndex++;
+            }
+            
+            return words;
+        }
+
+        function convertChunk(number, includeAnd) {
+            const units = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+            const teens = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+            const tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+            
+            let words = '';
+            
+            if (number >= 100) {
+                const hundreds = Math.floor(number / 100);
+                words += units[hundreds] + ' hundred';
+                number = number % 100;
+                if (number > 0 && includeAnd) {
+                    words += ' and ';
+                } else if (number > 0) {
+                    words += ' ';
+                }
+            }
+            
+            if (number >= 20) {
+                const ten = Math.floor(number / 10);
+                words += tens[ten];
+                number = number % 10;
+                if (number > 0) {
+                    words += '-' + units[number];
+                }
+            } else if (number >= 10) {
+                words += teens[number - 10];
+            } else if (number > 0) {
+                words += units[number];
+            }
+            
+            return words;
+        }
+
+        function convertDecimal(decimal, style) {
+            if (decimal === 0) return '';
+            
+            switch (style) {
+                case 'point':
+                    return 'point ' + convertInteger(decimal, false);
+                case 'and':
+                    return 'and ' + decimal + '/100';
+                case 'fraction':
+                    return decimal + '/100';
+                default:
+                    return 'point ' + convertInteger(decimal, false);
+            }
+        }
+
+        function formatCase(words, caseFormat) {
+            switch (caseFormat) {
+                case 'title':
+                    return words.replace(/\b\w/g, l => l.toUpperCase());
+                case 'upper':
+                    return words.toUpperCase();
+                case 'lower':
+                    return words.toLowerCase();
+                case 'sentence':
+                    return words.charAt(0).toUpperCase() + words.slice(1);
+                default:
+                    return words;
+            }
+        }
+
+        function setNumber(num) {
+            document.getElementById('numberInput').value = num;
+            convertNumber();
+        }
+
+        function clearAll() {
+            document.getElementById('numberInput').value = '';
+            document.getElementById('resultsSection').style.display = 'none';
+            showMessage('Cleared', 'info');
+        }
+
+        function copyWords() {
+            const words = document.getElementById('wordsResult').textContent;
+            if (!words) {
+                showMessage('No words to copy', 'error');
+                return;
+            }
+            copyToClipboard(words);
+        }
+
+        function copyAll() {
+            const number = document.getElementById('originalNumber').textContent;
+            const words = document.getElementById('wordsResult').textContent;
+            const all = number + ' = ' + words;
+            copyToClipboard(all);
+        }
+
+        function downloadResult() {
+            const number = document.getElementById('originalNumber').textContent;
+            const words = document.getElementById('wordsResult').textContent;
+            const content = `Number to Words Conversion Result\n` +
+                          `===================================\n` +
+                          `Number: ${number}\n` +
+                          `Words: ${words}\n` +
+                          `Converted: ${new Date().toLocaleString()}`;
+            
+            downloadFile(content, 'number_to_words_' + new Date().getTime() + '.txt');
+        }
+
+        function convertBatch() {
+            const batchInput = document.getElementById('batchNumbers').value.trim();
+            
+            if (!batchInput) {
+                showMessage('Please enter numbers for batch conversion', 'error');
+                return;
+            }
+            
+            const lines = batchInput.split('\n');
+            const results = [];
+            
+            for (const line of lines) {
+                const numberStr = line.trim();
+                if (numberStr) {
+                    const number = parseFloat(numberStr.replace(/,/g, ''));
+                    if (!isNaN(number)) {
+                        const words = numberToWords(number, 'title', 'none', 'point', true);
+                        results.push({ number: numberStr, words: words });
+                    }
+                }
+            }
+            
+            displayBatchResults(results);
+        }
+
+        function displayBatchResults(results) {
+            const resultsDiv = document.getElementById('batchResults');
+            
+            if (results.length === 0) {
+                resultsDiv.innerHTML = '<p style="color: #ef4444;">No valid numbers found</p>';
+            } else {
+                let html = '<h4>Batch Conversion Results:</h4><div style="display: grid; gap: 0.5rem;">';
+                
+                for (const result of results) {
+                    html += `
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: #f9fafb; border-radius: 4px;">
+                            <span style="font-family: monospace;">${result.number}</span>
+                            <span style="font-family: Georgia, serif;">${result.words}</span>
+                        </div>
+                    `;
+                }
+                
+                html += '</div>';
+                resultsDiv.innerHTML = html;
+            }
+            
+            resultsDiv.style.display = 'block';
+        }
+
+        // Auto-convert on input change
+        document.getElementById('numberInput').addEventListener('input', function() {
+            if (this.value.trim()) {
+                convertNumber();
+            }
+        });
+    </script>
+</body>
+</html>

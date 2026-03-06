@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lorem Ipsum Generator - Generate Placeholder Text Online | ToolMetric</title>
+    <meta name="description" content="Free online Lorem Ipsum generator. Create placeholder text for design and testing. Multiple options for words, sentences, and paragraphs.">
+    <meta name="keywords" content="Lorem Ipsum generator, placeholder text, dummy text, filler text, online Lorem Ipsum, text generator">
+    <meta name="author" content="ToolMetric">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Lorem Ipsum Generator - ToolMetric">
+    <meta property="og:description" content="Generate Lorem Ipsum placeholder text instantly">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolmetric.com/lorem-ipsum-generator.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🛠️ ToolMetric</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container tool-container">
+        <div class="tool-header">
+            <h1>Lorem Ipsum Generator</h1>
+            <h2>Generate placeholder text for design and testing</h2>
+            <p class="tool-description">
+                Generate Lorem Ipsum placeholder text instantly with our comprehensive Lorem Ipsum generator tool. 
+                This essential utility for designers and developers creates realistic filler text for website mockups, 
+                print designs, and testing environments. Perfect for filling empty spaces in designs, testing 
+                typography and layout, and creating realistic content demonstrations. Our tool offers multiple 
+                Lorem Ipsum variations including classic Latin, modern alternatives, and customizable options for 
+                words, sentences, and paragraphs. Whether you're designing a website, creating a brochure, 
+                or need placeholder text for development testing, our generator provides natural-looking text 
+                with proper formatting and realistic word distribution. Simply specify your requirements and 
+                generate professional placeholder text instantly.
+            </p>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 728x90</p>
+        </div>
+
+        <div class="tool-content">
+            <div class="lorem-controls">
+                <h3>Text Generation Options</h3>
+                
+                <div class="options-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                    <div class="option-group">
+                        <div class="form-group">
+                            <label for="textType">Text Type:</label>
+                            <select id="textType" class="form-control">
+                                <option value="lorem">Classic Lorem Ipsum</option>
+                                <option value="cicero">Cicero Latin</option>
+                                <option value="modern">Modern Alternative</option>
+                                <option value="tech">Technology Themed</option>
+                                <option value="business">Business Themed</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="startText">Start with "Lorem ipsum"</label>
+                            <select id="startText" class="form-control">
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="form-group">
+                            <label for="amountType">Amount Type:</label>
+                            <select id="amountType" class="form-control">
+                                <option value="words">Words</option>
+                                <option value="sentences">Sentences</option>
+                                <option value="paragraphs">Paragraphs</option>
+                                <option value="bytes">Bytes</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Amount:</label>
+                            <input type="number" id="amount" class="form-control" value="5" min="1" max="1000">
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="form-group">
+                            <label for="sentenceLength">Sentence Length:</label>
+                            <select id="sentenceLength" class="form-control">
+                                <option value="short">Short (5-10 words)</option>
+                                <option value="medium" selected>Medium (10-20 words)</option>
+                                <option value="long">Long (20-30 words)</option>
+                                <option value="random">Random</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="paragraphLength">Paragraph Length:</label>
+                            <select id="paragraphLength" class="form-control">
+                                <option value="short">Short (2-4 sentences)</option>
+                                <option value="medium" selected>Medium (4-7 sentences)</option>
+                                <option value="long">Long (7-10 sentences)</option>
+                                <option value="random">Random</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="generate-section" style="text-align: center; margin: 2rem 0;">
+                    <button onclick="generateLorem()" class="btn" style="font-size: 1.1rem; padding: 1rem 2rem;">Generate Lorem Ipsum</button>
+                    <button onclick="clearText()" class="btn btn-outline ml-2">Clear</button>
+                </div>
+            </div>
+
+            <div class="text-output">
+                <h3>Generated Text</h3>
+                <div id="loremOutput" style="background: #f9fafb; border: 2px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; min-height: 200px; font-family: serif; line-height: 1.6;">
+                    <p style="color: #6b7280; text-align: center;">Your Lorem Ipsum text will appear here...</p>
+                </div>
+                
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <button onclick="copyText()" class="btn btn-secondary">Copy Text</button>
+                    <button onclick="downloadText()" class="btn btn-outline">Download Text</button>
+                    <button onclick="regenerateText()" class="btn btn-outline">Regenerate</button>
+                </div>
+                
+                <div id="textStats" class="text-stats" style="display: none; margin-top: 1rem;">
+                    <h4>Text Statistics</h4>
+                    <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                        <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #2563eb;" id="wordCount">0</div>
+                            <div style="color: #6b7280;">Words</div>
+                        </div>
+                        <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #10b981;" id="sentenceCount">0</div>
+                            <div style="color: #6b7280;">Sentences</div>
+                        </div>
+                        <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #f59e0b;" id="paragraphCount">0</div>
+                            <div style="color: #6b7280;">Paragraphs</div>
+                        </div>
+                        <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #ef4444;" id="charCount">0</div>
+                            <div style="color: #6b7280;">Characters</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-templates">
+                <h3>Quick Templates</h3>
+                <div class="template-buttons" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <button onclick="quickTemplate('short')" class="btn btn-secondary">
+                        📄 Short Paragraph
+                    </button>
+                    <button onclick="quickTemplate('medium')" class="btn btn-secondary">
+                        📃 Medium Article
+                    </button>
+                    <button onclick="quickTemplate('long')" class="btn btn-secondary">
+                        📚 Long Article
+                    </button>
+                    <button onclick="quickTemplate('blog')" class="btn btn-secondary">
+                        📝 Blog Post
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 300x250</p>
+        </div>
+
+        <div class="tool-content">
+            <h3>How to Use Lorem Ipsum Generator</h3>
+            <ol>
+                <li>Choose the text type (Classic Lorem Ipsum, Cicero, Modern, etc.)</li>
+                <li>Select amount type (words, sentences, paragraphs, or bytes)</li>
+                <li>Set the amount you want to generate</li>
+                <li>Configure sentence and paragraph length preferences</li>
+                <li>Click "Generate Lorem Ipsum" to create your text</li>
+                <li>Copy, download, or regenerate the text as needed</li>
+            </ol>
+
+            <h4 class="mt-3">Features</h4>
+            <ul>
+                <li><strong>Multiple Text Types:</strong> Classic, modern, and themed variations</li>
+                <li><strong>Flexible Amounts:</strong> Generate by words, sentences, paragraphs, or bytes</li>
+                <li><strong>Customizable Length:</strong> Control sentence and paragraph length</li>
+                <li><strong>Text Statistics:</strong> Real-time word, sentence, and character counts</li>
+                <li><strong>Quick Templates:</strong> Pre-configured amounts for common use cases</li>
+                <li><strong>Export Options:</strong> Copy and download functionality</li>
+            </ul>
+
+            <h4 class="mt-3">Common Use Cases</h4>
+            <ul>
+                <li><strong>Web Design:</strong> Fill website mockups and prototypes</li>
+                <li><strong>Print Design:</strong> Create placeholder text for brochures and flyers</li>
+                <li><strong>Typography Testing:</strong> Test font rendering and layout</li>
+                <li><strong>Development:</strong> Fill database fields and test areas</li>
+                <li><strong>Content Planning:</strong> Estimate space needed for actual content</li>
+            </ul>
+        </div>
+
+        <div class="tool-content">
+            <h3>Related Tools</h3>
+            <div class="related-tools" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="word-counter.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">📝 Word Counter</h4>
+                    <p style="margin: 0; color: #6b7280;">Count words and reading time</p>
+                </a>
+                <a href="character-counter.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🔤 Character Counter</h4>
+                    <p style="margin: 0; color: #6b7280;">Count characters instantly</p>
+                </a>
+                <a href="reading-time-calculator.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">⏱️ Reading Time Calculator</h4>
+                    <p style="margin: 0; color: #6b7280;">Calculate reading time</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>What is Lorem Ipsum?</h4>
+                <p>Lorem Ipsum is placeholder text commonly used in the printing and typesetting industry. It has been the industry's standard dummy text since the 1500s.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Why use placeholder text?</h4>
+                <p>Placeholder text helps designers and developers focus on layout and design without being distracted by readable content. It provides a realistic approximation of text flow and spacing.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Is Lorem Ipsum real Latin?</h4>
+                <p>Yes, Lorem Ipsum comes from a Latin text by Cicero from 45 BC, though it's scrambled and modified to make it nonsensical.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can I customize the generated text?</h4>
+                <p>Yes! You can choose different text types, amounts, sentence lengths, and paragraph structures to match your specific needs.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🛠️ ToolMetric</h4>
+                    <p>Your trusted source for free online tools. We provide simple, fast, and secure tools for everyday use.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Text Tools</h4>
+                    <ul>
+                        <li><a href="lorem-ipsum-generator.html">Lorem Ipsum Generator</a></li>
+                        <li><a href="word-counter.html">Word Counter</a></li>
+                        <li><a href="character-counter.html">Character Counter</a></li>
+                        <li><a href="reading-time-calculator.html">Reading Time Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>Have feedback or suggestions? We'd love to hear from you!</p>
+                    <a href="contact.html" class="btn btn-outline mt-2">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ToolMetric. All rights reserved. | <a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const loremTexts = {
+            lorem: "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum",
+            cicero: "sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt neque porro quisquam est dolorem ipsum quia dolor sit amet consectetur adipisci velit sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem ut enim ad minima veniam quis nostrum exercitationem ullam corporis suscipit laboriosam nisi ut aliquid ex ea commodi consequatur quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur vel illum qui dolorem eum fugiat quo voluptas nulla pariatur",
+            modern: "the quick brown fox jumps over the lazy dog pack my box with five dozen liquor jugs how vexingly quick daft zebras jump bright vixens jump dozy fowl quack jinxed wizards pack my box with five dozen liquor jugs the five boxing wizards jump quickly bright vixens jump dozy fowl quack jinxed wizards pack my box with five dozen liquor jugs",
+            tech: "algorithm data structure database framework interface application programming language development software engineering system architecture cloud computing artificial intelligence machine learning neural network deep learning blockchain cryptocurrency cybersecurity encryption authentication authorization server client frontend backend responsive design user experience interface design pattern object oriented programming functional programming agile methodology version control deployment testing debugging optimization performance scalability reliability maintainability documentation",
+            business: "strategy marketing finance revenue profit investment growth development management leadership innovation entrepreneurship competition market analysis customer service product service solution value proposition business model revenue stream cost structure key partnership customer relationship channel segment value chain core competency competitive advantage market positioning brand equity customer loyalty retention acquisition conversion optimization analytics metrics key performance indicators return on investment cash flow profit margin market share growth rate scalability sustainability risk management compliance governance corporate social responsibility environmental impact sustainability"
+        };
+
+        function generateLorem() {
+            const textType = document.getElementById('textType').value;
+            const amountType = document.getElementById('amountType').value;
+            const amount = parseInt(document.getElementById('amount').value);
+            const startWithLorem = document.getElementById('startText').value === 'yes';
+            const sentenceLength = document.getElementById('sentenceLength').value;
+            const paragraphLength = document.getElementById('paragraphLength').value;
+            
+            if (amount < 1 || amount > 1000) {
+                showMessage('Amount must be between 1 and 1000', 'error');
+                return;
+            }
+            
+            const text = loremTexts[textType];
+            const words = text.split(' ');
+            
+            let generatedText = '';
+            
+            switch (amountType) {
+                case 'words':
+                    generatedText = generateWords(words, amount, startWithLorem);
+                    break;
+                case 'sentences':
+                    generatedText = generateSentences(words, amount, startWithLorem, sentenceLength);
+                    break;
+                case 'paragraphs':
+                    generatedText = generateParagraphs(words, amount, startWithLorem, sentenceLength, paragraphLength);
+                    break;
+                case 'bytes':
+                    generatedText = generateBytes(words, amount, startWithLorem);
+                    break;
+            }
+            
+            document.getElementById('loremOutput').innerHTML = generatedText;
+            calculateStatistics(generatedText);
+            showMessage('Lorem Ipsum generated successfully', 'success');
+        }
+
+        function generateWords(words, amount, startWithLorem) {
+            let result = '';
+            const wordList = startWithLorem ? words.slice() : words.slice(1);
+            
+            for (let i = 0; i < amount; i++) {
+                result += wordList[i % wordList.length];
+                if (i < amount - 1) result += ' ';
+            }
+            
+            return result;
+        }
+
+        function generateSentences(words, amount, startWithLorem, sentenceLength) {
+            let result = '';
+            const sentences = [];
+            
+            for (let i = 0; i < amount; i++) {
+                const length = getSentenceLength(sentenceLength);
+                const sentence = generateSentence(words, length);
+                sentences.push(sentence);
+            }
+            
+            if (startWithLorem && sentences.length > 0) {
+                sentences[0] = 'Lorem ipsum ' + sentences[0];
+            }
+            
+            return sentences.join('. ');
+        }
+
+        function generateParagraphs(words, amount, startWithLorem, sentenceLength, paragraphLength) {
+            let result = '';
+            const paragraphs = [];
+            
+            for (let i = 0; i < amount; i++) {
+                const sentences = getParagraphLength(paragraphLength);
+                const paragraphSentences = [];
+                
+                for (let j = 0; j < sentences; j++) {
+                    const length = getSentenceLength(sentenceLength);
+                    const sentence = generateSentence(words, length);
+                    paragraphSentences.push(sentence);
+                }
+                
+                if (startWithLorem && i === 0 && paragraphSentences.length > 0) {
+                    paragraphSentences[0] = 'Lorem ipsum ' + paragraphSentences[0];
+                }
+                
+                paragraphs.push(paragraphSentences.join('. '));
+            }
+            
+            return paragraphs.join('\n\n');
+        }
+
+        function generateBytes(words, amount, startWithLorem) {
+            let result = '';
+            let currentBytes = 0;
+            let wordIndex = 0;
+            
+            if (!startWithLorem) {
+                wordIndex = 1;
+            }
+            
+            while (currentBytes < amount) {
+                const word = words[wordIndex % words.length];
+                const wordWithSpace = word + ' ';
+                const wordBytes = wordWithSpace.length;
+                
+                if (currentBytes + wordBytes > amount) {
+                    // Take only part of the word
+                    const remainingBytes = amount - currentBytes;
+                    result += word.substring(0, remainingBytes);
+                    break;
+                }
+                
+                result += wordWithSpace;
+                currentBytes += wordBytes;
+                wordIndex++;
+            }
+            
+            return result;
+        }
+
+        function generateSentence(words, length) {
+            let sentence = '';
+            for (let i = 0; i < length; i++) {
+                sentence += words[i % words.length];
+                if (i < length - 1) sentence += ' ';
+            }
+            return sentence.charAt(0).toUpperCase() + sentence.slice(1);
+        }
+
+        function getSentenceLength(type) {
+            switch (type) {
+                case 'short': return Math.floor(Math.random() * 6) + 5;
+                case 'medium': return Math.floor(Math.random() * 11) + 10;
+                case 'long': return Math.floor(Math.random() * 11) + 20;
+                case 'random': return Math.floor(Math.random() * 26) + 5;
+                default: return 15;
+            }
+        }
+
+        function getParagraphLength(type) {
+            switch (type) {
+                case 'short': return Math.floor(Math.random() * 3) + 2;
+                case 'medium': return Math.floor(Math.random() * 4) + 4;
+                case 'long': return Math.floor(Math.random() * 4) + 7;
+                case 'random': return Math.floor(Math.random() * 9) + 2;
+                default: return 5;
+            }
+        }
+
+        function calculateStatistics(text) {
+            const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+            const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+            const paragraphs = text.split(/\n\n+/).filter(p => p.trim().length > 0);
+            const characters = text.length;
+            
+            document.getElementById('wordCount').textContent = words.length;
+            document.getElementById('sentenceCount').textContent = sentences.length;
+            document.getElementById('paragraphCount').textContent = paragraphs.length;
+            document.getElementById('charCount').textContent = characters;
+            document.getElementById('textStats').style.display = 'block';
+        }
+
+        function copyText() {
+            const text = document.getElementById('loremOutput').textContent;
+            if (!text || text.includes('Your Lorem Ipsum text will appear here')) {
+                showMessage('No text to copy', 'error');
+                return;
+            }
+            copyToClipboard(text);
+        }
+
+        function downloadText() {
+            const text = document.getElementById('loremOutput').textContent;
+            if (!text || text.includes('Your Lorem Ipsum text will appear here')) {
+                showMessage('No text to download', 'error');
+                return;
+            }
+            
+            const content = `Lorem Ipsum Text\n` +
+                          `==================\n` +
+                          `Generated: ${new Date().toLocaleString()}\n` +
+                          `Type: ${document.getElementById('textType').value}\n` +
+                          `Amount: ${document.getElementById('amount').value} ${document.getElementById('amountType').value}\n\n` +
+                          `Text:\n${text}`;
+            
+            downloadFile(content, 'lorem_ipsum_' + new Date().getTime() + '.txt');
+        }
+
+        function regenerateText() {
+            const text = document.getElementById('loremOutput').textContent;
+            if (!text || text.includes('Your Lorem Ipsum text will appear here')) {
+                generateLorem();
+            } else {
+                generateLorem();
+            }
+        }
+
+        function clearText() {
+            document.getElementById('loremOutput').innerHTML = '<p style="color: #6b7280; text-align: center;">Your Lorem Ipsum text will appear here...</p>';
+            document.getElementById('textStats').style.display = 'none';
+            showMessage('Text cleared', 'info');
+        }
+
+        function quickTemplate(type) {
+            switch (type) {
+                case 'short':
+                    document.getElementById('amountType').value = 'paragraphs';
+                    document.getElementById('amount').value = '1';
+                    break;
+                case 'medium':
+                    document.getElementById('amountType').value = 'paragraphs';
+                    document.getElementById('amount').value = '3';
+                    break;
+                case 'long':
+                    document.getElementById('amountType').value = 'paragraphs';
+                    document.getElementById('amount').value = '5';
+                    break;
+                case 'blog':
+                    document.getElementById('amountType').value = 'paragraphs';
+                    document.getElementById('amount').value = '4';
+                    document.getElementById('sentenceLength').value = 'medium';
+                    document.getElementById('paragraphLength').value = 'medium';
+                    break;
+            }
+            
+            generateLorem();
+        }
+    </script>
+</body>
+</html>

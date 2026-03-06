@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Picker Tool - Pick Colors Online | ToolMetric</title>
+    <meta name="description" content="Free online color picker tool. Pick colors from screen, convert between color formats, and generate color palettes. Perfect for designers and developers.">
+    <meta name="keywords" content="color picker, online color picker, color chooser, color selector, color tool, web colors, color palette">
+    <meta name="author" content="ToolMetric">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Color Picker Tool - ToolMetric">
+    <meta property="og:description" content="Pick colors and convert between formats instantly">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolmetric.com/color-picker.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🛠️ ToolMetric</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container tool-container">
+        <div class="tool-header">
+            <h1>Color Picker Tool</h1>
+            <h2>Pick colors and convert between formats instantly</h2>
+            <p class="tool-description">
+                Pick colors from anywhere on your screen with our comprehensive color picker tool. 
+                This essential utility for designers and developers allows you to select colors visually, 
+                convert between different color formats, and create color palettes. Perfect for web design, 
+                graphic design, and development projects. Our tool features an interactive color wheel, 
+                RGB sliders, HEX input, and real-time color preview with multiple format outputs. 
+                Whether you're designing a website, creating graphics, or need to match colors from 
+                existing designs, our color picker provides accurate color selection with detailed 
+                information about each color including HEX, RGB, HSL, and CMYK values. Simply pick a color 
+                and get all the information you need instantly.
+            </p>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 728x90</p>
+        </div>
+
+        <div class="tool-content">
+            <div class="color-picker-interface">
+                <div class="picker-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div class="picker-section">
+                        <h3>Color Selection</h3>
+                        
+                        <div class="color-wheel-container" style="margin-bottom: 1.5rem;">
+                            <canvas id="colorWheel" width="300" height="300" style="border: 2px solid #e5e7eb; border-radius: 50%; cursor: crosshair;"></canvas>
+                        </div>
+                        
+                        <div class="color-inputs" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1rem;">
+                            <div>
+                                <label for="hexInput" style="font-size: 0.9rem;">HEX Color:</label>
+                                <input type="text" id="hexInput" class="form-control" placeholder="#FF5733" maxlength="7">
+                            </div>
+                            <div>
+                                <label for="colorName" style="font-size: 0.9rem;">Color Name:</label>
+                                <input type="text" id="colorName" class="form-control" placeholder="Orange Red" readonly>
+                            </div>
+                        </div>
+                        
+                        <div class="rgb-sliders" style="margin-bottom: 1rem;">
+                            <div class="slider-group" style="margin-bottom: 0.5rem;">
+                                <label for="redSlider">Red: <span id="redValue">255</span></label>
+                                <input type="range" id="redSlider" min="0" max="255" value="255" style="width: 100%;">
+                            </div>
+                            <div class="slider-group" style="margin-bottom: 0.5rem;">
+                                <label for="greenSlider">Green: <span id="greenValue">87</span></label>
+                                <input type="range" id="greenSlider" min="0" max="255" value="87" style="width: 100%;">
+                            </div>
+                            <div class="slider-group" style="margin-bottom: 0.5rem;">
+                                <label for="blueSlider">Blue: <span id="blueValue">51</span></label>
+                                <input type="range" id="blueSlider" min="0" max="255" value="51" style="width: 100%;">
+                            </div>
+                        </div>
+                        
+                        <button onclick="pickFromScreen()" class="btn" style="width: 100%;">Pick from Screen</button>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3>Color Information</h3>
+                        
+                        <div class="color-preview-large" style="margin-bottom: 1.5rem;">
+                            <div id="colorPreview" style="width: 100%; height: 150px; border: 2px solid #e5e7eb; border-radius: 8px; background: rgb(255, 87, 51); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">
+                                Selected Color
+                            </div>
+                        </div>
+                        
+                        <div class="color-formats" style="background: #f9fafb; padding: 1.5rem; border-radius: 8px;">
+                            <h4>Color Formats:</h4>
+                            <div style="display: grid; gap: 0.75rem; margin-top: 1rem;">
+                                <div class="format-item" style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: white; border-radius: 4px;">
+                                    <span>HEX:</span>
+                                    <code id="hexFormat" style="background: #f3f4f6; padding: 0.25rem 0.5rem; border-radius: 3px;">#FF5733</code>
+                                </div>
+                                <div class="format-item" style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: white; border-radius: 4px;">
+                                    <span>RGB:</span>
+                                    <code id="rgbFormat" style="background: #f3f4f6; padding: 0.25rem 0.5rem; border-radius: 3px;">rgb(255, 87, 51)</code>
+                                </div>
+                                <div class="format-item" style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: white; border-radius: 4px;">
+                                    <span>HSL:</span>
+                                    <code id="hslFormat" style="background: #f3f4f6; padding: 0.25rem 0.5rem; border-radius: 3px;">hsl(18, 100%, 60%)</code>
+                                </div>
+                                <div class="format-item" style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: white; border-radius: 4px;">
+                                    <span>CMYK:</span>
+                                    <code id="cmykFormat" style="background: #f3f4f6; padding: 0.25rem 0.5rem; border-radius: 3px;">cmyk(0%, 66%, 80%, 0%)</code>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                            <button onclick="copyHex()" class="btn btn-secondary" style="flex: 1;">Copy HEX</button>
+                            <button onclick="copyAllFormats()" class="btn btn-outline" style="flex: 1;">Copy All</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="color-palette" style="margin-top: 2rem;">
+                    <h3>Color Palette</h3>
+                    <div class="palette-controls" style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <button onclick="addToPalette()" class="btn btn-secondary">Add to Palette</button>
+                        <button onclick="clearPalette()" class="btn btn-outline">Clear Palette</button>
+                        <button onclick="exportPalette()" class="btn btn-outline">Export Palette</button>
+                    </div>
+                    <div id="colorPalette" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 0.5rem;">
+                        <!-- Palette colors will be added here -->
+                    </div>
+                </div>
+                
+                <div class="recent-colors" style="margin-top: 2rem;">
+                    <h3>Recent Colors</h3>
+                    <div id="recentColors" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 0.5rem;">
+                        <!-- Recent colors will be added here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 300x250</p>
+        </div>
+
+        <div class="tool-content">
+            <h3>How to Use Color Picker</h3>
+            <ol>
+                <li>Click on the color wheel to select a color</li>
+                <li>Use RGB sliders to fine-tune the color</li>
+                <li>Enter HEX code directly for precise colors</li>
+                <li>Click "Pick from Screen" to select colors from your screen</li>
+                <li>Add colors to your palette for later use</li>
+                <li>Copy color formats for use in your projects</li>
+            </ol>
+
+            <h4 class="mt-3">Features</h4>
+            <ul>
+                <li><strong>Interactive Color Wheel:</strong> Visual color selection</li>
+                <li><strong>Screen Picking:</strong> Pick colors from anywhere on screen</li>
+                <li><strong>Multiple Formats:</strong> HEX, RGB, HSL, CMYK support</li>
+                <li><strong>Color Palette:</strong> Save and organize colors</li>
+                <li><strong>Recent Colors:</strong> Quick access to recently used colors</li>
+                <li><strong>Real-time Preview:</strong> Live color visualization</li>
+            </ul>
+
+            <h4 class="mt-3">Common Use Cases</h4>
+            <ul>
+                <li><strong>Web Design:</strong> Select colors for websites and apps</li>
+                <li><strong>Graphic Design:</strong> Pick colors for logos and graphics</li>
+                <li><strong>Color Matching:</strong> Match colors from existing designs</li>
+                <li><strong>Theme Creation:</strong> Create color palettes for projects</li>
+                <li><strong>Development:</strong> Get color codes for CSS and development</li>
+            </ul>
+        </div>
+
+        <div class="tool-content">
+            <h3>Related Tools</h3>
+            <div class="related-tools" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="hex-to-rgb.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🎨 HEX to RGB</h4>
+                    <p style="margin: 0; color: #6b7280;">Convert HEX to RGB colors</p>
+                </a>
+                <a href="rgb-to-hex.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🎨 RGB to HEX</h4>
+                    <p style="margin: 0; color: #6b7280;">Convert RGB to HEX colors</p>
+                </a>
+                <a href="base64-encoder.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">📋 Base64 Encoder</h4>
+                    <p style="margin: 0; color: #6b7280;">Encode and decode data</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>How does the screen color picker work?</h4>
+                <p>The screen picker uses the EyeDropper API (when available) to select colors from anywhere on your screen. Click the button and then click on any color on your screen.</p>
+            </div>
+            <div class="faq-item">
+                <h4>What's the difference between RGB and HSL?</h4>
+                <p>RGB represents colors as Red, Green, and Blue values, while HSL represents them as Hue, Saturation, and Lightness. HSL is often more intuitive for human color perception.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can I save my color palettes?</h4>
+                <p>Yes! You can add colors to your palette and export them as text. The palette is stored in your browser's local storage.</p>
+            </div>
+            <div class="faq-item">
+                <h4>What is CMYK used for?</h4>
+                <p>CMYK (Cyan, Magenta, Yellow, Key/Black) is primarily used in printing and design for print materials.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🛠️ ToolMetric</h4>
+                    <p>Your trusted source for free online tools. We provide simple, fast, and secure tools for everyday use.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Color Tools</h4>
+                    <ul>
+                        <li><a href="color-picker.html">Color Picker</a></li>
+                        <li><a href="hex-to-rgb.html">HEX to RGB</a></li>
+                        <li><a href="rgb-to-hex.html">RGB to HEX</a></li>
+                        <li><a href="base64-encoder.html">Base64 Encoder</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>Have feedback or suggestions? We'd love to hear from you!</p>
+                    <a href="contact.html" class="btn btn-outline mt-2">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ToolMetric. All rights reserved. | <a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let currentColor = { r: 255, g: 87, b: 51 };
+        let colorPalette = [];
+        let recentColors = [];
+
+        function initColorWheel() {
+            const canvas = document.getElementById('colorWheel');
+            const ctx = canvas.getContext('2d');
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = Math.min(centerX, centerY) - 10;
+
+            // Draw color wheel
+            for (let angle = 0; angle < 360; angle += 1) {
+                const startAngle = (angle - 1) * Math.PI / 180;
+                const endAngle = angle * Math.PI / 180;
+                
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+                ctx.closePath();
+                
+                const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius);
+                gradient.addColorStop(0, `hsl(${angle}, 100%, 100%)`);
+                gradient.addColorStop(1, `hsl(${angle}, 100%, 50%)`);
+                
+                ctx.fillStyle = gradient;
+                ctx.fill();
+            }
+
+            // Add click event
+            canvas.addEventListener('click', function(e) {
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const dx = x - centerX;
+                const dy = y - centerY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance <= radius) {
+                    const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+                    const saturation = (distance / radius) * 100;
+                    const lightness = 50;
+                    
+                    const rgb = hslToRgb(angle, saturation, lightness);
+                    updateColor(rgb.r, rgb.g, rgb.b);
+                }
+            });
+        }
+
+        function hslToRgb(h, s, l) {
+            h = h / 360;
+            s = s / 100;
+            l = l / 100;
+            
+            let r, g, b;
+            
+            if (s === 0) {
+                r = g = b = l;
+            } else {
+                const hue2rgb = (p, q, t) => {
+                    if (t < 0) t += 1;
+                    if (t > 1) t -= 1;
+                    if (t < 1/6) return p + (q - p) * 6 * t;
+                    if (t < 1/2) return q;
+                    if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                    return p;
+                };
+                
+                const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                const p = 2 * l - q;
+                
+                r = hue2rgb(p, q, h + 1/3);
+                g = hue2rgb(p, q, h);
+                b = hue2rgb(p, q, h - 1/3);
+            }
+            
+            return {
+                r: Math.round(r * 255),
+                g: Math.round(g * 255),
+                b: Math.round(b * 255)
+            };
+        }
+
+        function rgbToHsl(r, g, b) {
+            r /= 255;
+            g /= 255;
+            b /= 255;
+            
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+            
+            if (max === min) {
+                h = s = 0;
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                
+                switch (max) {
+                    case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+                    case g: h = ((b - r) / d + 2) / 6; break;
+                    case b: h = ((r - g) / d + 4) / 6; break;
+                }
+            }
+            
+            return {
+                h: Math.round(h * 360),
+                s: Math.round(s * 100),
+                l: Math.round(l * 100)
+            };
+        }
+
+        function rgbToCmyk(r, g, b) {
+            r /= 255;
+            g /= 255;
+            b /= 255;
+            
+            const k = 1 - Math.max(r, g, b);
+            const c = (1 - r - k) / (1 - k) || 0;
+            const m = (1 - g - k) / (1 - k) || 0;
+            const y = (1 - b - k) / (1 - k) || 0;
+            
+            return {
+                c: Math.round(c * 100),
+                m: Math.round(m * 100),
+                y: Math.round(y * 100),
+                k: Math.round(k * 100)
+            };
+        }
+
+        function updateColor(r, g, b) {
+            currentColor = { r, g, b };
+            
+            // Update sliders
+            document.getElementById('redSlider').value = r;
+            document.getElementById('greenSlider').value = g;
+            document.getElementById('blueSlider').value = b;
+            document.getElementById('redValue').textContent = r;
+            document.getElementById('greenValue').textContent = g;
+            document.getElementById('blueValue').textContent = b;
+            
+            // Update inputs
+            document.getElementById('redInput').value = r;
+            document.getElementById('greenInput').value = g;
+            document.getElementById('blueInput').value = b;
+            
+            // Update HEX
+            const hex = rgbToHex(r, g, b);
+            document.getElementById('hexInput').value = hex;
+            document.getElementById('hexFormat').textContent = hex;
+            
+            // Update RGB
+            const rgbString = `rgb(${r}, ${g}, ${b})`;
+            document.getElementById('rgbFormat').textContent = rgbString;
+            
+            // Update HSL
+            const hsl = rgbToHsl(r, g, b);
+            const hslString = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+            document.getElementById('hslFormat').textContent = hslString;
+            
+            // Update CMYK
+            const cmyk = rgbToCmyk(r, g, b);
+            const cmykString = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
+            document.getElementById('cmykFormat').textContent = cmykString;
+            
+            // Update preview
+            document.getElementById('colorPreview').style.background = rgbString;
+            
+            // Update color name (simplified)
+            const colorName = getColorName(r, g, b);
+            document.getElementById('colorName').value = colorName;
+            
+            // Add to recent colors
+            addToRecentColors(hex);
+        }
+
+        function rgbToHex(r, g, b) {
+            return '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0').toUpperCase()).join('');
+        }
+
+        function getColorName(r, g, b) {
+            // Simplified color naming
+            const colors = {
+                'Black': [0, 0, 0],
+                'White': [255, 255, 255],
+                'Red': [255, 0, 0],
+                'Green': [0, 255, 0],
+                'Blue': [0, 0, 255],
+                'Yellow': [255, 255, 0],
+                'Cyan': [0, 255, 255],
+                'Magenta': [255, 0, 255],
+                'Orange': [255, 165, 0],
+                'Purple': [128, 0, 128],
+                'Pink': [255, 192, 203],
+                'Brown': [165, 42, 42],
+                'Gray': [128, 128, 128]
+            };
+            
+            let closestColor = 'Custom';
+            let minDistance = Infinity;
+            
+            for (const [name, rgb] of Object.entries(colors)) {
+                const distance = Math.sqrt(
+                    Math.pow(r - rgb[0], 2) +
+                    Math.pow(g - rgb[1], 2) +
+                    Math.pow(b - rgb[2], 2)
+                );
+                
+                if (distance < minDistance && distance < 100) {
+                    minDistance = distance;
+                    closestColor = name;
+                }
+            }
+            
+            return closestColor;
+        }
+
+        function pickFromScreen() {
+            if ('EyeDropper' in window) {
+                const eyeDropper = new EyeDropper();
+                eyeDropper.open().then(result => {
+                    const hex = result.sRGBHex;
+                    const r = parseInt(hex.substr(1, 2), 16);
+                    const g = parseInt(hex.substr(3, 2), 16);
+                    const b = parseInt(hex.substr(5, 2), 16);
+                    updateColor(r, g, b);
+                    showMessage('Color picked from screen', 'success');
+                }).catch(err => {
+                    showMessage('Screen picking failed', 'error');
+                });
+            } else {
+                showMessage('Screen picking not supported in this browser', 'error');
+            }
+        }
+
+        function addToPalette() {
+            const hex = rgbToHex(currentColor.r, currentColor.g, currentColor.b);
+            
+            if (!colorPalette.includes(hex)) {
+                colorPalette.push(hex);
+                updatePaletteDisplay();
+                savePalette();
+                showMessage('Color added to palette', 'success');
+            } else {
+                showMessage('Color already in palette', 'info');
+            }
+        }
+
+        function updatePaletteDisplay() {
+            const paletteDiv = document.getElementById('colorPalette');
+            paletteDiv.innerHTML = colorPalette.map(hex => `
+                <div style="background: ${hex}; width: 100%; height: 60px; border-radius: 4px; cursor: pointer; border: 2px solid #e5e7eb;" 
+                     onclick="selectPaletteColor('${hex}')" 
+                     title="${hex}">
+                </div>
+            `).join('');
+        }
+
+        function selectPaletteColor(hex) {
+            const r = parseInt(hex.substr(1, 2), 16);
+            const g = parseInt(hex.substr(3, 2), 16);
+            const b = parseInt(hex.substr(5, 2), 16);
+            updateColor(r, g, b);
+        }
+
+        function clearPalette() {
+            colorPalette = [];
+            updatePaletteDisplay();
+            savePalette();
+            showMessage('Palette cleared', 'info');
+        }
+
+        function exportPalette() {
+            if (colorPalette.length === 0) {
+                showMessage('Palette is empty', 'error');
+                return;
+            }
+            
+            const content = `Color Palette Export\n` +
+                          `==================\n` +
+                          `Exported: ${new Date().toLocaleString()}\n\n` +
+                          colorPalette.join('\n');
+            
+            downloadFile(content, 'color_palette_' + new Date().getTime() + '.txt');
+            showMessage('Palette exported successfully', 'success');
+        }
+
+        function addToRecentColors(hex) {
+            if (!recentColors.includes(hex)) {
+                recentColors.unshift(hex);
+                if (recentColors.length > 12) {
+                    recentColors.pop();
+                }
+                updateRecentColorsDisplay();
+                saveRecentColors();
+            }
+        }
+
+        function updateRecentColorsDisplay() {
+            const recentDiv = document.getElementById('recentColors');
+            recentDiv.innerHTML = recentColors.map(hex => `
+                <div style="background: ${hex}; width: 100%; height: 40px; border-radius: 4px; cursor: pointer; border: 2px solid #e5e7eb;" 
+                     onclick="selectPaletteColor('${hex}')" 
+                     title="${hex}">
+                </div>
+            `).join('');
+        }
+
+        function copyHex() {
+            const hex = document.getElementById('hexFormat').textContent;
+            copyToClipboard(hex);
+        }
+
+        function copyAllFormats() {
+            const formats = [
+                document.getElementById('hexFormat').textContent,
+                document.getElementById('rgbFormat').textContent,
+                document.getElementById('hslFormat').textContent,
+                document.getElementById('cmykFormat').textContent
+            ];
+            
+            const allFormats = formats.join('\n');
+            copyToClipboard(allFormats);
+        }
+
+        function savePalette() {
+            localStorage.setItem('colorPalette', JSON.stringify(colorPalette));
+        }
+
+        function loadPalette() {
+            const saved = localStorage.getItem('colorPalette');
+            if (saved) {
+                colorPalette = JSON.parse(saved);
+                updatePaletteDisplay();
+            }
+        }
+
+        function saveRecentColors() {
+            localStorage.setItem('recentColors', JSON.stringify(recentColors));
+        }
+
+        function loadRecentColors() {
+            const saved = localStorage.getItem('recentColors');
+            if (saved) {
+                recentColors = JSON.parse(saved);
+                updateRecentColorsDisplay();
+            }
+        }
+
+        // Event listeners
+        document.getElementById('hexInput').addEventListener('input', function() {
+            const hex = this.value.trim();
+            if (hex.match(/^#[0-9A-Fa-f]{6}$/)) {
+                const r = parseInt(hex.substr(1, 2), 16);
+                const g = parseInt(hex.substr(3, 2), 16);
+                const b = parseInt(hex.substr(5, 2), 16);
+                updateColor(r, g, b);
+            }
+        });
+
+        document.getElementById('redSlider').addEventListener('input', function() {
+            const r = parseInt(this.value);
+            const g = parseInt(document.getElementById('greenSlider').value);
+            const b = parseInt(document.getElementById('blueSlider').value);
+            updateColor(r, g, b);
+        });
+
+        document.getElementById('greenSlider').addEventListener('input', function() {
+            const r = parseInt(document.getElementById('redSlider').value);
+            const g = parseInt(this.value);
+            const b = parseInt(document.getElementById('blueSlider').value);
+            updateColor(r, g, b);
+        });
+
+        document.getElementById('blueSlider').addEventListener('input', function() {
+            const r = parseInt(document.getElementById('redSlider').value);
+            const g = parseInt(document.getElementById('greenSlider').value);
+            const b = parseInt(this.value);
+            updateColor(r, g, b);
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initColorWheel();
+            loadPalette();
+            loadRecentColors();
+            updateColor(255, 87, 51);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Encoder / Decoder - Encode & Decode URLs Online | ToolMetric</title>
+    <meta name="description" content="Free online URL encoder and decoder. Encode and decode URLs, query parameters, and special characters instantly. Perfect for web developers and URL handling.">
+    <meta name="keywords" content="URL encoder, URL decoder, encode URL, decode URL, percent encoding, online URL encoder, URL converter">
+    <meta name="author" content="ToolMetric">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="URL Encoder / Decoder - ToolMetric">
+    <meta property="og:description" content="Encode and decode URLs instantly">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolmetric.com/url-encoder.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🛠️ ToolMetric</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container tool-container">
+        <div class="tool-header">
+            <h1>URL Encoder / Decoder</h1>
+            <p class="tool-description">
+                Encode and decode URLs instantly with our comprehensive URL encoder/decoder tool. 
+                This essential utility for web developers handles URL encoding and decoding of special characters, 
+                query parameters, and entire URLs. Perfect for ensuring URLs are safe for transmission 
+                over the internet, handling API requests, or processing user input. Our tool supports 
+                percent encoding standards, automatically identifies characters that need encoding, 
+                and provides both individual character and full URL conversion. Whether you're working 
+                with web forms, API endpoints, or need to process user-submitted URLs, our converter 
+                ensures proper formatting and safe transmission. Simply enter your URL and watch it 
+                transform between encoded and decoded formats instantly.
+            </p>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 728x90</p>
+        </div>
+
+        <div class="tool-content">
+            <div class="mode-selector" style="text-align: center; margin-bottom: 2rem;">
+                <div class="btn-group" style="display: inline-flex; background: #f3f4f6; border-radius: 8px; padding: 4px;">
+                    <button id="encodeMode" class="btn" style="background: #2563eb; color: white; border: none;">Encode URL</button>
+                    <button id="decodeMode" class="btn btn-outline" style="background: transparent; border: none;">Decode URL</button>
+                </div>
+            </div>
+
+            <div class="url-controls">
+                <div class="control-buttons" style="display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                    <button onclick="processURL()" class="btn">Process</button>
+                    <button onclick="swapData()" class="btn btn-secondary">Swap Input/Output</button>
+                    <button onclick="clearURL()" class="btn btn-outline">Clear</button>
+                    <button onclick="loadSample()" class="btn btn-secondary">Load Sample</button>
+                </div>
+                
+                <div class="encoding-options" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+                    <div class="form-group">
+                        <label for="encodeSpaces">
+                            <input type="checkbox" id="encodeSpaces" checked style="margin-right: 0.5rem;">
+                            Encode Spaces
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="encodeSpecial">
+                            <input type="checkbox" id="encodeSpecial" checked style="margin-right: 0.5rem;">
+                            Encode Special Characters
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="encodeUnicode">
+                            <input type="checkbox" id="encodeUnicode" checked style="margin-right: 0.5rem;">
+                            Encode Unicode Characters
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="url-editor" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="input-section">
+                    <h3 id="inputLabel">Input URL</h3>
+                    <textarea id="inputURL" class="form-control" rows="20" placeholder="Enter URL here..."></textarea>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button onclick="copyInput()" class="btn btn-outline">Copy Input</button>
+                        <button onclick="validateURL()" class="btn btn-outline">Validate URL</button>
+                    </div>
+                </div>
+                
+                <div class="output-section">
+                    <h3 id="outputLabel">Encoded URL</h3>
+                    <div id="outputURL" style="background: #f9fafb; border: 2px solid #e5e7eb; border-radius: 8px; padding: 1rem; min-height: 400px; font-family: monospace; white-space: pre-wrap; overflow: auto; word-break: break-all;"></div>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button onclick="copyOutput()" class="btn btn-secondary">Copy Output</button>
+                        <button onclick="openURL()" class="btn btn-outline">Open URL</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="validationResult" class="validation-result" style="display: none; margin-top: 1rem;">
+                <!-- Validation results will be shown here -->
+            </div>
+
+            <div id="urlStats" class="url-stats" style="display: none; margin-top: 1rem;">
+                <h3>URL Statistics</h3>
+                <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #2563eb;" id="encodedChars">0</div>
+                        <div style="color: #6b7280;">Encoded Characters</div>
+                    </div>
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #10b981;" id="urlLength">0</div>
+                        <div style="color: #6b7280;">URL Length</div>
+                    </div>
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #f59e0b;" id="protocol">N/A</div>
+                        <div style="color: #6b7280;">Protocol</div>
+                    </div>
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #ef4444;" id="domain">N/A</div>
+                        <div style="color: #6b7280;">Domain</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 300x250</p>
+        </div>
+
+        <div class="tool-content">
+            <h3>How to Use URL Encoder / Decoder</h3>
+            <ol>
+                <li>Choose between "Encode URL" or "Decode URL" mode</li>
+                <li>Enter your URL in the input field</li>
+                <li>Select encoding options (spaces, special characters, unicode)</li>
+                <li>Click "Process" to convert the URL</li>
+                <li>View the converted result in the output field</li>
+                <li>Copy the result or open it in a new tab</li>
+            </ol>
+
+            <h4 class="mt-3">Features</h4>
+            <ul>
+                <li><strong>Bidirectional:</strong> Both encode and decode URLs</li>
+                <li><strong>Percent Encoding:</strong> Standard URL encoding format</li>
+                <li><strong>Character Options:</strong> Control which characters to encode</li>
+                <li><strong>URL Validation:</strong> Check URL format and structure</li>
+                <li><strong>Statistics:</strong> Analyze URL components and encoding</li>
+                <li><strong>Quick Actions:</strong> Copy, open, and swap functions</li>
+            </ul>
+
+            <h4 class="mt-3">Common Use Cases</h4>
+            <ul>
+                <li><strong>API Requests:</strong> Encode URLs for HTTP requests</li>
+                <li><strong>Web Forms:</strong> Process user-submitted URLs</li>
+                <li><strong>Query Parameters:</strong> Encode special characters in URLs</li>
+                <li><strong>URL Sharing:</strong> Ensure URLs are safe for transmission</li>
+                <li><strong>Database Storage:</strong> Store URLs in encoded format</li>
+            </ul>
+        </div>
+
+        <div class="tool-content">
+            <h3>Related Tools</h3>
+            <div class="related-tools" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="base64-encoder.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">📋 Base64 Encoder</h4>
+                    <p style="margin: 0; color: #6b7280;">Encode and decode Base64 data</p>
+                </a>
+                <a href="binary-to-text.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🔢 Binary to Text</h4>
+                    <p style="margin: 0; color: #6b7280;">Convert binary to text</p>
+                </a>
+                <a href="text-to-binary.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🔤 Text to Binary</h4>
+                    <p style="margin: 0; color: #6b7280;">Convert text to binary</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>What is URL encoding?</h4>
+                <p>URL encoding converts special characters into a format safe for transmission over the internet using percent-encoding (%XX format).</p>
+            </div>
+            <div class="faq-item">
+                <h4>Which characters need to be encoded in URLs?</h4>
+                <p>Characters like spaces, quotes, ampersands, question marks, and other special characters need to be encoded for safe URL transmission.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Is URL encoding reversible?</h4>
+                <p>Yes, URL encoding is completely reversible. The decode function converts percent-encoded characters back to their original form.</p>
+            </div>
+            <div class="faq-item">
+                <h4>When should I encode URLs?</h4>
+                <p>Encode URLs when using them in query parameters, form submissions, API requests, or when they contain special characters.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🛠️ ToolMetric</h4>
+                    <p>Your trusted source for free online tools. We provide simple, fast, and secure tools for everyday use.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Encoder Tools</h4>
+                    <ul>
+                        <li><a href="url-encoder.html">URL Encoder</a></li>
+                        <li><a href="base64-encoder.html">Base64 Encoder</a></li>
+                        <li><a href="binary-to-text.html">Binary to Text</a></li>
+                        <li><a href="hex-to-rgb.html">HEX to RGB</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>Have feedback or suggestions? We'd love to hear from you!</p>
+                    <a href="contact.html" class="btn btn-outline mt-2">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ToolMetric. All rights reserved. | <a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let isEncodeMode = true;
+
+        // Mode switching
+        document.getElementById('encodeMode').addEventListener('click', function() {
+            isEncodeMode = true;
+            this.style.background = '#2563eb';
+            this.style.color = 'white';
+            document.getElementById('decodeMode').style.background = 'transparent';
+            document.getElementById('decodeMode').style.color = '#1f2937';
+            updateLabels();
+        });
+
+        document.getElementById('decodeMode').addEventListener('click', function() {
+            isEncodeMode = false;
+            this.style.background = '#2563eb';
+            this.style.color = 'white';
+            document.getElementById('encodeMode').style.background = 'transparent';
+            document.getElementById('encodeMode').style.color = '#1f2937';
+            updateLabels();
+        });
+
+        function updateLabels() {
+            if (isEncodeMode) {
+                document.getElementById('inputLabel').textContent = 'Input URL';
+                document.getElementById('outputLabel').textContent = 'Encoded URL';
+            } else {
+                document.getElementById('inputLabel').textContent = 'Encoded URL';
+                document.getElementById('outputLabel').textContent = 'Decoded URL';
+            }
+        }
+
+        function processURL() {
+            const input = document.getElementById('inputURL').value.trim();
+            
+            if (!input) {
+                showMessage('Please enter a URL to process', 'error');
+                return;
+            }
+            
+            try {
+                let output;
+                const encodeSpaces = document.getElementById('encodeSpaces').checked;
+                const encodeSpecial = document.getElementById('encodeSpecial').checked;
+                const encodeUnicode = document.getElementById('encodeUnicode').checked;
+                
+                if (isEncodeMode) {
+                    output = encodeURL(input, encodeSpaces, encodeSpecial, encodeUnicode);
+                } else {
+                    output = decodeURL(input);
+                }
+                
+                document.getElementById('outputURL').textContent = output;
+                document.getElementById('outputURL').style.color = '#1f2937';
+                
+                calculateStatistics(output);
+                showValidation(true, `URL ${isEncodeMode ? 'encoded' : 'decoded'} successfully!`);
+                showMessage(`URL ${isEncodeMode ? 'encoded' : 'decoded'} successfully`, 'success');
+            } catch (error) {
+                showValidation(false, 'Error: ' + error.message);
+                document.getElementById('outputURL').textContent = input;
+                document.getElementById('outputURL').style.color = '#ef4444';
+                showMessage('Processing failed', 'error');
+            }
+        }
+
+        function encodeURL(url, encodeSpaces, encodeSpecial, encodeUnicode) {
+            if (encodeSpaces) {
+                url = url.replace(/ /g, '%20');
+            }
+            
+            if (encodeSpecial) {
+                // Encode special characters that commonly need encoding
+                url = url.replace(/[#?&=+$]/g, char => '%' + char.charCodeAt(0).toString(16).toUpperCase());
+                url = url.replace(/[<>"']/g, char => '%' + char.charCodeAt(0).toString(16).toUpperCase());
+            }
+            
+            if (encodeUnicode) {
+                // Encode all non-ASCII characters
+                url = url.replace(/[^\x00-\x7F]/g, char => {
+                    return encodeURIComponent(char);
+                });
+            }
+            
+            return url;
+        }
+
+        function decodeURL(url) {
+            try {
+                return decodeURIComponent(url);
+            } catch (error) {
+                // Fallback for partial decoding
+                return url.replace(/%[0-9A-Fa-f]{2}/g, match => {
+                    return String.fromCharCode(parseInt(match.substr(1), 16));
+                });
+            }
+        }
+
+        function calculateStatistics(url) {
+            const encodedChars = (url.match(/%[0-9A-Fa-f]{2}/g) || []).length;
+            const urlLength = url.length;
+            
+            let protocol = 'N/A';
+            let domain = 'N/A';
+            
+            try {
+                const urlObj = new URL(url);
+                protocol = urlObj.protocol;
+                domain = urlObj.hostname;
+            } catch (e) {
+                // Try to extract protocol and domain manually
+                const protocolMatch = url.match(/^(https?):\/\//);
+                if (protocolMatch) {
+                    protocol = protocolMatch[1] + '://';
+                    const domainMatch = url.match(/\/\/([^\/:]+)/);
+                    if (domainMatch) {
+                        domain = domainMatch[1];
+                    }
+                }
+            }
+            
+            document.getElementById('encodedChars').textContent = encodedChars;
+            document.getElementById('urlLength').textContent = urlLength;
+            document.getElementById('protocol').textContent = protocol;
+            document.getElementById('domain').textContent = domain;
+            document.getElementById('urlStats').style.display = 'block';
+        }
+
+        function showValidation(isValid, message) {
+            const resultDiv = document.getElementById('validationResult');
+            resultDiv.style.display = 'block';
+            
+            if (isValid) {
+                resultDiv.innerHTML = `
+                    <div class="message success">
+                        <h4>✅ ${message}</h4>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="message error">
+                        <h4>❌ ${message}</h4>
+                    </div>
+                `;
+            }
+        }
+
+        function validateURL() {
+            const input = document.getElementById('inputURL').value.trim();
+            
+            if (!input) {
+                showMessage('Please enter a URL to validate', 'error');
+                return;
+            }
+            
+            try {
+                new URL(input);
+                showValidation(true, 'URL format is valid!');
+                showMessage('URL validation successful', 'success');
+            } catch (error) {
+                showValidation(false, 'Invalid URL format: ' + error.message);
+                showMessage('URL validation failed', 'error');
+            }
+        }
+
+        function swapData() {
+            const input = document.getElementById('inputURL').value;
+            const output = document.getElementById('outputURL').textContent;
+            
+            document.getElementById('inputURL').value = output;
+            document.getElementById('outputURL').textContent = input;
+            
+            // Switch mode
+            if (isEncodeMode) {
+                document.getElementById('decodeMode').click();
+            } else {
+                document.getElementById('encodeMode').click();
+            }
+            
+            showMessage('Data swapped and mode changed', 'info');
+        }
+
+        function clearURL() {
+            document.getElementById('inputURL').value = '';
+            document.getElementById('outputURL').textContent = '';
+            document.getElementById('validationResult').style.display = 'none';
+            document.getElementById('urlStats').style.display = 'none';
+            showMessage('URL cleared', 'info');
+        }
+
+        function loadSample() {
+            const sampleURL = 'https://example.com/search?q=hello world&category=web development&lang=en';
+            document.getElementById('inputURL').value = sampleURL;
+            showMessage('Sample URL loaded', 'success');
+        }
+
+        function copyInput() {
+            const input = document.getElementById('inputURL').value;
+            if (!input) {
+                showMessage('No input to copy', 'error');
+                return;
+            }
+            copyToClipboard(input);
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('outputURL').textContent;
+            if (!output) {
+                showMessage('No output to copy', 'error');
+                return;
+            }
+            copyToClipboard(output);
+        }
+
+        function openURL() {
+            const output = document.getElementById('outputURL').textContent;
+            if (!output) {
+                showMessage('No URL to open', 'error');
+                return;
+            }
+            
+            try {
+                window.open(output, '_blank');
+                showMessage('URL opened in new tab', 'success');
+            } catch (error) {
+                showMessage('Error opening URL', 'error');
+            }
+        }
+
+        // Initialize
+        updateLabels();
+    </script>
+</body>
+</html>

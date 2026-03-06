@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Encoder / Decoder - Encode & Decode Base64 Online | ToolMetric</title>
+    <meta name="description" content="Free online Base64 encoder and decoder. Encode and decode text, files, and data to/from Base64 format instantly. Perfect for developers and data encoding.">
+    <meta name="keywords" content="Base64 encoder, Base64 decoder, encode Base64, decode Base64, online Base64 tool, Base64 conversion">
+    <meta name="author" content="ToolMetric">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Base64 Encoder / Decoder - ToolMetric">
+    <meta property="og:description" content="Encode and decode Base64 data instantly">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolmetric.com/base64-encoder.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🛠️ ToolMetric</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container tool-container">
+        <div class="tool-header">
+            <h1>Base64 Encoder / Decoder</h1>
+            <p class="tool-description">
+                Encode and decode Base64 data instantly with our comprehensive Base64 encoder/decoder tool. 
+                This essential utility for developers handles text, files, and binary data conversion to and from 
+                Base64 format. Perfect for encoding images for HTML embedding, transmitting data safely over 
+                networks, or storing binary data in text format. Our tool supports both encoding and decoding 
+                with automatic format detection and validation. Whether you're working with API data, email attachments, 
+                or need to embed images in web pages, our Base64 converter provides fast, reliable conversion 
+                with error checking and proper formatting. Simply paste your data or upload a file, and watch it 
+                transform instantly between Base64 and original format.
+            </p>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 728x90</p>
+        </div>
+
+        <div class="tool-content">
+            <div class="mode-selector" style="text-align: center; margin-bottom: 2rem;">
+                <div class="btn-group" style="display: inline-flex; background: #f3f4f6; border-radius: 8px; padding: 4px;">
+                    <button id="encodeMode" class="btn" style="background: #2563eb; color: white; border: none;">Encode to Base64</button>
+                    <button id="decodeMode" class="btn btn-outline" style="background: transparent; border: none;">Decode from Base64</button>
+                </div>
+            </div>
+
+            <div class="base64-controls">
+                <div class="control-buttons" style="display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                    <button onclick="processBase64()" class="btn">Process</button>
+                    <button onclick="swapData()" class="btn btn-secondary">Swap Input/Output</button>
+                    <button onclick="clearData()" class="btn btn-outline">Clear</button>
+                    <button onclick="loadSample()" class="btn btn-secondary">Load Sample</button>
+                </div>
+                
+                <div class="file-upload-section" style="margin-bottom: 1rem;">
+                    <button onclick="uploadFile()" class="btn btn-outline">Upload File</button>
+                    <input type="file" id="fileInput" style="display: none;" onchange="handleFileUpload(event)">
+                    <span id="fileName" style="margin-left: 1rem; color: #6b7280;"></span>
+                </div>
+            </div>
+
+            <div class="base64-editor" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="input-section">
+                    <h3 id="inputLabel">Input Data</h3>
+                    <textarea id="inputData" class="form-control" rows="20" placeholder="Enter text or Base64 data here..."></textarea>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button onclick="copyInput()" class="btn btn-outline">Copy Input</button>
+                        <button onclick="downloadInput()" class="btn btn-outline">Download Input</button>
+                    </div>
+                </div>
+                
+                <div class="output-section">
+                    <h3 id="outputLabel">Output Data</h3>
+                    <div id="outputData" style="background: #f9fafb; border: 2px solid #e5e7eb; border-radius: 8px; padding: 1rem; min-height: 400px; font-family: monospace; white-space: pre-wrap; overflow: auto; word-break: break-all;"></div>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button onclick="copyOutput()" class="btn btn-secondary">Copy Output</button>
+                        <button onclick="downloadOutput()" class="btn btn-outline">Download Output</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="validationResult" class="validation-result" style="display: none; margin-top: 1rem;">
+                <!-- Validation results will be shown here -->
+            </div>
+
+            <div id="base64Stats" class="base64-stats" style="display: none; margin-top: 1rem;">
+                <h3>Data Statistics</h3>
+                <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #2563eb;" id="inputSize">0</div>
+                        <div style="color: #6b7280;">Input Size</div>
+                    </div>
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #10b981;" id="outputSize">0</div>
+                        <div style="color: #6b7280;">Output Size</div>
+                    </div>
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #f59e0b;" id="sizeRatio">0%</div>
+                        <div style="color: #6b7280;">Size Ratio</div>
+                    </div>
+                    <div class="stat-item" style="background: #f9fafb; padding: 1rem; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #ef4444;" id="dataType">Text</div>
+                        <div style="color: #6b7280;">Data Type</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 300x250</p>
+        </div>
+
+        <div class="tool-content">
+            <h3>How to Use Base64 Encoder / Decoder</h3>
+            <ol>
+                <li>Choose between "Encode to Base64" or "Decode from Base64" mode</li>
+                <li>Enter your text or Base64 data in the input field, or upload a file</li>
+                <li>Click "Process" to convert the data</li>
+                <li>View the converted result in the output field</li>
+                <li>Copy the result or download it as a file</li>
+                <li>Use "Swap Input/Output" to quickly reverse the conversion</li>
+            </ol>
+
+            <h4 class="mt-3">Features</h4>
+            <ul>
+                <li><strong>Bidirectional:</strong> Both encode and decode Base64 data</li>
+                <li><strong>File Support:</strong> Upload files for direct conversion</li>
+                <li><strong>Auto Detection:</strong> Automatically detects Base64 format</li>
+                <li><strong>Validation:</strong> Checks for valid Base64 data</li>
+                <li><strong>Statistics:</strong> Shows size information and compression ratio</li>
+                <li><strong>Swap Function:</strong> Quickly swap input and output data</li>
+            </ul>
+
+            <h4 class="mt-3">Common Use Cases</h4>
+            <ul>
+                <li><strong>Image Embedding:</strong> Embed images in HTML/CSS using Base64</li>
+                <li><strong>Data Transmission:</strong> Safely transmit binary data as text</li>
+                <li><strong>Email Attachments:</strong> Encode email attachments</li>
+                <li><strong>API Integration:</strong> Encode data for API requests</li>
+                <li><strong>Configuration Files:</strong> Store binary data in text format</li>
+            </ul>
+        </div>
+
+        <div class="tool-content">
+            <h3>Related Tools</h3>
+            <div class="related-tools" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="url-encoder.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🔗 URL Encoder</h4>
+                    <p style="margin: 0; color: #6b7280;">Encode and decode URLs</p>
+                </a>
+                <a href="binary-to-text.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🔢 Binary to Text</h4>
+                    <p style="margin: 0; color: #6b7280;">Convert binary to text</p>
+                </a>
+                <a href="hex-to-rgb.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🎨 HEX to RGB</h4>
+                    <p style="margin: 0; color: #6b7280;">Convert HEX colors to RGB</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>What is Base64 encoding?</h4>
+                <p>Base64 is an encoding scheme that converts binary data into ASCII text format, making it safe to transmit data over text-based protocols.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Does Base64 encoding compress data?</h4>
+                <p>No, Base64 actually increases data size by about 33%. It's used for safe transmission, not compression.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Is Base64 encoding secure?</h4>
+                <p>Base64 is not encryption - it's easily reversible. Use it for encoding, not for security purposes.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can I encode any type of file?</h4>
+                <p>Yes, Base64 can encode any binary data including images, documents, audio, and video files.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🛠️ ToolMetric</h4>
+                    <p>Your trusted source for free online tools. We provide simple, fast, and secure tools for everyday use.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Encoder Tools</h4>
+                    <ul>
+                        <li><a href="base64-encoder.html">Base64 Encoder</a></li>
+                        <li><a href="url-encoder.html">URL Encoder</a></li>
+                        <li><a href="binary-to-text.html">Binary to Text</a></li>
+                        <li><a href="hex-to-rgb.html">HEX to RGB</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>Have feedback or suggestions? We'd love to hear from you!</p>
+                    <a href="contact.html" class="btn btn-outline mt-2">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ToolMetric. All rights reserved. | <a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let isEncodeMode = true;
+        let currentFile = null;
+
+        // Mode switching
+        document.getElementById('encodeMode').addEventListener('click', function() {
+            isEncodeMode = true;
+            this.style.background = '#2563eb';
+            this.style.color = 'white';
+            document.getElementById('decodeMode').style.background = 'transparent';
+            document.getElementById('decodeMode').style.color = '#1f2937';
+            updateLabels();
+        });
+
+        document.getElementById('decodeMode').addEventListener('click', function() {
+            isEncodeMode = false;
+            this.style.background = '#2563eb';
+            this.style.color = 'white';
+            document.getElementById('encodeMode').style.background = 'transparent';
+            document.getElementById('encodeMode').style.color = '#1f2937';
+            updateLabels();
+        });
+
+        function updateLabels() {
+            if (isEncodeMode) {
+                document.getElementById('inputLabel').textContent = 'Input Data';
+                document.getElementById('outputLabel').textContent = 'Base64 Output';
+            } else {
+                document.getElementById('inputLabel').textContent = 'Base64 Input';
+                document.getElementById('outputLabel').textContent = 'Decoded Output';
+            }
+        }
+
+        function processBase64() {
+            const input = document.getElementById('inputData').value.trim();
+            
+            if (!input) {
+                showMessage('Please enter data to process', 'error');
+                return;
+            }
+            
+            try {
+                let output;
+                let dataType = 'Text';
+                
+                if (isEncodeMode) {
+                    // Encode to Base64
+                    if (currentFile) {
+                        output = btoa(new Uint8Array(currentFile).reduce((data, byte) => data + String.fromCharCode(byte), ''));
+                        dataType = currentFile.type || 'Binary';
+                    } else {
+                        output = btoa(unescape(encodeURIComponent(input)));
+                        dataType = 'Text';
+                    }
+                } else {
+                    // Decode from Base64
+                    if (!isValidBase64(input)) {
+                        throw new Error('Invalid Base64 format');
+                    }
+                    output = decodeURIComponent(escape(atob(input)));
+                    dataType = 'Text';
+                }
+                
+                document.getElementById('outputData').textContent = output;
+                document.getElementById('outputData').style.color = '#1f2937';
+                
+                calculateStatistics(input, output, dataType);
+                showValidation(true, `Data ${isEncodeMode ? 'encoded' : 'decoded'} successfully!`);
+                showMessage(`Data ${isEncodeMode ? 'encoded' : 'decoded'} successfully`, 'success');
+            } catch (error) {
+                showValidation(false, 'Error: ' + error.message);
+                document.getElementById('outputData').textContent = input;
+                document.getElementById('outputData').style.color = '#ef4444';
+                showMessage('Processing failed', 'error');
+            }
+        }
+
+        function isValidBase64(str) {
+            try {
+                return btoa(atob(str)) === str;
+            } catch (err) {
+                return false;
+            }
+        }
+
+        function calculateStatistics(input, output, dataType) {
+            const inputSize = new Blob([input]).size;
+            const outputSize = new Blob([output]).size;
+            const sizeRatio = inputSize > 0 ? Math.round((outputSize / inputSize) * 100) : 0;
+            
+            document.getElementById('inputSize').textContent = formatBytes(inputSize);
+            document.getElementById('outputSize').textContent = formatBytes(outputSize);
+            document.getElementById('sizeRatio').textContent = sizeRatio + '%';
+            document.getElementById('dataType').textContent = dataType;
+            document.getElementById('base64Stats').style.display = 'block';
+        }
+
+        function showValidation(isValid, message) {
+            const resultDiv = document.getElementById('validationResult');
+            resultDiv.style.display = 'block';
+            
+            if (isValid) {
+                resultDiv.innerHTML = `
+                    <div class="message success">
+                        <h4>✅ ${message}</h4>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="message error">
+                        <h4>❌ ${message}</h4>
+                    </div>
+                `;
+            }
+        }
+
+        function swapData() {
+            const input = document.getElementById('inputData').value;
+            const output = document.getElementById('outputData').textContent;
+            
+            document.getElementById('inputData').value = output;
+            document.getElementById('outputData').textContent = input;
+            
+            // Switch mode
+            if (isEncodeMode) {
+                document.getElementById('decodeMode').click();
+            } else {
+                document.getElementById('encodeMode').click();
+            }
+            
+            showMessage('Data swapped and mode changed', 'info');
+        }
+
+        function clearData() {
+            document.getElementById('inputData').value = '';
+            document.getElementById('outputData').textContent = '';
+            document.getElementById('validationResult').style.display = 'none';
+            document.getElementById('base64Stats').style.display = 'none';
+            document.getElementById('fileName').textContent = '';
+            currentFile = null;
+            showMessage('Data cleared', 'info');
+        }
+
+        function loadSample() {
+            const sampleText = 'Hello, World! This is a sample text for Base64 encoding demonstration.';
+            document.getElementById('inputData').value = sampleText;
+            document.getElementById('fileName').textContent = '';
+            currentFile = null;
+            showMessage('Sample data loaded', 'success');
+        }
+
+        function copyInput() {
+            const input = document.getElementById('inputData').value;
+            if (!input) {
+                showMessage('No input to copy', 'error');
+                return;
+            }
+            copyToClipboard(input);
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('outputData').textContent;
+            if (!output) {
+                showMessage('No output to copy', 'error');
+                return;
+            }
+            copyToClipboard(output);
+        }
+
+        function downloadInput() {
+            const input = document.getElementById('inputData').value;
+            if (!input) {
+                showMessage('No input to download', 'error');
+                return;
+            }
+            
+            const filename = isEncodeMode ? 'input_data.txt' : 'base64_input.txt';
+            downloadFile(input, filename);
+        }
+
+        function downloadOutput() {
+            const output = document.getElementById('outputData').textContent;
+            if (!output) {
+                showMessage('No output to download', 'error');
+                return;
+            }
+            
+            const filename = isEncodeMode ? 'base64_output.txt' : 'decoded_output.txt';
+            downloadFile(output, filename);
+        }
+
+        function uploadFile() {
+            document.getElementById('fileInput').click();
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const arrayBuffer = e.target.result;
+                currentFile = new Uint8Array(arrayBuffer);
+                
+                // Display file info
+                document.getElementById('fileName').textContent = `File: ${file.name} (${formatBytes(file.size)})`;
+                
+                // Clear input and prepare for encoding
+                document.getElementById('inputData').value = '';
+                
+                // Auto-switch to encode mode if not already
+                if (!isEncodeMode) {
+                    document.getElementById('encodeMode').click();
+                }
+                
+                showMessage('File uploaded successfully', 'success');
+            };
+            reader.onerror = function() {
+                showMessage('Error reading file', 'error');
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        // Initialize
+        updateLabels();
+    </script>
+</body>
+</html>

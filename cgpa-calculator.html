@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free CGPA Calculator for Engineering Students | Calculate GPA Online | ToolMetric</title>
+    <meta name="description" content="Calculate CGPA instantly with our free engineering calculator. Support for multiple semesters & grading systems. Accurate & mobile-friendly.">
+    <meta name="keywords" content="CGPA calculator, engineering CGPA, grade point average, GPA calculator, semester grades, academic calculator">
+    <meta name="author" content="ToolMetric">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Free CGPA Calculator for Engineering Students | ToolMetric">
+    <meta property="og:description" content="Calculate CGPA instantly with our free engineering calculator. Support for multiple semesters & grading systems.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolmetric.com/cgpa-calculator">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "CGPA Calculator",
+        "description": "Free online CGPA calculator for engineering students with support for multiple semesters and grading systems",
+        "url": "https://toolmetric.com/cgpa-calculator",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "ToolMetric"
+        }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🛠️ ToolMetric</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container tool-container">
+        <div class="tool-header">
+            <h1>CGPA Calculator for Engineering Students</h1>
+            <p class="tool-description">
+                Calculate your Cumulative Grade Point Average (CGPA) effortlessly with our comprehensive engineering CGPA calculator. 
+                This tool supports multiple semesters, different credit systems, and various grading scales including 10-point and 4-point GPA systems. 
+                Perfect for engineering students who need to track their academic performance across semesters. 
+                Simply enter your grades and credits for each semester, and get instant CGPA results with detailed breakdowns.
+            </p>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 728x90</p>
+        </div>
+
+        <div class="tool-content">
+            <div class="form-group">
+                <label for="gradingSystem">Select Grading System:</label>
+                <select id="gradingSystem" class="form-control">
+                    <option value="10">10-Point Scale (Most Common)</option>
+                    <option value="4">4-Point Scale</option>
+                    <option value="5">5-Point Scale</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="numSemesters">Number of Semesters:</label>
+                <input type="number" id="numSemesters" class="form-control" min="1" max="12" value="1">
+                <button onclick="generateSemesterFields()" class="btn btn-secondary mt-2">Generate Fields</button>
+            </div>
+
+            <div id="semesterFields">
+                <!-- Semester fields will be generated here -->
+            </div>
+
+            <div class="text-center mt-4">
+                <button onclick="calculateCGPA()" class="btn">Calculate CGPA</button>
+                <button onclick="resetCalculator()" class="btn btn-outline ml-2">Reset</button>
+            </div>
+
+            <div id="result" class="result-box" style="display: none;">
+                <h3>CGPA Result</h3>
+                <div id="cgpaResult"></div>
+                <div id="percentageResult"></div>
+                <div id="gradeResult"></div>
+                <div id="detailsResult"></div>
+            </div>
+        </div>
+
+        <div class="tool-content mt-4">
+            <h3>How to Use CGPA Calculator</h3>
+            <ol>
+                <li>Select your grading system (10-point, 4-point, or 5-point scale)</li>
+                <li>Enter the number of semesters you want to calculate</li>
+                <li>For each semester, enter your SGPA/CGPA and total credits</li>
+                <li>Click "Calculate CGPA" to get your cumulative result</li>
+                <li>View your CGPA, equivalent percentage, and grade classification</li>
+            </ol>
+
+            <h4 class="mt-3">Grade Classification (10-Point System)</h4>
+            <ul>
+                <li><strong>9.0 - 10.0:</strong> Outstanding (O)</li>
+                <li><strong>8.0 - 8.9:</strong> Excellent (A+)</li>
+                <li><strong>7.0 - 7.9:</strong> Very Good (A)</li>
+                <li><strong>6.0 - 6.9:</strong> Good (B+)</li>
+                <li><strong>5.0 - 5.9:</strong> Average (B)</li>
+                <li><strong>4.0 - 4.9:</strong> Pass (C)</li>
+                <li><strong>Below 4.0:</strong> Fail (F)</li>
+            </ul>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 300x250</p>
+        </div>
+
+        <div class="tool-content">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>What is CGPA?</h4>
+                <p>CGPA (Cumulative Grade Point Average) is the average of grade points obtained in all subjects excluding additional subjects as per Scheme of studies.</p>
+            </div>
+            <div class="faq-item">
+                <h4>How is CGPA calculated?</h4>
+                <p>CGPA is calculated by dividing the sum of grade points multiplied by credits for all subjects by the total number of credits.</p>
+            </div>
+            <div class="faq-item">
+                <h4>How to convert CGPA to percentage?</h4>
+                <p>For most engineering universities, Percentage = CGPA × 10. However, some universities use different conversion formulas.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🛠️ ToolMetric</h4>
+                    <p>Your trusted source for free online tools. We provide simple, fast, and secure tools for everyday use.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Academic Tools</h4>
+                    <ul>
+                        <li><a href="cgpa-calculator.html">CGPA Calculator</a></li>
+                        <li><a href="attendance-calculator.html">Attendance Calculator</a></li>
+                        <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+                        <li><a href="word-counter.html">Word Counter</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>Have feedback or suggestions? We'd love to hear from you!</p>
+                    <a href="contact.html" class="btn btn-outline mt-2">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ToolMetric. All rights reserved. | <a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function generateSemesterFields() {
+            const numSemesters = parseInt(document.getElementById('numSemesters').value);
+            const container = document.getElementById('semesterFields');
+            container.innerHTML = '';
+
+            for (let i = 1; i <= numSemesters; i++) {
+                const semesterDiv = document.createElement('div');
+                semesterDiv.className = 'semester-group';
+                semesterDiv.innerHTML = `
+                    <h4>Semester ${i}</h4>
+                    <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label for="sgpa${i}">SGPA/GPA:</label>
+                            <input type="number" id="sgpa${i}" class="form-control" step="0.01" min="0" max="10" placeholder="Enter SGPA">
+                        </div>
+                        <div class="form-group">
+                            <label for="credits${i}">Total Credits:</label>
+                            <input type="number" id="credits${i}" class="form-control" min="1" max="50" placeholder="Enter credits">
+                        </div>
+                    </div>
+                `;
+                container.appendChild(semesterDiv);
+            }
+        }
+
+        function calculateCGPA() {
+            const numSemesters = parseInt(document.getElementById('numSemesters').value);
+            const gradingSystem = document.getElementById('gradingSystem').value;
+            
+            let totalGradePoints = 0;
+            let totalCredits = 0;
+            let validData = true;
+
+            for (let i = 1; i <= numSemesters; i++) {
+                const sgpa = parseFloat(document.getElementById(`sgpa${i}`).value);
+                const credits = parseInt(document.getElementById(`credits${i}`).value);
+
+                if (isNaN(sgpa) || isNaN(credits) || sgpa < 0 || credits <= 0) {
+                    showMessage('Please enter valid SGPA and credits for all semesters', 'error');
+                    validData = false;
+                    break;
+                }
+
+                // Validate SGPA range based on grading system
+                const maxGrade = parseFloat(gradingSystem);
+                if (sgpa > maxGrade) {
+                    showMessage(`SGPA cannot exceed ${maxGrade} for ${gradingSystem}-point system`, 'error');
+                    validData = false;
+                    break;
+                }
+
+                totalGradePoints += sgpa * credits;
+                totalCredits += credits;
+            }
+
+            if (!validData) return;
+
+            const cgpa = totalGradePoints / totalCredits;
+            const percentage = calculatePercentage(cgpa, gradingSystem);
+            const grade = getGrade(cgpa, gradingSystem);
+
+            displayResult(cgpa, percentage, grade, totalCredits, numSemesters);
+        }
+
+        function calculatePercentage(cgpa, gradingSystem) {
+            // Different conversion formulas based on grading system
+            switch(gradingSystem) {
+                case '10':
+                    return cgpa * 10;
+                case '4':
+                    return (cgpa / 4) * 100;
+                case '5':
+                    return (cgpa / 5) * 100;
+                default:
+                    return cgpa * 10;
+            }
+        }
+
+        function getGrade(cgpa, gradingSystem) {
+            if (gradingSystem === '10') {
+                if (cgpa >= 9.0) return { grade: 'O', description: 'Outstanding' };
+                if (cgpa >= 8.0) return { grade: 'A+', description: 'Excellent' };
+                if (cgpa >= 7.0) return { grade: 'A', description: 'Very Good' };
+                if (cgpa >= 6.0) return { grade: 'B+', description: 'Good' };
+                if (cgpa >= 5.0) return { grade: 'B', description: 'Average' };
+                if (cgpa >= 4.0) return { grade: 'C', description: 'Pass' };
+                return { grade: 'F', description: 'Fail' };
+            } else if (gradingSystem === '4') {
+                if (cgpa >= 3.7) return { grade: 'A', description: 'Excellent' };
+                if (cgpa >= 3.0) return { grade: 'B', description: 'Good' };
+                if (cgpa >= 2.0) return { grade: 'C', description: 'Average' };
+                if (cgpa >= 1.0) return { grade: 'D', description: 'Pass' };
+                return { grade: 'F', description: 'Fail' };
+            } else {
+                if (cgpa >= 4.5) return { grade: 'A', description: 'Excellent' };
+                if (cgpa >= 3.5) return { grade: 'B', description: 'Good' };
+                if (cgpa >= 2.5) return { grade: 'C', description: 'Average' };
+                if (cgpa >= 1.5) return { grade: 'D', description: 'Pass' };
+                return { grade: 'F', description: 'Fail' };
+            }
+        }
+
+        function displayResult(cgpa, percentage, grade, totalCredits, numSemesters) {
+            const resultDiv = document.getElementById('result');
+            const cgpaResult = document.getElementById('cgpaResult');
+            const percentageResult = document.getElementById('percentageResult');
+            const gradeResult = document.getElementById('gradeResult');
+            const detailsResult = document.getElementById('detailsResult');
+
+            cgpaResult.innerHTML = `<strong>Your CGPA:</strong> ${cgpa.toFixed(2)}`;
+            percentageResult.innerHTML = `<strong>Equivalent Percentage:</strong> ${percentage.toFixed(2)}%`;
+            gradeResult.innerHTML = `<strong>Grade:</strong> ${grade.grade} - ${grade.description}`;
+            detailsResult.innerHTML = `
+                <strong>Academic Summary:</strong><br>
+                Total Semesters: ${numSemesters}<br>
+                Total Credits: ${totalCredits}<br>
+                Grading System: ${document.getElementById('gradingSystem').value}-Point Scale
+            `;
+
+            resultDiv.style.display = 'block';
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function resetCalculator() {
+            document.getElementById('numSemesters').value = 1;
+            document.getElementById('semesterFields').innerHTML = '';
+            document.getElementById('result').style.display = 'none';
+            generateSemesterFields();
+        }
+
+        // Initialize with one semester
+        generateSemesterFields();
+    </script>
+</body>
+</html>

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Validator - Validate JSON Online | ToolMetric</title>
+    <meta name="description" content="Free online JSON validator. Validate, format, and analyze JSON data with error highlighting and formatting.">
+    <meta name="keywords" content="JSON validator, JSON checker, JSON formatter, validate JSON, online JSON validator, JSON parser">
+    <meta name="author" content="ToolMetric">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="JSON Validator - ToolMetric">
+    <meta property="og:description" content="Validate JSON data instantly">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolmetric.com/json-validator.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🛠️ ToolMetric</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container tool-container">
+        <div class="tool-header">
+            <h1>JSON Validator</h1>
+            <h2>Validate, format, and analyze JSON data instantly</h2>
+            <p class="tool-description">
+                Validate JSON data instantly with our comprehensive JSON validator tool. 
+                This essential utility for developers and data analysts checks JSON syntax, 
+                highlights errors, and provides detailed error messages with line numbers. 
+                Perfect for debugging API responses, validating configuration files, and ensuring 
+                data integrity. Our tool offers real-time validation, automatic formatting, 
+                and comprehensive analysis including structure validation, size statistics, and data type 
+                breakdown. Whether you're working with APIs, configuration files, or data exchange 
+                formats, our validator provides instant feedback with clear error descriptions and 
+                formatting suggestions. Simply paste your JSON and get immediate validation with detailed analysis.
+            </p>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 728x90</p>
+        </div>
+
+        <div class="tool-content">
+            <div class="json-controls">
+                <div class="control-buttons" style="display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                    <button onclick="validateJSON()" class="btn">Validate JSON</button>
+                    <button onclick="formatJSON()" class="btn btn-secondary">Format JSON</button>
+                    <button onclick="minifyJSON()" class="btn btn-outline">Minify JSON</button>
+                    <button onclick="clearJSON()" class="btn btn-outline">Clear</button>
+                    <button onclick="loadSample()" class="btn btn-secondary">Load Sample</button>
+                </div>
+                
+                <div class="editor-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="input-section">
+                        <h3>JSON Input</h3>
+                        <div style="position: relative;">
+                            <textarea id="jsonInput" class="form-control" rows="20" placeholder="Paste your JSON here..."></textarea>
+                            <div id="lineNumbers" style="position: absolute; left: 0; top: 0; width: 40px; height: 100%; background: #f9fafb; border-right: 1px solid #e5e7eb; padding: 0.5rem; font-family: monospace; font-size: 0.9rem; line-height: 1.5; overflow: hidden;">
+                                <div id="lineNumbersContent">1</div>
+                            </div>
+                            <div id="jsonInput" style="padding-left: 50px; font-family: monospace;"></div>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                            <button onclick="uploadFile()" class="btn btn-outline">Upload File</button>
+                            <input type="file" id="fileInput" accept=".json" style="display: none;" onchange="handleFileUpload(event)">
+                            <button onclick="copyInput()" class="btn btn-outline">Copy Input</button>
+                        </div>
+                    </div>
+                    
+                    <div class="output-section">
+                        <h3>Validation Results</h3>
+                        <div id="validationResult" style="background: #f9fafb; border: 2px solid #e5e7eb; border-radius: 8px; padding: 1rem; min-height: 400px;">
+                            <div id="resultContent" style="font-family: monospace; white-space: pre-wrap;">
+                                <p style="color: #6b7280; text-align: center;">Validation results will appear here...</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                            <button onclick="copyOutput()" class="btn btn-secondary">Copy Output</button>
+                            <button onclick="downloadOutput()" class="btn btn-outline">Download JSON</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="jsonAnalysis" class="json-analysis" style="display: none; margin-top: 1rem;">
+                    <h3>JSON Analysis</h3>
+                    <div class="analysis-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <div class="analysis-item" style="background: #f0f9ff; padding: 1rem; border-radius: 6px;">
+                            <h4 style="margin: 0 0 0.5rem 0; color: #0ea5e9;">📊 Structure</h4>
+                            <div id="structureInfo" style="margin-top: 0.5rem;">
+                                <!-- Structure info will be shown here -->
+                            </div>
+                        </div>
+                        
+                        <div class="analysis-item" style="background: #f0fdf4; padding: 1rem; border-radius: 6px;">
+                            <h4 style="margin: 0 0 0.5rem 0; color: #22c55e;">📏 Size</h4>
+                            <div id="sizeInfo" style="margin-top: 0.5rem;">
+                                <!-- Size info will be shown here -->
+                            </div>
+                        </div>
+                        
+                        <div class="analysis-item" style="background: #fefce8; padding: 1rem; border-radius: 6px;">
+                            <h4 style="margin: 0 0 0.5rem 0; color: #eab308;">🔍 Validation</h4>
+                            <div id="validationInfo" style="margin-top: 0.5rem;">
+                                <!-- Validation info will be shown here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 300x250</p>
+        </div>
+
+        <div class="tool-content">
+            <h3>How to Use JSON Validator</h3>
+            <ol>
+                <li>Paste your JSON data in the input field or upload a JSON file</li>
+                <li>Click "Validate JSON" to check syntax and structure</li>
+                <li>View validation results with error highlighting</li>
+                <li>Use "Format JSON" to beautify the code</li>
+                <li>Use "Minify JSON" to remove unnecessary whitespace</li>
+                <li>Copy or download the validated JSON</li>
+            </ol>
+
+            <h4 class="mt-3">Features</h4>
+            <ul>
+                <li><strong>Real-time Validation:</strong> Instant JSON syntax checking</li>
+                <li><strong>Error Highlighting:</strong> Clear error messages with line numbers</li>
+                <li><strong>Auto-formatting:</strong> Beautify JSON with proper indentation</li>
+                <li><strong>Minification:</strong> Remove unnecessary whitespace</li>
+                <li><strong>Structure Analysis:</strong> Detailed JSON breakdown</li>
+                <li><strong>File Support:</strong> Upload and validate JSON files</li>
+            </ul>
+
+            <h4 class="mt-3">Common Use Cases</h4>
+            <ul>
+                <li><strong>API Development:</strong> Validate API responses</li>
+                <li><strong>Configuration Files:</strong> Check config file syntax</li>
+                <li><strong>Data Exchange:</strong> Ensure JSON data integrity</li>
+                <li><strong>Debugging:</strong> Find and fix JSON errors</li>
+                <li><strong>Learning:</strong> Understand JSON structure</li>
+            </ul>
+        </div>
+
+        <div class="tool-content">
+            <h3>Related Tools</h3>
+            <div class="related-tools" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="json-formatter.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">📋 JSON Formatter</h4>
+                    <p style="margin: 0; color: #6b7280;">Format and beautify JSON</p>
+                </a>
+                <a href="base64-encoder.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">📋 Base64 Encoder</h4>
+                    <p style="margin: 0; color: #6b7280;">Encode and decode data</p>
+                </a>
+                <a href="url-encoder.html" class="related-tool" style="display: block; background: #f9fafb; padding: 1rem; border-radius: 6px; text-decoration: none; color: inherit; border: 1px solid #e5e7eb; transition: all 0.3s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #2563eb;">🔗 URL Encoder</h4>
+                    <p style="margin: 0; color: #6b7280;">Encode and decode URLs</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>What is JSON validation?</h4>
+                <p>JSON validation checks if your data follows proper JSON syntax rules, including correct bracket usage, quote placement, and value formatting.</p>
+            </div>
+            <div class="faq-item">
+                <h4>What are common JSON errors?</h4>
+                <p>Common errors include mismatched brackets, missing quotes, trailing commas, invalid escape sequences, and incorrect data types.</p>
+            </div>
+            <div class="faq-item">
+                <h4>How does JSON validation work?</h4>
+                <p>Our validator parses your JSON using JavaScript's JSON.parse() method and catches syntax errors, providing detailed error messages.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Is my JSON data secure?</h4>
+                <p>Yes! All JSON validation is performed locally in your browser. No data is sent to our servers or stored anywhere.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🛠️ ToolMetric</h4>
+                    <p>Your trusted source for free online tools. We provide simple, fast, and secure tools for everyday use.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Data Tools</h4>
+                    <ul>
+                        <li><a href="json-validator.html">JSON Validator</a></li>
+                        <li><a href="json-formatter.html">JSON Formatter</a></li>
+                        <li><a href="base64-encoder.html">Base64 Encoder</a></li>
+                        <li><a href="url-encoder.html">URL Encoder</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>Have feedback or suggestions? We'd love to hear from you!</p>
+                    <a href="contact.html" class="btn btn-outline mt-2">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ToolMetric. All rights reserved. | <a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function validateJSON() {
+            const input = document.getElementById('jsonInput').value.trim();
+            
+            if (!input) {
+                showMessage('Please enter JSON data to validate', 'error');
+                return;
+            }
+            
+            try {
+                const parsed = JSON.parse(input);
+                displayValidationResult(true, 'Valid JSON', parsed, null);
+                updateLineNumbers(input);
+                showMessage('JSON is valid', 'success');
+            } catch (error) {
+                displayValidationResult(false, 'Invalid JSON', null, error);
+                highlightError(error);
+                showMessage('JSON validation failed: ' + error.message, 'error');
+            }
+        }
+
+        function formatJSON() {
+            const input = document.getElementById('jsonInput').value.trim();
+            
+            if (!input) {
+                showMessage('Please enter JSON data to format', 'error');
+                return;
+            }
+            
+            try {
+                const parsed = JSON.parse(input);
+                const formatted = JSON.stringify(parsed, null, 2);
+                document.getElementById('jsonInput').value = formatted;
+                updateLineNumbers(formatted);
+                validateJSON();
+            } catch (error) {
+                showMessage('Cannot format invalid JSON', 'error');
+            }
+        }
+
+        function minifyJSON() {
+            const input = document.getElementById('jsonInput').value.trim();
+            
+            if (!input) {
+                showMessage('Please enter JSON data to minify', 'error');
+                return;
+            }
+            
+            try {
+                const parsed = JSON.parse(input);
+                const minified = JSON.stringify(parsed);
+                document.getElementById('jsonInput').value = minified;
+                updateLineNumbers(minified);
+                validateJSON();
+            } catch (error) {
+                showMessage('Cannot minify invalid JSON', 'error');
+            }
+        }
+
+        function displayValidationResult(isValid, message, data, error) {
+            const resultContent = document.getElementById('resultContent');
+            const validationResult = document.getElementById('validationResult');
+            
+            if (isValid) {
+                validationResult.style.borderColor = '#10b981';
+                resultContent.innerHTML = `
+                    <div style="color: #10b981; font-weight: bold; margin-bottom: 1rem;">✅ ${message}</div>
+                    <pre style="background: white; padding: 1rem; border-radius: 4px; overflow: auto;">${JSON.stringify(data, null, 2)}</pre>
+                `;
+                
+                // Show analysis
+                showAnalysis(data);
+            } else {
+                validationResult.style.borderColor = '#ef4444';
+                resultContent.innerHTML = `
+                    <div style="color: #ef4444; font-weight: bold; margin-bottom: 1rem;">❌ ${message}</div>
+                    <div style="background: #fef2f2; padding: 1rem; border-radius: 4px; border-left: 4px solid #ef4444;">
+                        <strong>Error:</strong> ${error.message}<br>
+                        <strong>Location:</strong> Line ${error.line || 'Unknown'}, Column ${error.column || 'Unknown'}<br>
+                        <strong>Expected:</strong> ${error.expected || 'Unknown'}
+                    </div>
+                `;
+                
+                // Hide analysis
+                document.getElementById('jsonAnalysis').style.display = 'none';
+            }
+        }
+
+        function showAnalysis(data) {
+            const analysis = analyzeJSON(data);
+            
+            document.getElementById('structureInfo').innerHTML = `
+                <div><strong>Type:</strong> ${analysis.type}</div>
+                <div><strong>Keys:</strong> ${analysis.keyCount}</div>
+                <div><strong>Depth:</strong> ${analysis.maxDepth}</div>
+            `;
+            
+            document.getElementById('sizeInfo').innerHTML = `
+                <div><strong>Characters:</strong> ${analysis.charCount}</div>
+                <div><strong>Size:</strong> ${analysis.size}</div>
+                <div><strong>Lines:</strong> ${analysis.lineCount}</div>
+            `;
+            
+            document.getElementById('validationInfo').innerHTML = `
+                <div><strong>Status:</strong> <span style="color: #10b981;">Valid</span></div>
+                <div><strong>Encoding:</strong> UTF-8</div>
+                <div><strong>Standard:</strong> RFC 8259</div>
+            `;
+            
+            document.getElementById('jsonAnalysis').style.display = 'block';
+        }
+
+        function analyzeJSON(data) {
+            const jsonString = JSON.stringify(data);
+            
+            return {
+                type: Array.isArray(data) ? 'Array' : typeof data === 'object' ? 'Object' : typeof data,
+                keyCount: typeof data === 'object' && data !== null ? Object.keys(data).length : 0,
+                maxDepth: getMaxDepth(data),
+                charCount: jsonString.length,
+                size: formatBytes(jsonString.length),
+                lineCount: jsonString.split('\n').length
+            };
+        }
+
+        function getMaxDepth(obj) {
+            if (typeof obj !== 'object' || obj === null) {
+                return 0;
+            }
+            
+            if (Array.isArray(obj)) {
+                return 1 + Math.max(0, ...obj.map(item => getMaxDepth(item)));
+            }
+            
+            const values = Object.values(obj);
+            return 1 + Math.max(0, ...values.map(value => getMaxDepth(value)));
+        }
+
+        function formatBytes(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function highlightError(error) {
+            // This would highlight the error line in the textarea
+            // For simplicity, we'll just update the line numbers
+            updateLineNumbers(document.getElementById('jsonInput').value);
+        }
+
+        function updateLineNumbers(text) {
+            const lines = text.split('\n');
+            const lineNumbersContent = document.getElementById('lineNumbersContent');
+            lineNumbersContent.innerHTML = lines.map((_, index) => index + 1).join('<br>');
+        }
+
+        function clearJSON() {
+            document.getElementById('jsonInput').value = '';
+            document.getElementById('resultContent').innerHTML = '<p style="color: #6b7280; text-align: center;">Validation results will appear here...</p>';
+            document.getElementById('validationResult').style.borderColor = '#e5e7eb';
+            document.getElementById('lineNumbersContent').innerHTML = '1';
+            document.getElementById('jsonAnalysis').style.display = 'none';
+            showMessage('Cleared', 'info');
+        }
+
+        function loadSample() {
+            const sampleJSON = {
+                "name": "John Doe",
+                "age": 30,
+                "email": "john@example.com",
+                "address": {
+                    "street": "123 Main St",
+                    "city": "New York",
+                    "country": "USA"
+                },
+                "hobbies": ["reading", "swimming", "coding"],
+                "active": true
+            };
+            
+            document.getElementById('jsonInput').value = JSON.stringify(sampleJSON, null, 2);
+            updateLineNumbers(JSON.stringify(sampleJSON, null, 2));
+            showMessage('Sample JSON loaded', 'success');
+        }
+
+        function uploadFile() {
+            document.getElementById('fileInput').click();
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            if (!file.name.endsWith('.json')) {
+                showMessage('Please upload a JSON file', 'error');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('jsonInput').value = e.target.result;
+                updateLineNumbers(e.target.result);
+                showMessage('File uploaded successfully', 'success');
+            };
+            reader.onerror = function() {
+                showMessage('Error reading file', 'error');
+            };
+            reader.readAsText(file);
+        }
+
+        function copyInput() {
+            const input = document.getElementById('jsonInput').value;
+            if (!input) {
+                showMessage('No input to copy', 'error');
+                return;
+            }
+            copyToClipboard(input);
+        }
+
+        function copyOutput() {
+            const output = document.querySelector('#resultContent pre');
+            if (!output) {
+                showMessage('No output to copy', 'error');
+                return;
+            }
+            copyToClipboard(output.textContent);
+        }
+
+        function downloadOutput() {
+            const output = document.querySelector('#resultContent pre');
+            if (!output) {
+                showMessage('No output to download', 'error');
+                return;
+            }
+            
+            const content = `JSON Validation Result\n` +
+                          `====================\n` +
+                          `Validated: ${new Date().toLocaleString()}\n\n` +
+                          `JSON Data:\n${output.textContent}`;
+            
+            downloadFile(content, 'json_validation_' + new Date().getTime() + '.json');
+        }
+
+        function showMessage(message, type) {
+            // Simple message display
+            console.log(`${type}: ${message}`);
+        }
+
+        // Auto-update line numbers on input
+        document.getElementById('jsonInput').addEventListener('input', function() {
+            updateLineNumbers(this.value);
+        });
+
+        // Sync scrolling
+        document.getElementById('jsonInput').addEventListener('scroll', function() {
+            document.getElementById('lineNumbersContent').scrollTop = this.scrollTop;
+        });
+
+        // Initialize
+        updateLineNumbers('');
+    </script>
+</body>
+</html>

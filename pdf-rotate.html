@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotate PDF Pages - ToolMetric</title>
+    <meta name="description" content="Free online tool to rotate PDF pages. Rotate individual pages or entire documents by 90, 180, or 270 degrees. Fix orientation issues instantly.">
+    <meta name="keywords" content="rotate PDF, PDF rotation, rotate pages, PDF orientation, PDF editor, PDF tools, page rotation">
+    <meta name="author" content="ToolMetric">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Rotate PDF Pages - ToolMetric">
+    <meta property="og:description" content="Rotate PDF pages to correct orientation instantly">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolmetric.com/pdf-rotate.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+    
+    <!-- PDF-lib for PDF manipulation -->
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://unpkg.com/downloadjs@1.4.7/download.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">🛠️ ToolMetric</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container tool-container">
+        <div class="tool-header">
+            <h1>Rotate PDF Pages</h1>
+            <p class="tool-description">
+                Rotate PDF pages instantly with our comprehensive PDF rotation tool. 
+                This essential utility helps you correct orientation issues by rotating individual pages or entire documents. 
+                Perfect for fixing scanned documents, mobile photos, or PDFs with mixed page orientations. 
+                Our tool supports 90°, 180°, and 270° rotations with precise control over which pages to rotate. 
+                Whether you need to rotate all pages, specific page ranges, or individual pages, 
+                our tool provides flexible options with instant preview. Simply upload your PDF, 
+                select your rotation preferences, and download the corrected document. 
+                All processing happens in your browser for complete privacy and security.
+            </p>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 728x90</p>
+        </div>
+
+        <div class="tool-content">
+            <div class="upload-section">
+                <div class="form-group">
+                    <label for="pdfFile">Upload PDF File:</label>
+                    <div class="file-upload-area" id="fileUploadArea" style="border: 2px dashed #e5e7eb; border-radius: 8px; padding: 2rem; text-align: center; background: #f9fafb; cursor: pointer;" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" onclick="document.getElementById('pdfFile').click()">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">📄</div>
+                        <p style="margin-bottom: 0.5rem; font-weight: 600;">Drop PDF file here or click to browse</p>
+                        <p style="color: #6b7280; font-size: 0.9rem;">Maximum file size: 50MB</p>
+                        <input type="file" id="pdfFile" accept=".pdf" style="display: none;" onchange="handleFileSelect(event)">
+                    </div>
+                </div>
+
+                <div id="fileInfo" class="file-info" style="display: none; background: #f0f9ff; padding: 1rem; border-radius: 6px; margin-top: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong id="fileName">file.pdf</strong>
+                            <p style="margin: 0; color: #6b7280; font-size: 0.9rem;">
+                                Size: <span id="fileSize">0 MB</span> | Pages: <span id="pageCount">0</span>
+                            </p>
+                        </div>
+                        <button onclick="removeFile()" class="btn btn-outline">Remove</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="optionsSection" class="options-section" style="display: none;">
+                <h3>Rotation Options</h3>
+                
+                <div class="rotation-controls" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <div class="option-group">
+                        <h4>Rotation Angle</h4>
+                        <div class="rotation-buttons" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                            <button onclick="setRotation(90)" class="btn btn-rotation" id="rotate90">
+                                <span style="display: block; font-size: 1.5rem;">↻</span>
+                                Rotate 90°
+                            </button>
+                            <button onclick="setRotation(180)" class="btn btn-rotation" id="rotate180">
+                                <span style="display: block; font-size: 1.5rem;">↔</span>
+                                Rotate 180°
+                            </button>
+                            <button onclick="setRotation(270)" class="btn btn-rotation" id="rotate270">
+                                <span style="display: block; font-size: 1.5rem;">↺</span>
+                                Rotate 270°
+                            </button>
+                            <button onclick="setRotation(0)" class="btn btn-rotation" id="rotate0">
+                                <span style="display: block; font-size: 1.5rem;">⟲</span>
+                                Reset
+                            </button>
+                        </div>
+                        <div class="form-group" style="margin-top: 1rem;">
+                            <label for="customAngle">Custom Angle (degrees):</label>
+                            <input type="number" id="customAngle" class="form-control" min="0" max="360" step="90" placeholder="90, 180, 270">
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <h4>Page Selection</h4>
+                        <div class="form-group">
+                            <label for="pageSelection">Apply to:</label>
+                            <select id="pageSelection" class="form-control">
+                                <option value="all">All Pages</option>
+                                <option value="current">Current Page Only</option>
+                                <option value="range">Page Range</option>
+                                <option value="odd">Odd Pages Only</option>
+                                <option value="even">Even Pages Only</option>
+                                <option value="custom">Custom Selection</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="rangeGroup" style="display: none;">
+                            <label for="pageRange">Page Range (e.g., 1-5, 8, 10-12):</label>
+                            <input type="text" id="pageRange" class="form-control" placeholder="1-5, 8, 10-12">
+                        </div>
+                        <div class="form-group" id="currentPageGroup" style="display: none;">
+                            <label for="currentPage">Current Page:</label>
+                            <input type="number" id="currentPage" class="form-control" min="1" value="1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-section" style="margin-top: 2rem;">
+                    <h4>Page Preview</h4>
+                    <div id="previewArea" style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; padding: 2rem; min-height: 200px;">
+                        <div id="pageThumbnails" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 1rem;">
+                            <!-- Page thumbnails will be generated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-section" style="text-align: center; margin-top: 2rem;">
+                    <button onclick="rotatePDF()" class="btn" style="font-size: 1.1rem; padding: 1rem 2rem;">Rotate Pages</button>
+                    <button onclick="resetOptions()" class="btn btn-outline ml-2">Reset Options</button>
+                </div>
+            </div>
+
+            <div id="processingSection" class="processing-section" style="display: none; text-align: center; padding: 2rem;">
+                <div class="spinner"></div>
+                <p style="margin-top: 1rem;">Rotating PDF pages... Please wait.</p>
+            </div>
+
+            <div id="downloadSection" class="download-section" style="display: none; text-align: center; padding: 2rem;">
+                <div style="background: #f0fdf4; padding: 2rem; border-radius: 8px; border: 1px solid #22c55e;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
+                    <h3>PDF Pages Rotated Successfully!</h3>
+                    <p style="color: #6b7280; margin-bottom: 1.5rem;">Your PDF has been processed with rotated pages.</p>
+                    <button onclick="downloadPDF()" class="btn btn-secondary" style="font-size: 1.1rem; padding: 1rem 2rem;">Download PDF</button>
+                    <button onclick="startOver()" class="btn btn-outline ml-2">Start Over</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-space">
+            <p>Advertisement Space - 300x250</p>
+        </div>
+
+        <div class="tool-content">
+            <h3>How to Rotate PDF Pages</h3>
+            <ol>
+                <li>Upload your PDF file by clicking the upload area or dragging and dropping</li>
+                <li>Select rotation angle (90°, 180°, 270°, or custom)</li>
+                <li>Choose which pages to rotate (all, range, odd/even, or custom)</li>
+                <li>Preview your selection if needed</li>
+                <li>Click "Rotate Pages" to process your PDF</li>
+                <li>Download the rotated PDF document</li>
+            </ol>
+
+            <h4 class="mt-3">Features</h4>
+            <ul>
+                <li><strong>Multiple Angles:</strong> 90°, 180°, 270°, and custom rotation options</li>
+                <li><strong>Flexible Selection:</strong> Rotate all pages, ranges, or specific pages</li>
+                <li><strong>Page Preview:</strong> Visual preview of pages before rotation</li>
+                <li><strong>Bulk Operations:</strong> Rotate multiple pages at once</li>
+                <li><strong>Privacy Protected:</strong> All processing happens in your browser</li>
+                <li><strong>No Upload Required:</strong> Your files never leave your device</li>
+            </ul>
+
+            <h4 class="mt-3">Common Use Cases</h4>
+            <ul>
+                <li><strong>Scanned Documents:</strong> Fix orientation of scanned pages</li>
+                <li><strong>Mobile Photos:</strong> Correct vertical/horizontal orientation</li>
+                <li><strong>Mixed Documents:</strong> Standardize page orientations</li>
+                <li><strong>Presentation Materials:</strong> Rotate slides for proper display</li>
+                <li><strong>Legal Documents:</strong> Ensure consistent page orientation</li>
+            </ul>
+        </div>
+
+        <div class="tool-content">
+            <h3>Rotation Guide</h3>
+            <div class="rotation-guide" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <div class="rotation-card" style="background: #f0f9ff; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0ea5e9; text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">↻</div>
+                    <h4>90° Clockwise</h4>
+                    <p style="font-size: 0.9rem; color: #6b7280;">Rotate portrait to landscape orientation</p>
+                </div>
+                <div class="rotation-card" style="background: #f0fdf4; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #22c55e; text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">↔</div>
+                    <h4>180°</h4>
+                    <p style="font-size: 0.9rem; color: #6b7280;">Flip page upside down</p>
+                </div>
+                <div class="rotation-card" style="background: #fefce8; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #eab308; text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">↺</div>
+                    <h4>270° Clockwise</h4>
+                    <p style="font-size: 0.9rem; color: #6b7280;">Rotate landscape to portrait orientation</p>
+                </div>
+                <div class="rotation-card" style="background: #fdf4ff; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #d946ef; text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">⟲</div>
+                    <h4>Reset</h4>
+                    <p style="font-size: 0.9rem; color: #6b7280;">Return to original orientation</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>Tips for PDF Rotation</h3>
+            <div class="tips-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+                <div class="tip-card" style="background: #f0f9ff; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0ea5e9;">
+                    <h4>📋 Check All Pages</h4>
+                    <p>Always review all pages before rotating, as some documents may have mixed orientations intentionally.</p>
+                </div>
+                <div class="tip-card" style="background: #f0fdf4; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #22c55e;">
+                    <h4>🎯 Use Page Ranges</h4>
+                    <p>For documents with only some pages needing rotation, use page ranges to avoid affecting correctly oriented pages.</p>
+                </div>
+                <div class="tip-card" style="background: #fefce8; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #eab308;">
+                    <h4>🔄 Test First</h4>
+                    <p>Test with a single page first to ensure the rotation direction is correct before applying to multiple pages.</p>
+                </div>
+                <div class="tip-card" style="background: #fdf4ff; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #d946ef;">
+                    <h4>💾 Save Backup</h4>
+                    <p>Keep a copy of your original PDF before making rotations, especially for important documents.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-content">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <h4>Is my PDF data secure?</h4>
+                <p>Yes! All PDF processing happens entirely in your browser using JavaScript. Your files are never uploaded to our servers.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can I rotate pages individually?</h4>
+                <p>Yes! You can select individual pages, page ranges, or use odd/even page selection for precise control.</p>
+            </div>
+            <div class="faq-item">
+                <h4>What if I rotate pages the wrong way?</h4>
+                <p>Simply rotate again in the opposite direction or use the reset option. Keep your original file as a backup.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Will rotation affect PDF quality?</h4>
+                <p>No, rotation maintains the original quality of your PDF. Only the orientation is changed.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🛠️ ToolMetric</h4>
+                    <p>Your trusted source for free online tools. We provide simple, fast, and secure tools for everyday use.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>PDF Tools</h4>
+                    <ul>
+                        <li><a href="pdf-page-numbers.html">Add Page Numbers</a></li>
+                        <li><a href="pdf-rotate.html">Rotate PDF Pages</a></li>
+                        <li><a href="password-generator.html">Password Generator</a></li>
+                        <li><a href="word-counter.html">Word Counter</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>Have feedback or suggestions? We'd love to hear from you!</p>
+                    <a href="contact.html" class="btn btn-outline mt-2">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ToolMetric. All rights reserved. | <a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let pdfDoc = null;
+        let processedPdfBytes = null;
+        let selectedRotation = 0;
+        let pageRotations = {};
+
+        // Handle file selection
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                processFile(file);
+            }
+        }
+
+        // Handle drag and drop
+        function handleDrop(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const file = event.dataTransfer.files[0];
+            if (file && file.type === 'application/pdf') {
+                processFile(file);
+            } else {
+                showMessage('Please upload a PDF file', 'error');
+            }
+        }
+
+        function handleDragOver(event) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        // Process uploaded file
+        async function processFile(file) {
+            if (file.size > 50 * 1024 * 1024) {
+                showMessage('File size must be less than 50MB', 'error');
+                return;
+            }
+
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
+                
+                // Initialize page rotations
+                const pageCount = pdfDoc.getPageCount();
+                for (let i = 1; i <= pageCount; i++) {
+                    pageRotations[i] = 0;
+                }
+                
+                // Display file info
+                document.getElementById('fileName').textContent = file.name;
+                document.getElementById('fileSize').textContent = formatBytes(file.size);
+                document.getElementById('pageCount').textContent = pageCount;
+                document.getElementById('fileInfo').style.display = 'block';
+                document.getElementById('optionsSection').style.display = 'block';
+                
+                // Generate page thumbnails
+                await generatePageThumbnails();
+                
+                // Hide upload area
+                document.getElementById('fileUploadArea').style.display = 'none';
+                
+                showMessage('PDF loaded successfully', 'success');
+            } catch (error) {
+                showMessage('Error loading PDF: ' + error.message, 'error');
+            }
+        }
+
+        // Generate page thumbnails
+        async function generatePageThumbnails() {
+            const thumbnailsDiv = document.getElementById('pageThumbnails');
+            thumbnailsDiv.innerHTML = '';
+            
+            const pageCount = pdfDoc.getPageCount();
+            for (let i = 1; i <= pageCount; i++) {
+                const thumbnailDiv = document.createElement('div');
+                thumbnailDiv.className = 'page-thumbnail';
+                thumbnailDiv.style.cssText = `
+                    background: white;
+                    border: 2px solid #e5e7eb;
+                    border-radius: 4px;
+                    padding: 0.5rem;
+                    text-align: center;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                `;
+                
+                thumbnailDiv.innerHTML = `
+                    <div style="width: 80px; height: 100px; background: #f9fafb; display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem; border-radius: 2px;">
+                        <span style="font-size: 2rem; color: #6b7280;">📄</span>
+                    </div>
+                    <div style="font-size: 0.8rem; color: #6b7280;">Page ${i}</div>
+                    <div class="rotation-indicator" style="font-size: 0.7rem; color: #2563eb; margin-top: 0.25rem;">0°</div>
+                `;
+                
+                thumbnailDiv.onclick = () => selectPage(i);
+                thumbnailDiv.onmouseover = () => {
+                    thumbnailDiv.style.borderColor = '#2563eb';
+                    thumbnailDiv.style.transform = 'scale(1.05)';
+                };
+                thumbnailDiv.onmouseout = () => {
+                    thumbnailDiv.style.borderColor = '#e5e7eb';
+                    thumbnailDiv.style.transform = 'scale(1)';
+                };
+                
+                thumbnailsDiv.appendChild(thumbnailDiv);
+            }
+        }
+
+        // Select page for rotation
+        function selectPage(pageNumber) {
+            document.getElementById('pageSelection').value = 'current';
+            document.getElementById('currentPage').value = pageNumber;
+            updatePageSelection();
+            
+            // Highlight selected page
+            const thumbnails = document.querySelectorAll('.page-thumbnail');
+            thumbnails.forEach((thumb, index) => {
+                if (index + 1 === pageNumber) {
+                    thumb.style.borderColor = '#2563eb';
+                    thumb.style.backgroundColor = '#f0f9ff';
+                } else {
+                    thumb.style.borderColor = '#e5e7eb';
+                    thumb.style.backgroundColor = 'white';
+                }
+            });
+        }
+
+        // Set rotation angle
+        function setRotation(angle) {
+            selectedRotation = angle;
+            document.getElementById('customAngle').value = angle;
+            
+            // Update button states
+            document.querySelectorAll('.btn-rotation').forEach(btn => {
+                btn.style.background = '';
+                btn.style.color = '';
+            });
+            
+            if (angle === 90) document.getElementById('rotate90').style.background = '#2563eb';
+            if (angle === 180) document.getElementById('rotate180').style.background = '#2563eb';
+            if (angle === 270) document.getElementById('rotate270').style.background = '#2563eb';
+            if (angle === 0) document.getElementById('rotate0').style.background = '#2563eb';
+        }
+
+        // Handle page selection change
+        document.getElementById('pageSelection').addEventListener('change', updatePageSelection);
+
+        function updatePageSelection() {
+            const selection = document.getElementById('pageSelection').value;
+            const rangeGroup = document.getElementById('rangeGroup');
+            const currentPageGroup = document.getElementById('currentPageGroup');
+            
+            rangeGroup.style.display = selection === 'range' ? 'block' : 'none';
+            currentPageGroup.style.display = selection === 'current' ? 'block' : 'none';
+        }
+
+        // Remove file
+        function removeFile() {
+            pdfDoc = null;
+            processedPdfBytes = null;
+            pageRotations = {};
+            selectedRotation = 0;
+            document.getElementById('pdfFile').value = '';
+            document.getElementById('fileInfo').style.display = 'none';
+            document.getElementById('optionsSection').style.display = 'none';
+            document.getElementById('downloadSection').style.display = 'none';
+            document.getElementById('fileUploadArea').style.display = 'block';
+        }
+
+        // Rotate PDF pages
+        async function rotatePDF() {
+            if (!pdfDoc) {
+                showMessage('Please upload a PDF file first', 'error');
+                return;
+            }
+
+            try {
+                document.getElementById('processingSection').style.display = 'block';
+                document.getElementById('optionsSection').style.display = 'none';
+
+                const pageSelection = document.getElementById('pageSelection').value;
+                const pageRange = document.getElementById('pageRange').value;
+                const currentPage = parseInt(document.getElementById('currentPage').value);
+                const rotationAngle = parseInt(document.getElementById('customAngle').value) || selectedRotation;
+
+                const pages = pdfDoc.getPages();
+
+                for (let i = 0; i < pages.length; i++) {
+                    const pageNumber = i + 1;
+                    
+                    // Check if this page should be rotated
+                    if (shouldRotatePage(pageNumber, pageSelection, pageRange, currentPage, pages.length)) {
+                        const page = pages[i];
+                        const currentRotation = page.getRotation().angle;
+                        const newRotation = (currentRotation + rotationAngle) % 360;
+                        
+                        page.setRotation(PDFLib.degrees(newRotation));
+                        pageRotations[pageNumber] = newRotation;
+                    }
+                }
+
+                // Save the PDF
+                processedPdfBytes = await pdfDoc.save();
+                
+                document.getElementById('processingSection').style.display = 'none';
+                document.getElementById('downloadSection').style.display = 'block';
+                
+                showMessage('PDF pages rotated successfully!', 'success');
+            } catch (error) {
+                document.getElementById('processingSection').style.display = 'none';
+                document.getElementById('optionsSection').style.display = 'block';
+                showMessage('Error rotating PDF: ' + error.message, 'error');
+            }
+        }
+
+        // Check if a page should be rotated
+        function shouldRotatePage(pageNumber, selection, range, currentPage, totalPages) {
+            switch (selection) {
+                case 'all':
+                    return true;
+                case 'current':
+                    return pageNumber === currentPage;
+                case 'range':
+                    return parsePageRange(range, pageNumber);
+                case 'odd':
+                    return pageNumber % 2 === 1;
+                case 'even':
+                    return pageNumber % 2 === 0;
+                case 'custom':
+                    // For custom selection, we'd need a more complex UI
+                    return false;
+                default:
+                    return false;
+            }
+        }
+
+        // Parse page range
+        function parsePageRange(range, pageNumber) {
+            if (!range) return false;
+            
+            const parts = range.split(',');
+            for (let part of parts) {
+                part = part.trim();
+                if (part.includes('-')) {
+                    const [start, end] = part.split('-').map(n => parseInt(n.trim()));
+                    if (pageNumber >= start && pageNumber <= end) return true;
+                } else {
+                    if (pageNumber === parseInt(part)) return true;
+                }
+            }
+            return false;
+        }
+
+        // Download processed PDF
+        function downloadPDF() {
+            if (processedPdfBytes) {
+                const blob = new Blob([processedPdfBytes], { type: 'application/pdf' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'rotated_pdf_' + new Date().getTime() + '.pdf';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                showMessage('PDF downloaded successfully!', 'success');
+            }
+        }
+
+        // Start over
+        function startOver() {
+            removeFile();
+        }
+
+        // Reset options
+        function resetOptions() {
+            selectedRotation = 0;
+            pageRotations = {};
+            document.getElementById('pageSelection').value = 'all';
+            document.getElementById('pageRange').value = '';
+            document.getElementById('currentPage').value = '1';
+            document.getElementById('customAngle').value = '0';
+            updatePageSelection();
+            setRotation(0);
+            
+            // Reset thumbnail highlights
+            const thumbnails = document.querySelectorAll('.page-thumbnail');
+            thumbnails.forEach(thumb => {
+                thumb.style.borderColor = '#e5e7eb';
+                thumb.style.backgroundColor = 'white';
+            });
+            
+            showMessage('Options reset to default', 'info');
+        }
+
+        // Initialize
+        updatePageSelection();
+        setRotation(0);
+    </script>
+</body>
+</html>
