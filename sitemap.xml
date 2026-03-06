@@ -1,237 +1,277 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-        <loc>https://toolmetric.com/</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/cgpa-calculator</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/attendance-calculator</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/percentage-calculator</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/word-counter</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/case-converter</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/remove-spaces</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/text-reverser</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/password-generator</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/pdf-page-numbers</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/pdf-rotate</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/character-counter</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/random-number-generator</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/random-string-generator</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/username-generator</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/uuid-generator</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/json-formatter</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/html-formatter</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/css-minifier</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/javascript-minifier</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/base64-encoder</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/url-encoder</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/binary-to-text</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/text-to-binary</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/hex-to-rgb</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/rgb-to-hex</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/color-picker</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/lorem-ipsum-generator</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/reading-time-calculator</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/number-to-words</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/simple-interest-calculator</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/text-to-speech</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/password-strength-checker</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/qrcode-generator</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/json-validator</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/about</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/contact</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/privacy</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-    <url>
-        <loc>https://toolmetric.com/terms</loc>
-        <lastmod>2024-12-01</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
+
+<url>
+<loc>https://www.toolmetric.in/</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/cgpa-calculator</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/attendance-calculator</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/percentage-calculator</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/word-counter</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/case-converter</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/remove-spaces</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/text-reverser</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/password-generator</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/pdf-page-numbers</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/pdf-rotate</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/character-counter</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/random-number-generator</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/random-string-generator</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/username-generator</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/uuid-generator</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/json-formatter</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/html-formatter</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/css-minifier</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/javascript-minifier</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/base64-encoder</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/url-encoder</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/binary-to-text</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/text-to-binary</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/hex-to-rgb</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/rgb-to-hex</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/color-picker</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/lorem-ipsum-generator</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/reading-time-calculator</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/number-to-words</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/simple-interest-calculator</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/text-to-speech</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/password-strength-checker</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/qrcode-generator</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/json-validator</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/about</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/contact</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.7</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/privacy</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://www.toolmetric.in/terms</loc>
+<lastmod>2024-12-01</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.5</priority>
+</url>
+
 </urlset>
